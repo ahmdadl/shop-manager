@@ -19,6 +19,9 @@
         "lib": [
             "dom",
             "es6"
+        ],
+        "types": [
+            "vue-sweetalert2"
         ]
     }
 }

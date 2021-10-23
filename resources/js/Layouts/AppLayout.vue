@@ -1,15 +1,9 @@
 <template>
     <div>
-        <!-- <nav class="sticky top-0 flex justify-between bg-blue-900 text-white w-screen">
-            <div class="px-5 xl:px-12 py-6 flex w-full items-center">
+        <!-- <nav class="sticky top-0 flex justify-between w-screen text-white bg-blue-900">
+            <div class="flex items-center w-full px-5 py-6 xl:px-12">
                 <ul
-                    class="
-                        flex
-                        px-4
-                        mx-auto
-                        font-semibold font-heading
-                        space-x-12
-                    "
+                    class="flex px-4 mx-auto space-x-12 font-semibold font-heading"
                 >
                     <li><a class="hover:text-gray-200" href="/">الصفحة الرئيسية</a></li>
                     <li>
@@ -20,113 +14,57 @@
         </nav> -->
 
         <div
-            class="
-                flex
-                min-h-screen
-                bg-gray-100
-                dark:text-white dark:bg-gray-900
-            "
+            class="flex min-h-screen bg-gray-100 dark:text-white dark:bg-gray-900"
         >
             <!-- Page Heading -->
             <!-- <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>
             </header> -->
 
             <aside
-                class="
-                    w-20
-                    md:w-44
-                    relative
-                    z-20
-                    flex-shrink-0
-                    px-2
-                    overflow-y-auto
-                    bg-indigo-600
-                "
+                class="relative z-20 flex-shrink-0 w-20 px-2 overflow-y-auto bg-indigo-600 md:w-44"
             >
-                <div class="mb-6 fixed top-0">
+                <div class="fixed top-0 mb-6">
                     <!--Start logo -->
                     <div class="flex justify-center">
                         <div
-                            class="
-                                w-14
-                                h-14
-                                rounded-full
-                                bg-gray-300
-                                border-2 border-white
-                                mt-2
-                            "
+                            class="mt-2 bg-gray-300 border-2 border-white rounded-full w-14 h-14"
                         >
                             <img
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVxhAxJ4D7MOeTTj6kR9PBeZonW5HM7giKjTbEmR-HMBwf3G1VqGnlwpO1kWrdyIZu8_U&usqp=CAU"
-                                class="rounded-full w-auto"
+                                class="w-auto rounded-full"
                             />
                         </div>
                     </div>
                     <!--End logo -->
                     <!--Start NavItem -->
                     <div>
-                        <ul class="mt-6 leading-10 px-4">
+                        <ul class="px-4 mt-6 leading-10">
                             <li
-                                class="
-                                    mb-3
-                                    p-2
-                                    rounded-md
-                                    flex
-                                    items-center
-                                    justify-center
-                                    bg-blue-400
-                                    cursor-pointer
-                                "
+                                class="flex items-center justify-center p-2 mb-3 bg-blue-400 rounded-md cursor-pointer "
                             >
                                 <a href="/" class="">
                                     <i
-                                        class="
-                                            fas
-                                            fa-align-left fa-sm
-                                            text-white
-                                        "
+                                        class="text-white fas fa-align-left fa-sm"
                                     ></i>
                                 <span class="hidden md:block">    الصفحة الرئيسية
                                 </span>
                                 </a>
                             </li>
                             <li
-                                class="
-                                    mb-3
-                                    p-2
-                                    rounded-md
-                                    flex
-                                    items-center
-                                    justify-center
-                                    bg-pink-400
-                                    cursor-pointer
-                                "
+                                class="flex items-center justify-center p-2 mb-3 bg-pink-400 rounded-md cursor-pointer "
                             >
                                 <i
-                                    class="
-                                        fas
-                                        fa-question-circle fa-sm
-                                        text-white
-                                    "
+                                    class="text-white fas fa-home fa-sm"
                                 ></i>
                             </li>
                             <li
-                                class="
-                                    mb-3
-                                    p-2
-                                    rounded-md
-                                    flex
-                                    items-center
-                                    justify-center
-                                    bg-yellow-400
-                                    cursor-pointer
-                                "
+                                class="flex items-center justify-center p-2 mb-3 bg-yellow-400 rounded-md cursor-pointer "
                             >
                                 <i
-                                    class="fas fa-headphones fa-sm text-white"
+                                    class="text-white fas fa-headphones fa-sm" @click="toggleDark"
                                 ></i>
                             </li>
                         </ul>
@@ -176,6 +114,9 @@ export default defineComponent({
     },
 
     methods: {
+        toggleDark() {
+            document.body.classList.toggle('dark');
+        },
         switchToTeam(team) {
             this.$inertia.put(
                 route("current-team.update"),

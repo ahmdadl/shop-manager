@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.ts('resources/js/app.js', 'public/js').vue()
+mix.ts('resources/js/app.ts', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('precss'),
@@ -19,6 +19,6 @@ mix.ts('resources/js/app.js', 'public/js').vue()
     ])
     .webpackConfig(require('./webpack.config'));
 
-if (mix.inProduction()) {
+// if (mix.inProduction()) {
     mix.version();
-}
+// }
