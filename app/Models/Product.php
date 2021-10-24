@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
 
-class Category extends Model
+class Product extends Model
 {
     use HasFactory;
+
     use Sluggable;
 
-    protected $fillable = ["title", "img"];
+    protected $guarded  = [];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -37,7 +38,7 @@ class Category extends Model
         return "slug";
     }
 
-    public function products() {
-        return $this->hasMany(Product::class);
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

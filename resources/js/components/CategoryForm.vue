@@ -54,7 +54,7 @@
                         <div
                             class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
                         >
-                            <i :class="`mx-auto fas fa-img`"></i>
+                            <i :class="`mx-auto fas fa-image`"></i>
                         </div>
                         <div class="w-10/12 rounded-l-xl">
                             <input

@@ -7,6 +7,30 @@
 @import '@fortawesome/fontawesome-free/css/brands.min.css'; */
 
 /*! purgecss start ignore */
+.multiselect-placeholder,
+.multiselect-single-label {
+    right: 1rem !important;
+    left: unset;
+    color: darkslategrey;
+}
+.widget__modal-container__item.modal-container {
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+input {
+    direction: rtl !important;
+    color: #000;
+}
+
+/* DarkMode styles */
+.dark {
+    /* --ms-dropdown-bg: red; */
+}
+.dark input {
+    color: #fff;
+}
+
 @font-face {
     font-family: 'Font Awesome 5 Free';
     src: url('fonts/fa-solid-900.eot?lwlvmc');

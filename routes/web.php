@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,10 @@ Route::post("/categories", [HomeController::class, "store"]);
 // axios not updating with patch request
 Route::post("/categories/{category}", [HomeController::class, "update"]);
 Route::delete("/categories/{category}", [HomeController::class, "destroy"]);
+
+// product
+Route::get('/categories/{category}', [ProductController::class, 'index']);
+Route::post('/products', [ProductController::class, 'store']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

@@ -14,7 +14,7 @@
         </nav> -->
 
         <div
-            class="flex min-h-screen gap-3 bg-gray-100 dark:text-white dark:bg-gray-900"
+            class="flex min-h-screen gap-0 bg-gray-100 dark:text-white dark:bg-gray-900"
         >
             <!-- Page Heading -->
             <!-- <header class="bg-white shadow" v-if="$slots.header">
@@ -24,9 +24,9 @@
             </header> -->
 
             <aside
-                class="relative z-20 flex-shrink-0 w-20 px-2 overflow-y-auto bg-indigo-600 md:w-44"
+                class="relative z-20 flex-shrink-0 w-20 px-2 overflow-y-auto bg-indigo-600 md:w-28"
             >
-                <div class="fixed top-0 mb-6">
+                <div class="top-0 mb-6 ">
                     <!--Start logo -->
                     <div class="flex justify-center">
                         <div
