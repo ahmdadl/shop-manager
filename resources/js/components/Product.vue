@@ -123,19 +123,26 @@
                     >
                         <i :class="`mx-auto fas fa-shopping-bag`"></i>
                     </div>
-                    <div class="w-10/12 rounded-l-xl">
+                    <div class="w-8/12 rounded-l-xl">
                         <input
                             id="amount"
                             type="number"
                             class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                             placeholder="الكمية"
                             v-model="amount"
-                            min='0'
+                            min="0"
                             :max="type !== 'add' ? product.amount : 1000000"
                         />
-                        <div v-if="amountErr" class="text-red-700">
-                            {{ amountErr }}
-                        </div>
+                    </div>
+                    <div
+                        class="flex items-center justify-center w-2/12 h-full text-center text-gray-900 bg-gray-300 rounded-l dark:text-gray-100 dark:bg-blue-900 text-md"
+                    >
+                        <span class="font-semibold">
+                            {{ product.amount }}
+                        </span>
+                    </div>
+                    <div v-if="amountErr" class="text-red-700">
+                        {{ amountErr }}
                     </div>
                 </div>
             </div>
@@ -294,12 +301,9 @@ export default class Product extends Vue {
     }
 
     setProduct() {
-        console.log(this.val);
-        
-        this.product = this.products.find(x => x.slug === this.val) as ProductInterface;
-
-        console.log(this.product);
-        
+        this.product = this.products.find(
+            (x) => x.slug === this.val
+        ) as ProductInterface;
     }
 
     mounted() {
