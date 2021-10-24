@@ -1,8 +1,8 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
 /* @import '@fortawesome/fontawesome-free/css/solid.min.css';
 @import '@fortawesome/fontawesome-free/css/brands.min.css'; */
 
@@ -35,61 +35,96 @@ input {
     color: #fff;
 }
 
+/* arabic */
 @font-face {
-    font-family: 'Font Awesome 5 Free';
-    src: url('fonts/fa-solid-900.eot?lwlvmc');
-    src: url('fonts/fa-solid-900.eot?lwlvmc#iefix') format('embedded-opentype'),
-        url('fonts/fa-solid-900.ttf?lwlvmc') format('truetype'),
-        url('fonts/fa-solid-900.woff?lwlvmc') format('woff'),
-        url('fonts/fa-solid-900.svg?lwlvmc#fa-solid-900') format('svg');
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/SLXGc1nY6HkvalIkTpu0xg.woff2")
+        format("woff2");
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+        U+FB50-FDFF, U+FE80-FEFC;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/SLXGc1nY6HkvalIvTpu0xg.woff2")
+        format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+        U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/SLXGc1nY6HkvalIhTps.woff2")
+        format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+        U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Font Awesome 5 Free";
+    src: url("fonts/fa-solid-900.eot?lwlvmc");
+    src: url("fonts/fa-solid-900.eot?lwlvmc#iefix") format("embedded-opentype"),
+        url("fonts/fa-solid-900.ttf?lwlvmc") format("truetype"),
+        url("fonts/fa-solid-900.woff?lwlvmc") format("woff"),
+        url("fonts/fa-solid-900.svg?lwlvmc#fa-solid-900") format("svg");
 
     font-display: swap;
 }
 .fa,
 .fas {
-    font-family: 'Font Awesome 5 Free';
+    font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
 @font-face {
-    font-family: 'Font Awesome 5 Brands';
-    src: url('./fonts/fa-brands-400.eot?yvb6gh');
-    src: url('./fonts/fa-brands-400.eot?yvb6gh#iefix')
-            format('embedded-opentype'),
-        url('./fonts/fa-brands-400.ttf?yvb6gh') format('truetype'),
-        url('./fonts/fa-brands-400.woff?yvb6gh') format('woff'),
-        url('./fonts/fa-brands-400.svg?yvb6gh#fa-brands-400') format('svg');
+    font-family: "Font Awesome 5 Brands";
+    src: url("./fonts/fa-brands-400.eot?yvb6gh");
+    src: url("./fonts/fa-brands-400.eot?yvb6gh#iefix")
+            format("embedded-opentype"),
+        url("./fonts/fa-brands-400.ttf?yvb6gh") format("truetype"),
+        url("./fonts/fa-brands-400.woff?yvb6gh") format("woff"),
+        url("./fonts/fa-brands-400.svg?yvb6gh#fa-brands-400") format("svg");
     font-display: swap;
 }
 .fab {
-    font-family: 'Font Awesome 5 Brands';
+    font-family: "Font Awesome 5 Brands";
     font-weight: 400;
 }
 
 .fa-trash-alt:before {
-    content: '\f014';
+    content: "\f014";
 }
 .fa-refresh:before {
-    content: '\f021';
+    content: "\f021";
 }
 .fa-spinner:before,
 .fa-cog:before {
-    content: '\f110';
+    content: "\f110";
 }
 .fa-sign-in:before,
 .fa-sign-in-alt:before {
-    content: '\f090';
+    content: "\f090";
 }
 .fa-newspaper:before {
-    content: '\f1ea';
+    content: "\f1ea";
 }
 .fa-mortar-board:before {
-    content: '\f19d';
+    content: "\f19d";
 }
 .fa-thumbs-up:before {
-    content: '\f087';
+    content: "\f087";
 }
 .fa-thumbs-down:before {
-    content: '\f088';
+    content: "\f088";
 }
 
 @layer utilities {

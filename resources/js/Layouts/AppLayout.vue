@@ -24,18 +24,15 @@
             </header> -->
 
             <aside
-                class="relative z-20 flex-shrink-0 w-20 px-2 overflow-y-auto bg-indigo-600 md:w-28"
+                class="relative z-20 flex-shrink-0 w-20 overflow-y-auto bg-indigo-600 md:w-28"
             >
                 <div class="top-0 mb-6 ">
                     <!--Start logo -->
                     <div class="flex justify-center">
                         <div
-                            class="mt-2 bg-gray-300 border-2 border-white rounded-full w-14 h-14"
+                            class="object-cover mt-2 bg-gray-300 bg-center bg-no-repeat bg-cover border-white rounded-full border-1 w-14 h-14"
+                            :style="`background-image: url('/logo.jpg')`"
                         >
-                            <img
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVxhAxJ4D7MOeTTj6kR9PBeZonW5HM7giKjTbEmR-HMBwf3G1VqGnlwpO1kWrdyIZu8_U&usqp=CAU"
-                                class="w-auto rounded-full"
-                            />
                         </div>
                     </div>
                     <!--End logo -->

@@ -20072,7 +20072,7 @@ var _hoisted_24 = {
 };
 var _hoisted_25 = ["src"];
 var _hoisted_26 = {
-  "class": "w-full p-6 space-y-2 text-right md:w-3/5 md:p-4"
+  "class": "w-full p-4 space-y-2 text-right md:w-3/5 md:p-1"
 };
 var _hoisted_27 = {
   "class": "text-sm font-bold text-gray-700 dark:text-gray-200",
@@ -24210,23 +24210,14 @@ var _hoisted_1 = {
   "class": "flex min-h-screen gap-0 transition duration-75 ease-linear bg-gray-100 dark:text-white dark:bg-gray-900"
 };
 var _hoisted_2 = {
-  "class": "relative z-20 flex-shrink-0 w-20 px-2 overflow-y-auto bg-indigo-600 md:w-28"
+  "class": "relative z-20 flex-shrink-0 w-20 overflow-y-auto bg-indigo-600 md:w-28"
 };
 var _hoisted_3 = {
   "class": "top-0 mb-6"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_4 = {
   "class": "flex justify-center"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "mt-2 bg-gray-300 border-2 border-white rounded-full w-14 h-14"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVxhAxJ4D7MOeTTj6kR9PBeZonW5HM7giKjTbEmR-HMBwf3G1VqGnlwpO1kWrdyIZu8_U&usqp=CAU",
-  "class": "w-auto rounded-full"
-})])], -1
-/* HOISTED */
-);
-
+};
 var _hoisted_5 = {
   "class": "px-4 mt-6 leading-10"
 };
@@ -24240,7 +24231,12 @@ var _hoisted_9 = {
   "class": "w-full"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <nav class=\"sticky top-0 flex justify-between w-screen text-white bg-blue-900\">\n            <div class=\"flex items-center w-full px-5 py-6 xl:px-12\">\n                <ul\n                    class=\"flex px-4 mx-auto space-x-12 font-semibold font-heading\"\n                >\n                    <li><a class=\"hover:text-gray-200\" href=\"/\">الصفحة الرئيسية</a></li>\n                    <li>\n                        <a class=\"hover:text-gray-200\" href=\"/reports\">التقارير</a>\n                    </li>\n                </ul>\n            </div>\n        </nav> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Heading "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <header class=\"bg-white shadow\" v-if=\"$slots.header\">\n                <div class=\"px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8\">\n                    <slot name=\"header\"></slot>\n                </div>\n            </header> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("aside", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start logo "), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End logo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start NavItem "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <nav class=\"sticky top-0 flex justify-between w-screen text-white bg-blue-900\">\n            <div class=\"flex items-center w-full px-5 py-6 xl:px-12\">\n                <ul\n                    class=\"flex px-4 mx-auto space-x-12 font-semibold font-heading\"\n                >\n                    <li><a class=\"hover:text-gray-200\" href=\"/\">الصفحة الرئيسية</a></li>\n                    <li>\n                        <a class=\"hover:text-gray-200\" href=\"/reports\">التقارير</a>\n                    </li>\n                </ul>\n            </div>\n        </nav> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page Heading "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <header class=\"bg-white shadow\" v-if=\"$slots.header\">\n                <div class=\"px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8\">\n                    <slot name=\"header\"></slot>\n                </div>\n            </header> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("aside", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start logo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "object-cover mt-2 bg-gray-300 bg-center bg-no-repeat bg-cover border-white rounded-full border-1 w-14 h-14",
+    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)("background-image: url('/logo.jpg')")
+  }, null, 4
+  /* STYLE */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("End logo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Start NavItem "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "text-white fas fa-headphones fa-sm",
     onClick: _cache[0] || (_cache[0] = function () {
       return _ctx.toggleDark && _ctx.toggleDark.apply(_ctx, arguments);

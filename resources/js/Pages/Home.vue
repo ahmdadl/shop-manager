@@ -104,7 +104,7 @@
                     <!-- <div class="object-cover w-full h-full bg-gray-800 bg-center bg-no-repeat bg-contain dark:bg-gray-600" :style="`background-image: url('/storage/${c.img || 'categories/default.jpg'}')`">
                     </div> -->
                 </div>
-                <div class="w-full p-6 space-y-2 text-right md:w-3/5 md:p-4">
+                <div class="w-full p-4 space-y-2 text-right md:w-3/5 md:p-1">
                     <p
                         class="text-sm font-bold text-gray-700 dark:text-gray-200"
                         dir="rtl"

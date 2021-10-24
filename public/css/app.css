@@ -352,7 +352,7 @@ ul {
  */
 
 html {
-  font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: Cairo, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -1309,14 +1309,11 @@ select {
 .h-14 {
 	height: 3.5rem;
 }
-.h-2\/4 {
-	height: 50%;
+.h-3\/5 {
+	height: 60%;
 }
 .h-28 {
 	height: 7rem;
-}
-.h-3\/5 {
-	height: 60%;
 }
 .h-2\/5 {
 	height: 40%;
@@ -1847,6 +1844,9 @@ select {
 .p-1 {
 	padding: 0.25rem;
 }
+.p-4 {
+	padding: 1rem;
+}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -1966,7 +1966,7 @@ select {
 	text-align: right;
 }
 .font-sans {
-	font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-family: Cairo, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .font-mono {
 	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -2212,9 +2212,6 @@ select {
 }
 .duration-1000 {
 	transition-duration: 1000ms;
-}
-.duration-100 {
-	transition-duration: 100ms;
 }
 .ease-in-out {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -3759,60 +3756,94 @@ input {
 .dark .multiselect-single-label {
     color: #fff;
 }
+/* arabic */
 @font-face {
-    font-family: 'Font Awesome 5 Free';
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/SLXGc1nY6HkvalIkTpu0xg.woff2?a228f4409e85c36ad9924c5307e7ab40)
+        format("woff2");
+    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41,
+        U+FB50-FDFF, U+FE80-FEFC;
+}
+/* latin-ext */
+@font-face {
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/SLXGc1nY6HkvalIvTpu0xg.woff2?fc034d1233fe81a020e5b4c245823f90)
+        format("woff2");
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+        U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/SLXGc1nY6HkvalIhTps.woff2?d3bac703ab71d722cebdc4784279c957)
+        format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+        U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: "Font Awesome 5 Free";
     src: url(/fonts/fa-solid-900.eot?9bbb245e67a133f6e486d8d2545e14a5);
-    src: url(/fonts/fa-solid-900.eot?9bbb245e67a133f6e486d8d2545e14a5#iefix) format('embedded-opentype'),
-        url(/fonts/fa-solid-900.ttf?be9ee23c0c6390141475d519c2c5fb8f) format('truetype'),
-        url(/fonts/fa-solid-900.woff?eeccf4f66002c6f2ba24d3d22f2434c2) format('woff'),
-        url(/fonts/fa-solid-900.svg?7a8b4f130182d19a2d7c67d80c090397#fa-solid-900) format('svg');
+    src: url(/fonts/fa-solid-900.eot?9bbb245e67a133f6e486d8d2545e14a5#iefix) format("embedded-opentype"),
+        url(/fonts/fa-solid-900.ttf?be9ee23c0c6390141475d519c2c5fb8f) format("truetype"),
+        url(/fonts/fa-solid-900.woff?eeccf4f66002c6f2ba24d3d22f2434c2) format("woff"),
+        url(/fonts/fa-solid-900.svg?7a8b4f130182d19a2d7c67d80c090397#fa-solid-900) format("svg");
 
     font-display: swap;
 }
 .fa,
 .fas {
-    font-family: 'Font Awesome 5 Free';
+    font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
 @font-face {
-    font-family: 'Font Awesome 5 Brands';
+    font-family: "Font Awesome 5 Brands";
     src: url(/fonts/fa-brands-400.eot?23f19bb08961f37aaf692ff943823453);
     src: url(/fonts/fa-brands-400.eot?23f19bb08961f37aaf692ff943823453#iefix)
-            format('embedded-opentype'),
-        url(/fonts/fa-brands-400.ttf?527940b104eb2ea366c8630f3f038603) format('truetype'),
-        url(/fonts/fa-brands-400.woff?2285773e6b4b172f07d9b777c81b0775) format('woff'),
-        url(/fonts/fa-brands-400.svg?2f517e09eb2ca6650ff5bec5a95157ab#fa-brands-400) format('svg');
+            format("embedded-opentype"),
+        url(/fonts/fa-brands-400.ttf?527940b104eb2ea366c8630f3f038603) format("truetype"),
+        url(/fonts/fa-brands-400.woff?2285773e6b4b172f07d9b777c81b0775) format("woff"),
+        url(/fonts/fa-brands-400.svg?2f517e09eb2ca6650ff5bec5a95157ab#fa-brands-400) format("svg");
     font-display: swap;
 }
 .fab {
-    font-family: 'Font Awesome 5 Brands';
+    font-family: "Font Awesome 5 Brands";
     font-weight: 400;
 }
 .fa-trash-alt:before {
-    content: '\f014';
+    content: "\f014";
 }
 .fa-refresh:before {
-    content: '\f021';
+    content: "\f021";
 }
 .fa-spinner:before,
 .fa-cog:before {
-    content: '\f110';
+    content: "\f110";
 }
 .fa-sign-in:before,
 .fa-sign-in-alt:before {
-    content: '\f090';
+    content: "\f090";
 }
 .fa-newspaper:before {
-    content: '\f1ea';
+    content: "\f1ea";
 }
 .fa-mortar-board:before {
-    content: '\f19d';
+    content: "\f19d";
 }
 .fa-thumbs-up:before {
-    content: '\f087';
+    content: "\f087";
 }
 .fa-thumbs-down:before {
-    content: '\f088';
+    content: "\f088";
 }
 html {
     scroll-behavior: smooth;
@@ -4603,6 +4634,10 @@ a {
 		width: 33.333333%;
 	}
 
+	.md\:w-6\/12 {
+		width: 50%;
+	}
+
 	.md\:w-3\/12 {
 		width: 25%;
 	}
@@ -4617,14 +4652,6 @@ a {
 
 	.md\:w-3\/5 {
 		width: 60%;
-	}
-
-	.md\:w-6\/12 {
-		width: 50%;
-	}
-
-	.md\:w-5\/12 {
-		width: 41.666667%;
 	}
 
 	.md\:grid-cols-3 {
@@ -4669,6 +4696,10 @@ a {
 
 	.md\:p-4 {
 		padding: 1rem;
+	}
+
+	.md\:p-1 {
+		padding: 0.25rem;
 	}
 }
 @media (min-width: 1024px) {
