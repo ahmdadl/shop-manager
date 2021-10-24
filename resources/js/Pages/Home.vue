@@ -1,5 +1,21 @@
 <template>
     <div class="flex justify-center w-full p-3 m-2" dir="rtl">
+        <div class="w-2/6">
+            <button
+                class="inline px-2 py-1 m-1 text-white bg-green-500 rounded hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
+                @click.prevent="addCategory"
+            >
+                <i class="mx-1 fas fa-plus"></i>
+                <span class="hidden md:inline-block"> إضافة </span>
+            </button>
+            <button
+                class="inline px-2 py-1 text-white bg-yellow-500 rounded hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+                @click.prevent="editMode = !editMode"
+            >
+                <i class="mx-1 fas fa-cogs"></i>
+                <span class="hidden md:inline-block"> تعديل </span>
+            </button>
+        </div>
         <Multiselect
             v-model="val"
             :options="findCat"
@@ -10,7 +26,7 @@
             :minChars="1"
             :resolveOnLoad="false"
             @clear="selectedCats = allCategories"
-            class="w-5/6"
+            class="w-3/6"
             ref="multiSelect"
             @select="$inertia.visit(`/categories/${val}`, { replace: true })"
             :classes="{
@@ -27,36 +43,79 @@
         />
         <div class="w-1/6">
             <button
-                class="p-2 mx-1 font-bold text-white bg-red-500 rounded  hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
+                class="p-2 mx-1 font-bold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
                 @click="resetSearch"
                 :disabled="selectedCats.length === allCategories.length"
             >
                 <i class="mx-1 fas fa-times"></i>
-                إلغاء
+                <span class="hidden md:inline-block"> إلغاء </span>
             </button>
         </div>
     </div>
-    <div
-        v-for="c in selectedCats"
-        :key="c.id"
-        class="p-2 m-3 text-white bg-red-700 border rounded-md d-block"
-    >
-        {{ c.title }} -> {{ c.slug }}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-7">
+        <div
+            class="flex flex-col w-full overflow-hidden bg-white rounded-lg dark:text-white dark:bg-gray-800 h-36 sahdow-lg md:flex-row"
+            v-for="c in selectedCats"
+            :key="c.id"
+        >
+            <div class="relative w-full h-16 md:w-2/5 md:h-80">
+                <div class="absolute top-0 right-0 z-10">
+                    <div
+                        class="relative px-2 py-1 text-base font-normal leading-relaxed text-gray-100 bg-red-900 bg-opacity-75 rounded-tr-sm "
+                    >
+                        40
+                    </div>
+                    <div v-if="!editMode">
+                        <button class="block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800">
+                            <i class="mx-1 fas fa-edit"></i>
+                        </button>
+                        <button class="block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800" @click.prevent="remove(c.slug)">
+                            <i class="mx-1 fas fa-trash" v-if="!removing"></i>
+                            <i class="mx-1 fas fa-spinner fa-spin" v-else></i>
+                        </button>   
+                    </div>
+                </div>
+                <img
+                    class="object-cover object-left w-full h-full"
+                    :src="`/storage/${c.img}`"
+                    alt="photo"
+                />
+            </div>
+            <div class="w-full p-6 space-y-2 text-left md:w-3/5 md:p-4">
+                <p
+                    class="font-bold text-gray-700 text-md dark:text-gray-200"
+                    dir="rtl"
+                >
+                    <Link :href="`/categories/${c.slug}`" dir="rtl">{{
+                        c.title
+                    }}</Link>
+                </p>
+            </div>
+        </div>
     </div>
+
+    <!-- create new category form -->
+    <modal @cat="addToList" />
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { Link } from "@inertiajs/inertia-vue3";
 // @ts-ignore
 import Multiselect from "@vueform/multiselect";
 import "@vueform/multiselect/themes/default.css";
-import { useForm } from "@inertiajs/inertia-vue3";
 import { Category } from "../interfaces";
+import { openModal, container } from "jenesius-vue-modal";
+import CategoryForm from "../components/CategoryForm.vue";
+import axios from "axios";
 
-@Options({ components: { Multiselect } })
+@Options({ components: { Multiselect, Link, modal: container } })
 export default class Home extends Vue {
     allCategories: Category[] = [];
     selectedCats: Category[] = [];
     val?: string = "";
+    modal: boolean = false;
+    editMode: boolean = false;
+    removing: boolean = false;
 
     showTo() {
         // @ts-ignore
@@ -85,6 +144,28 @@ export default class Home extends Vue {
         this.$refs.multiSelect.clear();
     }
 
+    async addCategory() {
+        const modal = await openModal(CategoryForm, {
+            title: "Hello world!",
+        });
+    }
+
+    async addToList(ev: any) {
+        console.log(ev);
+    }
+
+    async remove(slug: string) {
+        if (this.removing) return;
+
+        this.removing = true;
+
+        const res = await axios.delete(`/categories/${slug}`);
+        
+        console.log(res);
+        
+        this.removing = false;
+    }
+
     mounted() {
         this.allCategories = this.selectedCats = this.$page.props
             .categories as Category[];
@@ -96,6 +177,10 @@ export default class Home extends Vue {
 .multiselect-placeholder {
     right: 1rem !important;
     left: unset;
+}
+.widget__modal-container__item.modal-container {
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* DarkMode styles */
