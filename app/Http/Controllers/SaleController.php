@@ -15,24 +15,35 @@ class SaleController extends Controller
                 "required",
                 "integer",
                 "min:1",
-                "max:{$product->amount}",
+                request()->get("type") === "sell"
+                    ? "max:{$product->amount}"
+                    : "",
             ],
+            "type" => "required|alpha|max:4",
         ]);
 
         $done = Sale::create([
             "product_id" => $product->id,
             "amount" => $req["amount"],
-            'type' => 'sell',
+            "type" => $req["type"],
+            "total" => ((int) $req["amount"]) * $product->price,
         ])->id;
 
         if ($done) {
             // update product amount
-            $product->amount -= $req["amount"];
+            $product->amount =
+                $req["type"] === "sell"
+                    ? $product->amount - $req["amount"]
+                    : $product->amount + $req["amount"];
             $product->update();
         }
 
         return response()->json([
             "done" => $done,
         ]);
+    }
+
+    public function buy()
+    {
     }
 }

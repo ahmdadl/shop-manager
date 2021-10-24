@@ -26,6 +26,7 @@ class SaleFactory extends Factory
             'product_id' => fn() => Product::factory(),
             'type' => $this->faker->randomKey(['sell', 'buy']),
             'amount' => random_int(1, 50),
+            'total' => random_int(50, 1000).random_int(0, 99),
         ];
     }
 }

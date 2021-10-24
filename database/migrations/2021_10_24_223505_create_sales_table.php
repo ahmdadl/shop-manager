@@ -18,6 +18,7 @@ class CreateSalesTable extends Migration
             $table->foreignId('product_id')->constrained();
             $table->enum('type', ['sell', 'buy'])->default('sell')->index();
             $table->integer('amount');
+            $table->double('total');
             $table->timestamps();
         });
     }

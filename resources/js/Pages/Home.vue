@@ -1,5 +1,5 @@
 <template>
-    <div class="pr-2 overflow-x-hidden overflow-y-auto h-2/4">
+    <div class="pr-2 overflow-x-hidden overflow-y-auto h-3/5">
         <div class="flex justify-center w-full px-3 py-1 mx-2" dir="rtl">
             <div class="w-2/6">
                 <button
@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4">
+    <div class="py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/5">
         <Product />
     </div>
 

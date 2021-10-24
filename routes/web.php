@@ -31,7 +31,7 @@ Route::patch('/products/{product}', [ProductController::class, 'update']);
 Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
 // sales
-Route::post('/products/{product}/sell', [SaleController::class, 'sell']);
+Route::post('/products/{product}/sales', [SaleController::class, 'sell']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

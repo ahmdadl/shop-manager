@@ -19692,9 +19692,6 @@ function (_super) {
             , _a.sent()];
 
           case 2:
-            if (!(this.type === "sell")) return [3
-            /*break*/
-            , 4];
             return [4
             /*yield*/
             , this._sell()];
@@ -19703,11 +19700,6 @@ function (_super) {
             return [2
             /*return*/
             , _a.sent()];
-
-          case 4:
-            return [2
-            /*return*/
-            ];
         }
       });
     });
@@ -19826,7 +19818,7 @@ function (_super) {
           case 0:
             this.saving = true;
 
-            if (!this.product.id || !this.amount || this.amount > this.product.amount) {
+            if (!this.product.id || !this.amount || this.type === "sell" && this.amount > this.product.amount) {
               this.saving = false;
               this.dataErr = false;
               return [2
@@ -19836,8 +19828,9 @@ function (_super) {
 
             return [4
             /*yield*/
-            , axios__WEBPACK_IMPORTED_MODULE_0___default().post("/products/" + this.product.slug + "/sell", {
-              amount: this.amount
+            , axios__WEBPACK_IMPORTED_MODULE_0___default().post("/products/" + this.product.slug + "/sales", {
+              amount: this.amount,
+              type: this.type
             })["catch"](function (err) {
               // @ts-ignore
               _this.alert("حدث خطأ غير متوقع", "error");
@@ -19868,7 +19861,7 @@ function (_super) {
 
             this.products.map(function (x) {
               if (x.slug === _this.product.slug) {
-                x.amount -= _this.amount;
+                x.amount = _this.type === "sell" ? x.amount - _this.amount : x.amount + _this.amount;
               }
 
               return x;
@@ -19995,7 +19988,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = {
-  "class": "pr-2 overflow-x-hidden overflow-y-auto h-2/4"
+  "class": "pr-2 overflow-x-hidden overflow-y-auto h-3/5"
 };
 var _hoisted_2 = {
   "class": "flex justify-center w-full px-3 py-1 mx-2",
@@ -20086,7 +20079,7 @@ var _hoisted_27 = {
   dir: "rtl"
 };
 var _hoisted_28 = {
-  "class": "py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4"
+  "class": "py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/5"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Multiselect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Multiselect");

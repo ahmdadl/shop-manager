@@ -1315,6 +1315,12 @@ select {
 .h-28 {
 	height: 7rem;
 }
+.h-3\/5 {
+	height: 60%;
+}
+.h-2\/5 {
+	height: 40%;
+}
 .max-h-full {
 	max-height: 100%;
 }
