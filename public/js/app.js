@@ -19261,7 +19261,15 @@ function (_super) {
     this.$refs.multiSelect.clear();
   };
 
-  Home.prototype.addCategory = function () {
+  Home.prototype.categoryForm = function (title, img) {
+    if (title === void 0) {
+      title = "";
+    }
+
+    if (img === void 0) {
+      img = "";
+    }
+
     return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function () {
       var modal;
       return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__generator)(this, function (_a) {
@@ -19270,7 +19278,8 @@ function (_super) {
             return [4
             /*yield*/
             , (0,jenesius_vue_modal__WEBPACK_IMPORTED_MODULE_3__.openModal)(_components_CategoryForm_vue__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              title: "Hello world!"
+              title: title,
+              img: img
             })];
 
           case 1:
@@ -19279,17 +19288,6 @@ function (_super) {
             /*return*/
             ];
         }
-      });
-    });
-  };
-
-  Home.prototype.addToList = function (ev) {
-    return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function () {
-      return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__generator)(this, function (_a) {
-        console.log(ev);
-        return [2
-        /*return*/
-        ];
       });
     });
   };
@@ -19632,7 +19630,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         args[_i] = arguments[_i];
       }
 
-      return _ctx.addCategory && _ctx.addCategory.apply(_ctx, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__read)(args), false));
+      return _ctx.categoryForm && _ctx.categoryForm.apply(_ctx, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__read)(args), false));
     }, ["prevent"]))
   }, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "inline px-2 py-1 text-white bg-yellow-500 rounded hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700",
@@ -19699,7 +19697,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_20)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "object-cover object-left w-full h-full",
-      src: "/storage/" + c.img,
+      src: "/storage/" + (c.img || 'categories/default.jpg'),
       alt: "photo"
     }, null, 8
     /* PROPS */
