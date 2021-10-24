@@ -142,15 +142,7 @@ export default class CategoryForm extends Vue {
 
         if (!res?.data || !res.data.id) {
             // @ts-ignore
-            this.$swal.fire({
-                toast: true,
-                icon: "error",
-                position: "bottom-end",
-                timer: 3000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-                title: "حدث خطأ",
-            });
+            this.toast();
             return;
         }
 
@@ -159,11 +151,7 @@ export default class CategoryForm extends Vue {
         this.$emit('cat', res.data);
 
         // @ts-ignore
-        this.$swal.fire({
-            icon: "success",
-            text: "تم الحفظ بنجاح",
-            confirmButtonText: "x",
-        });
+        this.alert();
 
         this.close();
     }

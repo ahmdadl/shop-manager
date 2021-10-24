@@ -19226,7 +19226,7 @@ function (_super) {
     _this.val = "";
     _this.modal = false;
     _this.editMode = false;
-    _this.removing = false;
+    _this.removing = "a";
     return _this;
   }
 
@@ -19295,23 +19295,50 @@ function (_super) {
   };
 
   Home.prototype.remove = function (slug) {
+    var _a;
+
     return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function () {
-      var res;
-      return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__generator)(this, function (_a) {
-        switch (_a.label) {
+      var conf, res;
+      return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__generator)(this, function (_b) {
+        switch (_b.label) {
           case 0:
-            if (this.removing) return [2
+            if (this.removing !== "a") return [2
             /*return*/
             ];
-            this.removing = true;
+            return [4
+            /*yield*/
+            , this.confirm()];
+
+          case 1:
+            conf = _b.sent();
+            if (!conf.isConfirmed) return [2
+            /*return*/
+            ];
+            this.removing = slug;
             return [4
             /*yield*/
             , axios__WEBPACK_IMPORTED_MODULE_5___default()["delete"]("/categories/" + slug)];
 
-          case 1:
-            res = _a.sent();
-            console.log(res);
-            this.removing = false;
+          case 2:
+            res = _b.sent();
+            this.removing = "a";
+
+            if (!(res === null || res === void 0 ? void 0 : res.data) || !((_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.done)) {
+              // @ts-ignore
+              this.toast();
+              return [2
+              /*return*/
+              ];
+            }
+
+            this.allCategories.splice(this.allCategories.findIndex(function (x) {
+              return x.slug === slug;
+            }), 1);
+            this.selectedCats.splice(this.selectedCats.findIndex(function (x) {
+              return x.slug === slug;
+            }), 1); // @ts-ignore
+
+            this.alert();
             return [2
             /*return*/
             ];
@@ -19321,7 +19348,8 @@ function (_super) {
   };
 
   Home.prototype.mounted = function () {
-    this.allCategories = this.selectedCats = this.$page.props.categories; // this.selectedCats = this.$page.props.categories as Category[];
+    this.allCategories = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__read)(this.$page.props.categories), false);
+    this.selectedCats = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__read)(this.$page.props.categories), false); // this.selectedCats = this.$page.props.categories as Category[];
   };
 
   Home = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_7__.Options)({
@@ -19422,15 +19450,7 @@ function (_super) {
 
             if (!(res === null || res === void 0 ? void 0 : res.data) || !res.data.id) {
               // @ts-ignore
-              this.$swal.fire({
-                toast: true,
-                icon: "error",
-                position: "bottom-end",
-                timer: 3000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-                title: "حدث خطأ"
-              });
+              this.toast();
               return [2
               /*return*/
               ];
@@ -19440,11 +19460,7 @@ function (_super) {
 
             this.$emit('cat', res.data); // @ts-ignore
 
-            this.$swal.fire({
-              icon: "success",
-              text: "تم الحفظ بنجاح",
-              confirmButtonText: "x"
-            });
+            this.alert();
             this.close();
             return [2
             /*return*/
@@ -19567,7 +19583,7 @@ var _hoisted_18 = {
 };
 
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+  "class": "block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "mx-1 fas fa-edit"
 })], -1
@@ -19577,11 +19593,11 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_20 = ["onClick"];
 var _hoisted_21 = {
   key: 0,
-  "class": "mx-1 fas fa-trash"
+  "class": "mx-1 fas fa-spinner fa-spin"
 };
 var _hoisted_22 = {
   key: 1,
-  "class": "mx-1 fas fa-spinner fa-spin"
+  "class": "mx-1 fas fa-trash"
 };
 var _hoisted_23 = ["src"];
 var _hoisted_24 = {
@@ -19667,11 +19683,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "flex flex-col w-full overflow-hidden bg-white rounded-lg dark:text-white dark:bg-gray-800 h-36 sahdow-lg md:flex-row",
       key: c.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, !_ctx.editMode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      "class": "block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800",
+      "class": "block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80",
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return _ctx.remove(c.slug);
       }, ["prevent"])
-    }, [!_ctx.removing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_21)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_22))], 8
+    }, [_ctx.removing === c.slug ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_21)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_22))], 8
     /* PROPS */
     , _hoisted_20)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "object-cover object-left w-full h-full",
@@ -19907,6 +19923,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/vue-sweetalert.umd.js");
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
+/* harmony import */ var _helpers_swal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/swal */ "./resources/js/helpers/swal.ts");
 var _a;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
@@ -19914,6 +19931,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
  // @ts-ignore
+
 
 
 
@@ -19942,7 +19960,10 @@ var appName = ((_a = window.document.getElementsByTagName("title")[0]) === null 
     }).use(plugin).use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4___default())) // @ts-ignore
     .mixin({
       methods: {
-        route: route
+        route: route,
+        toast: _helpers_swal__WEBPACK_IMPORTED_MODULE_6__.toast,
+        alert: _helpers_swal__WEBPACK_IMPORTED_MODULE_6__.alert,
+        confirm: _helpers_swal__WEBPACK_IMPORTED_MODULE_6__.confirm
       }
     }).mount(el);
   }
@@ -19950,6 +19971,133 @@ var appName = ((_a = window.document.getElementsByTagName("title")[0]) === null 
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init({
   color: "#4B5563"
 });
+
+/***/ }),
+
+/***/ "./resources/js/helpers/swal.ts":
+/*!**************************************!*\
+  !*** ./resources/js/helpers/swal.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "toast": () => (/* binding */ toast),
+/* harmony export */   "alert": () => (/* binding */ alert),
+/* harmony export */   "confirm": () => (/* binding */ confirm)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+/**
+ * show toast
+ * @param title
+ * @param icon
+ * @param position
+ * @default error-toast
+ */
+
+function toast(title, icon, position) {
+  if (title === void 0) {
+    title = "حدث خطأ";
+  }
+
+  if (icon === void 0) {
+    icon = "error";
+  }
+
+  if (position === void 0) {
+    position = "bottom-end";
+  } // @ts-ignore
+
+
+  this.$swal.fire({
+    toast: true,
+    icon: icon,
+    position: position,
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    title: title
+  });
+}
+/**
+ * show alert
+ * @param text
+ * @param icon
+ * @param confirmButtonText
+ * @default success-alert
+ */
+
+function alert(text, icon, confirmButtonText) {
+  if (text === void 0) {
+    text = "تمت العملية بنجاح";
+  }
+
+  if (icon === void 0) {
+    icon = "success";
+  }
+
+  if (confirmButtonText === void 0) {
+    confirmButtonText = "x";
+  }
+
+  return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function () {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__generator)(this, function (_a) {
+      // @ts-ignore
+      this.$swal.fire({
+        icon: icon,
+        text: text,
+        confirmButtonText: confirmButtonText
+      });
+      return [2
+      /*return*/
+      ];
+    });
+  });
+}
+/**
+ * show confirmation dialog
+ * @param title
+ * @param okText
+ * @param cancelText
+ */
+
+function confirm(title, okText, cancelText) {
+  if (title === void 0) {
+    title = "هل أنت متأكد؟";
+  }
+
+  if (okText === void 0) {
+    okText = "نعم";
+  }
+
+  if (cancelText === void 0) {
+    cancelText = "إلغاء";
+  }
+
+  return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function () {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__generator)(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , this.$swal.fire({
+            title: title,
+            showCancelButton: true,
+            confirmButtonText: okText,
+            cancelButtonText: cancelText
+          })];
+
+        case 1:
+          // @ts-ignore
+          return [2
+          /*return*/
+          , _a.sent()];
+      }
+    });
+  });
+}
 
 /***/ }),
 

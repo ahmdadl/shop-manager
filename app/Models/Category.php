@@ -11,7 +11,7 @@ class Category extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'img'];
+    protected $fillable = ["title", "img"];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -21,9 +21,19 @@ class Category extends Model
     public function sluggable(): array
     {
         return [
-            'slug' => [
-                'source' => 'title'
-            ]
+            "slug" => [
+                "source" => "title",
+            ],
         ];
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return "slug";
     }
 }

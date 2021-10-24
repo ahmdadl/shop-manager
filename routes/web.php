@@ -18,7 +18,10 @@ use Inertia\Inertia;
 
 Route::get("/", [HomeController::class, "index"]);
 Route::post("/categories", [HomeController::class, "store"]);
-Route::delete("/categories/{category}", [HomeController::class, "destroy"]);
+Route::delete("/categories/{category}", [
+    HomeController::class,
+    "destroy",
+]);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

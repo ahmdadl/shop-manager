@@ -66,13 +66,21 @@
                         40
                     </div>
                     <div v-if="!editMode">
-                        <button class="block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800">
+                        <button
+                            class="block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
+                        >
                             <i class="mx-1 fas fa-edit"></i>
                         </button>
-                        <button class="block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-800" @click.prevent="remove(c.slug)">
-                            <i class="mx-1 fas fa-trash" v-if="!removing"></i>
-                            <i class="mx-1 fas fa-spinner fa-spin" v-else></i>
-                        </button>   
+                        <button
+                            class="block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80"
+                            @click.prevent="remove(c.slug)"
+                        >
+                            <i
+                                class="mx-1 fas fa-spinner fa-spin"
+                                v-if="removing === c.slug"
+                            ></i>
+                            <i class="mx-1 fas fa-trash" v-else></i>
+                        </button>
                     </div>
                 </div>
                 <img
@@ -115,7 +123,7 @@ export default class Home extends Vue {
     val?: string = "";
     modal: boolean = false;
     editMode: boolean = false;
-    removing: boolean = false;
+    removing: string = "a";
 
     showTo() {
         // @ts-ignore
@@ -155,20 +163,44 @@ export default class Home extends Vue {
     }
 
     async remove(slug: string) {
-        if (this.removing) return;
+        if (this.removing !== "a") return;
 
-        this.removing = true;
+        // confirmation required
+        // @ts-ignore
+        const conf = await this.confirm();
+
+        if (!conf.isConfirmed) return;
+
+        this.removing = slug;
 
         const res = await axios.delete(`/categories/${slug}`);
-        
-        console.log(res);
-        
-        this.removing = false;
+
+        this.removing = "a";
+
+        if (!res?.data || !res?.data?.done) {
+            // @ts-ignore
+            this.toast();
+            return;
+        }
+
+        this.allCategories.splice(
+            this.allCategories.findIndex((x) => x.slug === slug),
+            1
+        );
+        this.selectedCats.splice(
+            this.selectedCats.findIndex((x) => x.slug === slug),
+            1
+        );
+
+        // @ts-ignore
+        this.alert();
     }
 
     mounted() {
-        this.allCategories = this.selectedCats = this.$page.props
-            .categories as Category[];
+        this.allCategories = [...this.$page.props
+            .categories as Category[]];
+        this.selectedCats = [...this.$page.props
+            .categories as Category[]];
         // this.selectedCats = this.$page.props.categories as Category[];
     }
 }

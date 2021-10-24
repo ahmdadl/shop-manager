@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Str;
 
@@ -32,5 +33,14 @@ class HomeController extends Controller
         ]);
 
         return response()->json($cat);
+    }
+
+    public function destroy(Category $category) {
+        // delete avatar
+        Storage::delete('public/' . $category->img);
+
+        return response()->json([
+            'done' => $category->delete(),
+        ]);
     }
 }
