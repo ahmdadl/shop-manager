@@ -2,17 +2,23 @@
     <div class="flex justify-center w-full p-3 m-2" dir="rtl">
         <div class="w-2/6">
             <button
-                class="inline px-2 py-1 m-1 text-white bg-green-500 rounded hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
+                class="inline px-2 py-1 m-1 text-white bg-green-500 rounded  hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
                 @click.prevent="categoryForm"
             >
                 <i class="mx-1 fas fa-plus"></i>
                 <span class="hidden md:inline-block"> إضافة </span>
             </button>
             <button
-                class="inline px-2 py-1 text-white bg-yellow-500 rounded hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+                class="inline px-2 py-1 text-white bg-yellow-500 rounded  hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
                 @click.prevent="editMode = !editMode"
             >
-                <i class="mx-1 fas fa-cogs"></i>
+                <i
+                    class="mx-1 fas"
+                    :class="{
+                        'fa-power-off': editMode,
+                        'fa-cogs': !editMode,
+                    }"
+                ></i>
                 <span class="hidden md:inline-block"> تعديل </span>
             </button>
         </div>
@@ -43,7 +49,7 @@
         />
         <div class="w-1/6">
             <button
-                class="p-2 mx-1 font-bold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
+                class="p-2 mx-1 font-bold text-white bg-red-500 rounded  hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
                 @click="resetSearch"
                 :disabled="selectedCats.length === allCategories.length"
             >
@@ -54,7 +60,7 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-7">
         <div
-            class="flex flex-col w-full overflow-hidden bg-white rounded-lg dark:text-white dark:bg-gray-800 h-36 sahdow-lg md:flex-row"
+            class="flex flex-col w-full overflow-hidden bg-white rounded-lg  dark:text-white dark:bg-gray-800 h-36 sahdow-lg md:flex-row"
             v-for="c in selectedCats"
             :key="c.id"
         >
@@ -67,12 +73,15 @@
                     </div>
                     <div v-if="!editMode">
                         <button
-                            class="block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
+                            class="block px-2 py-1 my-2 text-white bg-blue-400  hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
+                            @click.prevent="
+                                categoryForm(c.slug, c.title, c.img)
+                            "
                         >
                             <i class="mx-1 fas fa-edit"></i>
                         </button>
                         <button
-                            class="block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80"
+                            class="block px-2 py-1 pl-3 text-white bg-red-400  hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80"
                             @click.prevent="remove(c.slug)"
                         >
                             <i
@@ -152,8 +161,9 @@ export default class Home extends Vue {
         this.$refs.multiSelect.clear();
     }
 
-    async categoryForm(title = "", img = "") {
+    async categoryForm(slug = "", title = "", img = "") {
         const modal = await openModal(CategoryForm, {
+            slug,
             title,
             img,
         });
@@ -202,6 +212,25 @@ export default class Home extends Vue {
         this.emitter.on("add-category", (category: Category) => {
             this.allCategories.unshift(category);
             this.selectedCats.unshift(category);
+        });
+
+        // update category
+        // @ts-ignore
+        this.emitter.on("update-category", (category: Category) => {
+            this.allCategories.map((x) => {
+                if (x.slug === category.slug) {
+                    x.title = category.title;
+                    x.img = category.img;
+                }
+                return x;
+            });
+            this.selectedCats.map((x) => {
+                if (x.slug === category.slug) {
+                    x.title = category.title;
+                    x.img = category.img;
+                }
+                return x;
+            });
         });
     }
 }

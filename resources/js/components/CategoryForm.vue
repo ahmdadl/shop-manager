@@ -5,9 +5,9 @@
         <div class="flex justify-between px-5 py-4 border-b border-gray-100">
             <div>
                 <i class="mx-1 text-orange-500 fa fa-plus-circle"></i>
-                <span class="text-lg font-bold text-gray-700"
-                    >إضافة صنف جديد</span
-                >
+                <span class="text-lg font-bold text-gray-700">
+                    {{ editMode ? "تعديل" : "إضافة صنف جديد" }}
+                </span>
             </div>
             <div>
                 <button>
@@ -97,19 +97,27 @@ import { Options, Vue } from "vue-class-component";
 import { closeModal } from "jenesius-vue-modal";
 import axios from "axios";
 
+class Props {
+    slug = "";
+    title: string = "";
+    img: string = "";
+}
+
 @Options({
     components: {},
 })
-export default class CategoryForm extends Vue {
+export default class CategoryForm extends Vue.with(Props) {
     form = {
         title: "",
-        img: null,
+        img: "",
+        slug: "",
         errors: {
             title: "",
             img: "",
         },
     };
     saving: boolean = false;
+    editMode: boolean = this.$props.slug.length > 0;
 
     async save() {
         if (!this.form.title.length || this.saving) {
@@ -120,22 +128,27 @@ export default class CategoryForm extends Vue {
 
         const form = new FormData();
         form.append("title", this.form?.title);
-        if (this.form.img) form.append("avatar", this.form?.img);
+        if (typeof this.form.img === "object") {
+            form.append("avatar", this.form?.img);
+        }        
 
-        const res = await axios
-            .post("/categories", form, {
+        // axios not updating with patch request
+        const res = await axios.post(
+            `/categories${this.editMode ? `/${this.form.slug}` : ""}`,
+            form,
+            {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
-            })
-            .catch((err) => {
-                if (err.response.status === 422) {
-                    const res = err.response.data.errors;
-                    this.form.errors.title = res?.title ? res.title[0] : "";
-                    this.form.errors.img = res?.avatar ? res.avatar[0] : "";
-                }
-                return null;
-            });
+            }
+        ).catch((err) => {
+            if (err.response.status === 422) {
+                const res = err.response.data.errors;
+                this.form.errors.title = res?.title ? res.title[0] : "";
+                this.form.errors.img = res?.avatar ? res.avatar[0] : "";
+            }
+            return null;
+        });
 
         this.saving = false;
 
@@ -147,7 +160,7 @@ export default class CategoryForm extends Vue {
 
         // emit newly created category to parent
         // @ts-ignore
-        this.emitter.emit('add-category', res.data);
+        this.emitter.emit(this.editMode ? 'update-category' : "add-category", res.data);
 
         // @ts-ignore
         this.alert();
@@ -160,7 +173,8 @@ export default class CategoryForm extends Vue {
 
         this.form = {
             title: "",
-            img: null,
+            img: "",
+            slug: "",
             errors: {
                 title: "",
                 img: "",
@@ -168,6 +182,14 @@ export default class CategoryForm extends Vue {
         };
 
         closeModal();
+    }
+
+    mounted() {
+        if (this.editMode) {
+            this.form.title = this.$props.title;
+            this.form.img = this.$props.img;
+            this.form.slug = this.$props.slug;
+        }
     }
 }
 </script>
