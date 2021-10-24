@@ -5,12 +5,12 @@
     <p class="text-xs text-red-400" v-if="dataErr">يرجى مراجعة البيانات</p>
     <form @submit.prevent="save">
         <div
-            class="flex justify-center p-1 mt-3 space-y-5 md:space-x-4 md:space-y-0"
+            class="flex justify-center p-1 mt-3 space-y-5  md:space-x-4 md:space-y-0"
         >
             <div class="flex flex-col w-full space-y-3 md:w-1/12">
                 <button
                     type="button"
-                    class="px-2 py-1 text-white transition duration-200 bg-blue-600 rounded hover:bg-blue-800 dark:bg-blue-700 dark:hover:bg-blue-600"
+                    class="px-2 py-1 text-white transition duration-200 bg-blue-600 rounded  hover:bg-blue-800 dark:bg-blue-700 dark:hover:bg-blue-600"
                     :class="{
                         'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                             type === 'sell',
@@ -28,7 +28,7 @@
                 </button>
                 <button
                     type="button"
-                    class="px-2 py-1 text-white transition duration-200 bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-700"
+                    class="px-2 py-1 text-white transition duration-200 bg-purple-600 rounded  hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-700"
                     :class="{
                         'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                             type === 'buy',
@@ -80,7 +80,7 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:text-gray-100 dark:bg-blue-900"
+                            class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r  dark:text-gray-100 dark:bg-blue-900"
                         >
                             <i :class="`mx-auto fas fa-heading`"></i>
                         </div>
@@ -88,7 +88,7 @@
                             <input
                                 id="title"
                                 type="text"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l  focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                                 placeholder="الإسم"
                                 v-model="product.title"
                             />
@@ -102,7 +102,7 @@
             <div class="w-full md:w-3/12">
                 <div class="flex w-full h-10 border border-blue-200 rounded">
                     <div
-                        class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:text-gray-100 dark:bg-blue-900"
+                        class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r  dark:text-gray-100 dark:bg-blue-900"
                     >
                         <i :class="`mx-auto fas fa-shopping-bag`"></i>
                     </div>
@@ -110,7 +110,7 @@
                         <input
                             id="amount"
                             type="number"
-                            class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                            class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l  focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                             placeholder="الكمية"
                             v-model="amount"
                             min="0"
@@ -118,7 +118,7 @@
                         />
                     </div>
                     <div
-                        class="flex items-center justify-center w-2/12 h-full text-center text-gray-900 bg-gray-300 rounded-l dark:text-gray-100 dark:bg-blue-900 text-md"
+                        class="flex items-center justify-center w-2/12 h-full text-center text-gray-900 bg-gray-300 rounded-l  dark:text-gray-100 dark:bg-blue-900 text-md"
                     >
                         <span class="font-semibold">
                             {{ product.amount }}
@@ -135,7 +135,7 @@
                     v-show="type !== 'sell'"
                 >
                     <div
-                        class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:bg-blue-900 dark:text-gray-100"
+                        class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r  dark:bg-blue-900 dark:text-gray-100"
                     >
                         <i :class="`mx-auto fas fa-dollar-sign`"></i>
                     </div>
@@ -143,7 +143,7 @@
                         <input
                             id="price"
                             type="number"
-                            class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                            class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l  focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                             placeholder="السعر"
                             v-model="price"
                         />
@@ -153,7 +153,7 @@
             <div class="w-full md:w-1/12">
                 <button
                     type="submit"
-                    class="px-2 py-1 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+                    class="px-3 py-2 text-white transition duration-200 bg-green-600 rounded  hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600"
                     :disabled="
                         (type === 'add' &&
                             (!product.title || price <= 0 || amount <= 0)) ||
@@ -170,7 +170,7 @@
     <div class="flex justify-center p-2 mt-1 space-x-3 text-center">
         <button
             type="button"
-            class="px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+            class="px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded  hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700"
             :class="{
                 'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                     type === 'add',
@@ -188,7 +188,7 @@
         </button>
         <button
             type="submit"
-            class="px-2 py-1 text-white transition duration-200 bg-pink-600 rounded hover:bg-pink-800 dark:bg-pink-900 dark:hover:bg-pink-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+            class="px-2 py-1 text-white transition duration-200 bg-pink-600 rounded  hover:bg-pink-800 dark:bg-pink-900 dark:hover:bg-pink-700 disabled:cursor-not-allowed disabled:bg-gray-600"
             style="margin-right: 0.75rem"
             @click.prevent="enableEditMode"
             :disabled="!product.slug"
@@ -198,7 +198,7 @@
         </button>
         <button
             type="submit"
-            class="px-2 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+            class="px-2 py-1 text-white transition duration-200 bg-red-600 rounded  hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600"
             :disabled="!product.slug.length"
             @click.prevent="remove"
         >
@@ -263,6 +263,8 @@ export default class Product extends Vue {
 
         if (this.type === "add" || this.type === "edit") {
             return await this._addnewProduct();
+        } else if (this.type === "sell") {
+            return await this._sell();
         }
     }
 
@@ -346,10 +348,62 @@ export default class Product extends Vue {
         this.resetForm();
     }
 
+    async _sell() {
+        this.saving = true;
+
+        if (
+            !this.product.id ||
+            !this.amount ||
+            this.amount > this.product.amount
+        ) {
+            this.saving = false;
+            this.dataErr = false;
+            return;
+        }
+
+        const res = await axios
+            .post(`/products/${this.product.slug}/sell`, {
+                amount: this.amount,
+            })
+            .catch((err) => {
+                // @ts-ignore
+                this.alert("حدث خطأ غير متوقع", "error");
+
+                if (err.response.status === 422) {
+                    const res = err.response.data.errors;
+                    this.dataErr = true;
+                    this.amountErr = res?.amount ? res.amount[0] : "";
+                }
+                return null;
+            });
+
+        this.saving = false;
+
+        if (!res || !res.data || !res.data.done) {
+            // @ts-ignore
+            this.toast();
+            return;
+        }
+
+        // @ts-ignore
+        this.alert();
+
+        // update product amount
+        this.products.map((x) => {
+            if (x.slug === this.product.slug) {
+                x.amount -= this.amount;
+            }
+            return x;
+        });
+
+        this.resetForm();
+    }
+
     setProduct() {
-        this.product = this.products.find(
-            (x) => x.slug === this.val
-        ) as ProductInterface;
+        this.product = Object.assign(
+            {},
+            this.products.find((x) => x.slug === this.val) as ProductInterface
+        );
     }
 
     async remove() {

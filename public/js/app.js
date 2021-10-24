@@ -19692,6 +19692,19 @@ function (_super) {
             , _a.sent()];
 
           case 2:
+            if (!(this.type === "sell")) return [3
+            /*break*/
+            , 4];
+            return [4
+            /*yield*/
+            , this._sell()];
+
+          case 3:
+            return [2
+            /*return*/
+            , _a.sent()];
+
+          case 4:
             return [2
             /*return*/
             ];
@@ -19802,12 +19815,79 @@ function (_super) {
     });
   };
 
+  Product.prototype._sell = function () {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function () {
+      var res;
+
+      var _this = this;
+
+      return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__generator)(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            this.saving = true;
+
+            if (!this.product.id || !this.amount || this.amount > this.product.amount) {
+              this.saving = false;
+              this.dataErr = false;
+              return [2
+              /*return*/
+              ];
+            }
+
+            return [4
+            /*yield*/
+            , axios__WEBPACK_IMPORTED_MODULE_0___default().post("/products/" + this.product.slug + "/sell", {
+              amount: this.amount
+            })["catch"](function (err) {
+              // @ts-ignore
+              _this.alert("حدث خطأ غير متوقع", "error");
+
+              if (err.response.status === 422) {
+                var res_2 = err.response.data.errors;
+                _this.dataErr = true;
+                _this.amountErr = (res_2 === null || res_2 === void 0 ? void 0 : res_2.amount) ? res_2.amount[0] : "";
+              }
+
+              return null;
+            })];
+
+          case 1:
+            res = _a.sent();
+            this.saving = false;
+
+            if (!res || !res.data || !res.data.done) {
+              // @ts-ignore
+              this.toast();
+              return [2
+              /*return*/
+              ];
+            } // @ts-ignore
+
+
+            this.alert(); // update product amount
+
+            this.products.map(function (x) {
+              if (x.slug === _this.product.slug) {
+                x.amount -= _this.amount;
+              }
+
+              return x;
+            });
+            this.resetForm();
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  };
+
   Product.prototype.setProduct = function () {
     var _this = this;
 
-    this.product = this.products.find(function (x) {
+    this.product = Object.assign({}, this.products.find(function (x) {
       return x.slug === _this.val;
-    });
+    }));
   };
 
   Product.prototype.remove = function () {
@@ -20006,7 +20086,7 @@ var _hoisted_27 = {
   dir: "rtl"
 };
 var _hoisted_28 = {
-  "class": "p-2 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4"
+  "class": "py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Multiselect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Multiselect");
@@ -20595,7 +20675,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.type !== 'sell']])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
-    "class": "px-2 py-1 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600",
+    "class": "px-3 py-2 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600",
     disabled: _ctx.type === 'add' && (!_ctx.product.title || _ctx.price <= 0 || _ctx.amount <= 0) || _ctx.type === 'sell' && _ctx.amount > _ctx.product.amount
   }, [!_ctx.saving ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_28)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_29)), _hoisted_30], 8
   /* PROPS */

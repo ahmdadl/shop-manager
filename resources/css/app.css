@@ -31,6 +31,10 @@ input {
     color: #fff;
 }
 
+.dark .multiselect-single-label {
+    color: #fff;
+}
+
 @font-face {
     font-family: 'Font Awesome 5 Free';
     src: url('fonts/fa-solid-900.eot?lwlvmc');

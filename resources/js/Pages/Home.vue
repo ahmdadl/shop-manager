@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="p-2 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4">
+    <div class="py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4">
         <Product />
     </div>
 
