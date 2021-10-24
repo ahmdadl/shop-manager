@@ -16,7 +16,7 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained();
-            $table->enum('type', ['sell', 'buy']);
+            $table->enum('type', ['sell', 'buy'])->default('sell')->index();
             $table->integer('amount');
             $table->timestamps();
         });

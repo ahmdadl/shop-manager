@@ -14,7 +14,7 @@
         </nav> -->
 
         <div
-            class="flex min-h-screen gap-0 bg-gray-100 dark:text-white dark:bg-gray-900"
+            class="flex min-h-screen gap-0 transition duration-75 ease-linear bg-gray-100 dark:text-white dark:bg-gray-900"
         >
             <!-- Page Heading -->
             <!-- <header class="bg-white shadow" v-if="$slots.header">

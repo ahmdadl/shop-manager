@@ -2207,6 +2207,9 @@ select {
 .duration-1000 {
 	transition-duration: 1000ms;
 }
+.duration-100 {
+	transition-duration: 100ms;
+}
 .ease-in-out {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -4608,6 +4611,14 @@ a {
 
 	.md\:w-3\/5 {
 		width: 60%;
+	}
+
+	.md\:w-6\/12 {
+		width: 50%;
+	}
+
+	.md\:w-5\/12 {
+		width: 41.666667%;
 	}
 
 	.md\:grid-cols-3 {

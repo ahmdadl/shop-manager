@@ -61,7 +61,7 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-5 gap-x-3 gap-y-5">
             <div
-                class="flex flex-col w-full overflow-hidden transition duration-150 ease-linear bg-white rounded-lg cursor-pointer dark:text-white dark:bg-gray-800 h-28 sahdow-lg md:flex-row hover:bg-green-700 hover:text-white group dark:hover:bg-green-700" :class="{
+                class="flex flex-col w-full overflow-hidden transition duration-200 ease-linear bg-white rounded-lg cursor-pointer dark:text-white dark:bg-gray-800 h-28 sahdow-lg md:flex-row hover:bg-green-700 hover:text-white group dark:hover:bg-green-700" :class="{
                     'border border-green-900 bg-green-900 dark:bg-green-900': selectedCat.slug === c.slug
                 }"
                 v-for="c in selectedCats"

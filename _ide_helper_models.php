@@ -17,10 +17,13 @@ namespace App\Models{
  * @property int $id
  * @property string $title
  * @property string $slug
- * @property string $img
+ * @property string|null $img
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
  * @method static \Database\Factories\CategoryFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category query()
@@ -30,8 +33,66 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class Category extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property int $category_id
+ * @property string $title
+ * @property string|null $slug
+ * @property string|null $img
+ * @property int $amount
+ * @property float $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Category $category
+ * @method static \Database\Factories\ProductFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class Product extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Sale
+ *
+ * @property int $id
+ * @property int $product_id
+ * @property string $type
+ * @property int $amount
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\SaleFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sale whereUpdatedAt($value)
+ */
+	class Sale extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -22,6 +22,7 @@ class SaleController extends Controller
         $done = Sale::create([
             "product_id" => $product->id,
             "amount" => $req["amount"],
+            'type' => 'sell',
         ])->id;
 
         if ($done) {
