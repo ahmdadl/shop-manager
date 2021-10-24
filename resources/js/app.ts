@@ -12,6 +12,9 @@ import "sweetalert2/dist/sweetalert2.min.css";
 
 import { toast, alert, confirm } from "./helpers/swal";
 
+import mitt from "mitt";
+const emitter = mitt();
+
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -24,14 +27,15 @@ createInertiaApp({
     },
     // @ts-ignore
     setup({ el, app, props, plugin }) {
-        return (
-            createApp({ render: () => h(app, props) })
-                .use(plugin)
-                .use(VueSweetalert2)
-                // @ts-ignore
-                .mixin({ methods: { route, toast, alert, confirm } })
-                .mount(el)
-        );
+        const mount = createApp({ render: () => h(app, props) })
+            .use(plugin)
+            .use(VueSweetalert2)
+            // @ts-ignore
+            .mixin({ methods: { route, toast, alert, confirm } });
+
+        mount.config.globalProperties.emitter = emitter;
+
+        return mount.mount(el);
     },
 });
 

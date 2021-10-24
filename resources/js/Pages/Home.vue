@@ -2,14 +2,14 @@
     <div class="flex justify-center w-full p-3 m-2" dir="rtl">
         <div class="w-2/6">
             <button
-                class="inline px-2 py-1 m-1 text-white bg-green-500 rounded hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
+                class="inline px-2 py-1 m-1 text-white bg-green-500 rounded  hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
                 @click.prevent="addCategory"
             >
                 <i class="mx-1 fas fa-plus"></i>
                 <span class="hidden md:inline-block"> إضافة </span>
             </button>
             <button
-                class="inline px-2 py-1 text-white bg-yellow-500 rounded hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+                class="inline px-2 py-1 text-white bg-yellow-500 rounded  hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
                 @click.prevent="editMode = !editMode"
             >
                 <i class="mx-1 fas fa-cogs"></i>
@@ -43,7 +43,7 @@
         />
         <div class="w-1/6">
             <button
-                class="p-2 mx-1 font-bold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
+                class="p-2 mx-1 font-bold text-white bg-red-500 rounded  hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
                 @click="resetSearch"
                 :disabled="selectedCats.length === allCategories.length"
             >
@@ -54,7 +54,7 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-7">
         <div
-            class="flex flex-col w-full overflow-hidden bg-white rounded-lg dark:text-white dark:bg-gray-800 h-36 sahdow-lg md:flex-row"
+            class="flex flex-col w-full overflow-hidden bg-white rounded-lg  dark:text-white dark:bg-gray-800 h-36 sahdow-lg md:flex-row"
             v-for="c in selectedCats"
             :key="c.id"
         >
@@ -67,12 +67,12 @@
                     </div>
                     <div v-if="!editMode">
                         <button
-                            class="block px-2 py-1 my-2 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
+                            class="block px-2 py-1 my-2 text-white bg-blue-400  hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
                         >
                             <i class="mx-1 fas fa-edit"></i>
                         </button>
                         <button
-                            class="block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80"
+                            class="block px-2 py-1 pl-3 text-white bg-red-400  hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80"
                             @click.prevent="remove(c.slug)"
                         >
                             <i
@@ -103,7 +103,7 @@
     </div>
 
     <!-- create new category form -->
-    <modal @cat="addToList" />
+    <modal />
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
@@ -197,11 +197,15 @@ export default class Home extends Vue {
     }
 
     mounted() {
-        this.allCategories = [...this.$page.props
-            .categories as Category[]];
-        this.selectedCats = [...this.$page.props
-            .categories as Category[]];
-        // this.selectedCats = this.$page.props.categories as Category[];
+        this.allCategories = [...(this.$page.props.categories as Category[])];
+        this.selectedCats = [...(this.$page.props.categories as Category[])];
+
+        // add newly created category to categories list
+        // @ts-ignore
+        this.emitter.on("add-category", (category: Category) => {
+            this.allCategories.unshift(category);
+            this.selectedCats.unshift(category);
+        });
     }
 }
 </script>

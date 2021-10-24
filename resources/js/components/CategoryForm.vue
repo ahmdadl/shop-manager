@@ -99,7 +99,6 @@ import axios from "axios";
 
 @Options({
     components: {},
-    emits: ['cat']
 })
 export default class CategoryForm extends Vue {
     form = {
@@ -147,8 +146,8 @@ export default class CategoryForm extends Vue {
         }
 
         // emit newly created category to parent
-        // TODO append to category list
-        this.$emit('cat', res.data);
+        // @ts-ignore
+        this.emitter.emit('add-category', res.data);
 
         // @ts-ignore
         this.alert();

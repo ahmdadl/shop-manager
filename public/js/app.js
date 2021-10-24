@@ -19348,8 +19348,17 @@ function (_super) {
   };
 
   Home.prototype.mounted = function () {
+    var _this = this;
+
     this.allCategories = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__read)(this.$page.props.categories), false);
-    this.selectedCats = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__read)(this.$page.props.categories), false); // this.selectedCats = this.$page.props.categories as Category[];
+    this.selectedCats = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__read)(this.$page.props.categories), false); // add newly created category to categories list
+    // @ts-ignore
+
+    this.emitter.on("add-category", function (category) {
+      _this.allCategories.unshift(category);
+
+      _this.selectedCats.unshift(category);
+    });
   };
 
   Home = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_7__.Options)({
@@ -19455,10 +19464,10 @@ function (_super) {
               /*return*/
               ];
             } // emit newly created category to parent
-            // TODO append to category list
+            // @ts-ignore
 
 
-            this.$emit('cat', res.data); // @ts-ignore
+            this.emitter.emit('add-category', res.data); // @ts-ignore
 
             this.alert();
             this.close();
@@ -19484,8 +19493,7 @@ function (_super) {
   };
 
   CategoryForm = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_3__.Options)({
-    components: {},
-    emits: ['cat']
+    components: {}
   })], CategoryForm);
   return CategoryForm;
 }(vue_class_component__WEBPACK_IMPORTED_MODULE_3__.Vue);
@@ -19712,11 +19720,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["href"])])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" create new category form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_modal, {
-    onCat: _ctx.addToList
-  }, null, 8
-  /* PROPS */
-  , ["onCat"])], 64
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" create new category form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_modal)], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -19924,6 +19928,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
 /* harmony import */ var _helpers_swal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./helpers/swal */ "./resources/js/helpers/swal.ts");
+/* harmony import */ var mitt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! mitt */ "./node_modules/mitt/dist/mitt.mjs");
 var _a;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
@@ -19936,6 +19941,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
+var emitter = (0,mitt__WEBPACK_IMPORTED_MODULE_7__["default"])();
 var appName = ((_a = window.document.getElementsByTagName("title")[0]) === null || _a === void 0 ? void 0 : _a.innerText) || "Laravel";
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.createInertiaApp)({
   title: function title(_title) {
@@ -19953,7 +19960,7 @@ var appName = ((_a = window.document.getElementsByTagName("title")[0]) === null 
         app = _a.app,
         props = _a.props,
         plugin = _a.plugin;
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
+    var mount = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(app, props);
       }
@@ -19965,7 +19972,9 @@ var appName = ((_a = window.document.getElementsByTagName("title")[0]) === null 
         alert: _helpers_swal__WEBPACK_IMPORTED_MODULE_6__.alert,
         confirm: _helpers_swal__WEBPACK_IMPORTED_MODULE_6__.confirm
       }
-    }).mount(el);
+    });
+    mount.config.globalProperties.emitter = emitter;
+    return mount.mount(el);
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init({
@@ -55330,6 +55339,23 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 /***/ (() => {
 
 /* (ignored) */
+
+/***/ }),
+
+/***/ "./node_modules/mitt/dist/mitt.mjs":
+/*!*****************************************!*\
+  !*** ./node_modules/mitt/dist/mitt.mjs ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__(n){return{all:n=n||new Map,on:function(t,e){var i=n.get(t);i?i.push(e):n.set(t,[e])},off:function(t,e){var i=n.get(t);i&&(e?i.splice(i.indexOf(e)>>>0,1):n.set(t,[]))},emit:function(t,e){var i=n.get(t);i&&i.slice().map(function(n){n(e)}),(i=n.get("*"))&&i.slice().map(function(n){n(t,e)})}}}
+//# sourceMappingURL=mitt.mjs.map
+
 
 /***/ }),
 
