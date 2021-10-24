@@ -44,28 +44,11 @@
                     ></i>
                     شراء
                 </button>
-                <button
-                    type="button"
-                    class="px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700"
-                    :class="{
-                        'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
-                            type === 'add',
-                    }"
-                    @click.prevent="type = 'add'"
-                >
-                    <i
-                        class="fas"
-                        :class="{
-                            'fa-plus': type !== 'add',
-                            'fa-check': type === 'add',
-                        }"
-                    ></i>
-                    جديد
-                </button>
             </div>
             <div class="w-full md:w-4/12" style="margin-right: 0.75rem">
-                <div v-if="type !== 'add'">
+                <div v-if="type === 'sell' || type === 'buy'">
                     <Multiselect
+                        ref="mst"
                         v-model="val"
                         :options="products"
                         :searchable="true"
@@ -131,7 +114,7 @@
                             placeholder="الكمية"
                             v-model="amount"
                             min="0"
-                            :max="type !== 'add' ? product.amount : 1000000"
+                            :max="type === 'sell' ? product.amount : 1000000"
                         />
                     </div>
                     <div
@@ -184,6 +167,46 @@
             </div>
         </div>
     </form>
+    <div class="flex justify-center p-2 mt-1 space-x-3 text-center">
+        <button
+            type="button"
+            class="px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+            :class="{
+                'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
+                    type === 'add',
+            }"
+            @click.prevent="type = 'add'"
+        >
+            <i
+                class="fas"
+                :class="{
+                    'fa-plus': type !== 'add',
+                    'fa-check': type === 'add',
+                }"
+            ></i>
+            جديد
+        </button>
+        <button
+            type="submit"
+            class="px-2 py-1 text-white transition duration-200 bg-pink-600 rounded hover:bg-pink-800 dark:bg-pink-900 dark:hover:bg-pink-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+            style="margin-right: 0.75rem"
+            @click.prevent="enableEditMode"
+            :disabled="!product.slug"
+        >
+            <i class="ml-1 fas fa-edit"></i>
+            تعديل
+        </button>
+        <button
+            type="submit"
+            class="px-2 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+            :disabled="!product.slug.length"
+            @click.prevent="remove"
+        >
+            <i class="ml-1 fas fa-trash" v-if="!removing"></i>
+            <i class="ml-1 fas fa-spinner fa-spin" v-else></i>
+            حذف
+        </button>
+    </div>
 </template>
 <script lang="ts">
 import axios from "axios";
@@ -215,7 +238,10 @@ export default class Product extends Vue {
     dataErr = false;
     catErr = "";
 
+    removing = false;
+
     async loadProducts() {
+        this.resetForm();
         this.loading = true;
 
         const res = await axios.get(`/categories/${this.category.slug}`);
@@ -235,7 +261,7 @@ export default class Product extends Vue {
     async save() {
         if (this.saving) return;
 
-        if (this.type === "add") {
+        if (this.type === "add" || this.type === "edit") {
             return await this._addnewProduct();
         }
     }
@@ -259,22 +285,23 @@ export default class Product extends Vue {
             return;
         }
 
-        const res = await axios
-            .post("/products", {
+        const res = await axios[this.type === "edit" ? "patch" : "post"](
+            `/products${this.type === "edit" ? `/${this.product.slug}` : ""}`,
+            {
                 category_id: this.category.id,
                 title: this.product.title,
                 amount: this.amount,
                 price: this.price,
-            })
-            .catch((err) => {
-                if (err.response.status === 422) {
-                    const res = err.response.data.errors;
-                    this.dataErr = true;
-                    this.nameErr = res?.title ? res.title[0] : "";
-                    this.amountErr = res?.amount ? res.amount[0] : "";
-                }
-                return null;
-            });
+            }
+        ).catch((err) => {
+            if (err.response.status === 422) {
+                const res = err.response.data.errors;
+                this.dataErr = true;
+                this.nameErr = res?.title ? res.title[0] : "";
+                this.amountErr = res?.amount ? res.amount[0] : "";
+            }
+            return null;
+        });
 
         console.log(res);
         this.saving = false;
@@ -288,22 +315,93 @@ export default class Product extends Vue {
         // @ts-ignore
         this.alert();
 
-        // @ts-ignore
-        this.emitter.emit("increment", this.category.slug);
+        if (this.type === "add") {
+            // @ts-ignore
+            this.emitter.emit("increment", this.category.slug);
 
-        // add new created product
-        this.products.unshift(res.data);
+            // add new created product
+            this.products.unshift(res.data);
 
-        // reset form
-        this.product.title = "";
-        this.amount = 0;
-        this.price = 0;
+            this.resetForm();
+
+            return;
+        }
+
+        // it`s update request now
+        if (!res.data.done) {
+            // @ts-ignore
+            this.toast();
+            return;
+        }
+
+        this.products.map((x) => {
+            if (x.slug === this.product.slug) {
+                x.title = this.product.title;
+                x.price = this.price;
+                x.amount = this.amount;
+            }
+            return x;
+        });
+
+        this.resetForm();
     }
 
     setProduct() {
         this.product = this.products.find(
             (x) => x.slug === this.val
         ) as ProductInterface;
+    }
+
+    async remove() {
+        if (
+            this.removing ||
+            !this.product.slug.length ||
+            !this.category.slug.length
+        ) {
+            return;
+        }
+
+        this.removing = true;
+
+        const res = await axios.delete(`/products/${this.product.slug}`);
+
+        this.removing = false;
+
+        if (!res || !res.data || !res.data.done) {
+            // @ts-ignore
+            this.toast();
+            return;
+        }
+
+        // remove from products
+        this.products.splice(
+            this.products.findIndex((x) => x.slug === this.product.slug),
+            1
+        );
+
+        // @ts-ignore
+        this.emitter.emit("decrement", this.category.slug);
+
+        // @ts-ignore
+        this.alert();
+
+        this.resetForm();
+    }
+
+    resetForm() {
+        this.product = Object.assign({}, emptyProduct);
+        // this.product.title = "";
+        this.amount = 1;
+        this.price = 1;
+
+        // @ts-ignore
+        this.$refs?.mst?.clear();
+    }
+
+    enableEditMode() {
+        this.type = "edit";
+        this.amount = this.product.amount;
+        this.price = this.product.price;
     }
 
     mounted() {

@@ -26,6 +26,8 @@ Route::delete("/categories/{category}", [HomeController::class, "destroy"]);
 // product
 Route::get('/categories/{category}', [ProductController::class, 'index']);
 Route::post('/products', [ProductController::class, 'store']);
+Route::patch('/products/{product}', [ProductController::class, 'update']);
+Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

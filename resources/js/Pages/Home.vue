@@ -1,5 +1,5 @@
 <template>
-    <div class="pr-2 overflow-x-hidden overflow-y-auto h-3/4">
+    <div class="pr-2 overflow-x-hidden overflow-y-auto h-2/4">
         <div class="flex justify-center w-full px-3 py-1 mx-2" dir="rtl">
             <div class="w-2/6">
                 <button
@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="p-2 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-1/4">
+    <div class="p-2 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/4">
         <Product />
     </div>
 
@@ -255,11 +255,21 @@ export default class Home extends Vue {
         this.emitter.on('increment', (slug: string) => {
             this.allCategories.map((x) => {
                 if (x.slug === slug) {
-                    x.products_count += 1;
+                    x.products_count++;
                 }
                 return x;
             });
         });
+
+        // @ts-ignore
+        this.emitter.on('decrement', (slug: string) => {
+            this.allCategories.map((x) => {
+                if (x.slug === slug) {
+                    x.products_count--;
+                }
+                return x;
+            });
+        })
     }
 }
 </script>

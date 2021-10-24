@@ -1318,6 +1318,9 @@ select {
 .h-1\/4 {
 	height: 25%;
 }
+.h-2\/4 {
+	height: 50%;
+}
 .max-h-full {
 	max-height: 100%;
 }
@@ -1542,6 +1545,11 @@ select {
 	margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-hidden {
 	overflow: hidden;
 }
@@ -1634,6 +1642,9 @@ select {
 .border-r {
 	border-right-width: 1px;
 }
+.border-t-2 {
+	border-top-width: 2px;
+}
 .border-gray-300 {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -1680,6 +1691,10 @@ select {
 .border-gray-800 {
 	--tw-border-opacity: 1;
 	border-color: rgba(31, 41, 55, var(--tw-border-opacity));
+}
+.border-gray-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(107, 114, 128, var(--tw-border-opacity));
 }
 .bg-white {
 	--tw-bg-opacity: 1;
@@ -1792,6 +1807,10 @@ select {
 .bg-yellow-600 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
+}
+.bg-pink-600 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(219, 39, 119, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
@@ -4015,6 +4034,14 @@ a {
 	--tw-bg-opacity: 1;
 	background-color: rgba(146, 64, 14, var(--tw-bg-opacity));
 }
+.hover\:bg-pink-800:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(157, 23, 77, var(--tw-bg-opacity));
+}
+.hover\:bg-red-800:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(153, 27, 27, var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -4259,6 +4286,10 @@ a {
 	--tw-bg-opacity: 1;
 	background-color: rgba(6, 95, 70, var(--tw-bg-opacity));
 }
+.dark .dark\:bg-pink-900 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(131, 24, 67, var(--tw-bg-opacity));
+}
 .dark .dark\:text-gray-50 {
 	--tw-text-opacity: 1;
 	color: rgba(249, 250, 251, var(--tw-text-opacity));
@@ -4326,6 +4357,10 @@ a {
 .dark .dark\:hover\:bg-green-600:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(5, 150, 105, var(--tw-bg-opacity));
+}
+.dark .dark\:hover\:bg-pink-700:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(190, 24, 93, var(--tw-bg-opacity));
 }
 .dark .dark\:focus\:bg-gray-700:focus {
 	--tw-bg-opacity: 1;
