@@ -13,12 +13,18 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create("sales", function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->enum('type', ['sell', 'buy'])->default('sell')->index();
-            $table->integer('amount');
-            $table->double('total');
+            $table
+                ->foreignId("product_id")
+                ->constrained()
+                ->onDelete("cascade");
+            $table
+                ->enum("type", ["sell", "buy"])
+                ->default("sell")
+                ->index();
+            $table->integer("amount");
+            $table->double("total");
             $table->timestamps();
         });
     }
@@ -30,6 +36,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists("sales");
     }
 }

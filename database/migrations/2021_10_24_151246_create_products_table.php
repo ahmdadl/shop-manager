@@ -13,13 +13,16 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create("products", function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
-            $table->string('title');
-            $table->string('slug')->index();
-            $table->integer('amount')->default(0);
-            $table->double('price')->default(0);
+            $table
+                ->foreignId("category_id")
+                ->constrained()
+                ->onDelete("cascade");
+            $table->string("title");
+            $table->string("slug")->index();
+            $table->integer("amount")->default(0);
+            $table->double("price")->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists("products");
     }
 }

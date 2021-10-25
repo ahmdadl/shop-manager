@@ -81,7 +81,7 @@
 
             <!-- show alert if no categories -->
             <div class="flex items-center justify-center w-full">
-                <div v-if="!selectedCat.length" class="m-2">
+                <div v-if="!selectedCats.length" class="m-2">
                     <div
                         class="flex max-w-sm mb-4 bg-yellow-200 border rounded dark:bg-yellow-600"
                     >
