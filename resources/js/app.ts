@@ -27,7 +27,7 @@ const money = (num: number) =>
         // style: "currency",
         // currency: "EGY",
         // maximumSignificantDigits: 1
-    }).format(num);
+    }).format(num || 0);
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

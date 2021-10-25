@@ -111,7 +111,7 @@
                     'md:w-4/12': type === 'sell' || type === 'buy',
                 }"
             >
-                <div class="flex w-full h-10 border border-blue-200 rounded">
+                <div class="flex w-full h-10 border border-blue-200 rounded" v-if="type !== 'add'">
                     <div
                         class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:text-gray-100 dark:bg-blue-900"
                     >
@@ -153,7 +153,7 @@
                     <div class="w-10/12 rounded-l-xl">
                         <input
                             id="price"
-                            type="number"
+                            type="text"
                             class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                             placeholder="السعر"
                             v-model="price"
@@ -186,7 +186,7 @@
                 'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                     type === 'add',
             }"
-            @click.prevent="type = 'add'"
+            @click.prevent="type = 'add';amount = 5"
         >
             <i
                 class="fas"
@@ -288,6 +288,8 @@ export default class Product extends Vue {
             this.saving = false;
             return;
         }
+
+        this.amount = this.type === 'add' ? 25 : this.amount;
 
         if (this.amount <= 0 || this.price <= 0 || !this.product.title.length) {
             console.log(this.product.title, this.amount, this.price);

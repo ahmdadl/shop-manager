@@ -36,7 +36,7 @@
             </div>
 
             <!-- products list -->
-            <div class="flex py-3 text-white bg-indigo-700 shadow-2xl">
+            <div class="flex py-3 text-white bg-indigo-700 shadow-2xl" v-if="products.length">
                 <div class="w-6/12 text-center">
                     المنتج
                 </div>

@@ -40,7 +40,7 @@ class ProductController extends Controller
             Product::create([
                 "category_id" => $req->category_id,
                 "title" => $req->title,
-                "amount" => $req->amount,
+                "amount" => 0,
                 "price" => $req->price,
             ])
         );
