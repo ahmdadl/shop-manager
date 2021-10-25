@@ -1,7 +1,7 @@
 <template>
     <div class="pr-2 overflow-x-hidden overflow-y-auto h-3/5">
         <div class="flex justify-center w-full px-3 py-1 mx-2" dir="rtl">
-            <div class="w-2/6">
+            <div class="w-3/6">
                 <button
                     class="inline px-2 py-1 m-1 text-white bg-green-500 rounded hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
                     @click.prevent="categoryForm"
@@ -22,6 +22,19 @@
                     ></i>
                     <span class="hidden md:inline-block"> تحكم </span>
                 </button>
+                <button
+                    class="inline w-10 h-10 text-sm text-white bg-yellow-500 rounded-full hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+                    @click.prevent="editMode = !editMode"
+                >
+                    <i
+                        class="mx-1 fas"
+                        :class="{
+                            'fa-power-off': editMode,
+                            'fa-cogs': !editMode,
+                        }"
+                    ></i>
+                    <span class="hidden md:inline-block"> 25 </span>
+                </button>
             </div>
             <Multiselect
                 v-model="val"
@@ -33,7 +46,7 @@
                 :minChars="1"
                 :resolveOnLoad="false"
                 @clear="selectedCats = allCategories"
-                class="w-3/6"
+                class="w-2/6"
                 ref="multiSelect"
                 @select="selectCategory(val)"
                 :classes="{

@@ -12,7 +12,7 @@ class SaleController extends Controller
 
     public function index() {
         return Inertia::render('Report', [
-            'sales' => Sale::all(),
+            'sales' => Sale::with('product')->paginate(),
         ]);
     }
 
@@ -53,5 +53,11 @@ class SaleController extends Controller
 
     public function buy()
     {
+    }
+
+    public function destroy(Sale $sale) {
+        return response()->json([
+            'done' => $sale->delete(),
+        ]);
     }
 }

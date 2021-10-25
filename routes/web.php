@@ -33,6 +33,7 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 // sales
 Route::get('/reports', [SaleController::class, 'index']);
 Route::post('/products/{product}/sales', [SaleController::class, 'sell']);
+Route::delete('/sales/{sale}', [SaleController::class, 'destroy']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

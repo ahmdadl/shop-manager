@@ -33,3 +33,21 @@ export const emptyProduct: ProductInterface = {
     amount: 1,
     price: 1,
 }
+
+export interface Sale {
+    id: number;
+    type: 'sell' | 'buy';
+    amount: number;
+    total: number;
+    updated_at: string;
+    product: ProductInterface;
+}
+
+export const emptySale: Sale = {
+    id: 0,
+    type: 'sell',
+    amount: 0,
+    total: 0,
+    updated_at: '',
+    product: emptyProduct,
+}

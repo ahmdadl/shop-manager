@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use App\Models\Sale;
+use Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SaleFactory extends Factory
@@ -24,7 +25,7 @@ class SaleFactory extends Factory
     {
         return [
             'product_id' => fn() => Product::factory(),
-            'type' => $this->faker->randomKey(['sell', 'buy']),
+            'type' => Arr::random(['sell', 'buy']),
             'amount' => random_int(1, 50),
             'total' => random_int(50, 1000).random_int(0, 99),
         ];
