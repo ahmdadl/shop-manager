@@ -125,6 +125,7 @@ import { Inertia } from "@inertiajs/inertia";
 import Filter from "../components/Filter.vue";
 import { openModal, container, closeModal } from "jenesius-vue-modal";
 
+
 @Options({ components: { Pagination, Modal: container,  } })
 export default class Report extends Vue {
     sales: Sale[] = [];
