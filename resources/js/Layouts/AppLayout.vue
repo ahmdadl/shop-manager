@@ -111,5 +111,11 @@ export default defineComponent({
             );
         },
     },
+    mounted() {
+        const darkMode = localStorage.getItem('theme');
+        if (darkMode === 'dark') {
+            document.body.classList.add("dark");
+        }
+    }
 });
 </script>

@@ -21775,6 +21775,13 @@ __webpack_require__.r(__webpack_exports__);
       document.body.classList.toggle("dark");
       localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     }
+  },
+  mounted: function mounted() {
+    var darkMode = localStorage.getItem('theme');
+
+    if (darkMode === 'dark') {
+      document.body.classList.add("dark");
+    }
   }
 }));
 
