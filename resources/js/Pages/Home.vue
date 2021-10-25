@@ -23,18 +23,23 @@
                         ></i>
                         <span class="hidden md:inline-block"> تحكم </span>
                     </button>
+                    
+                    <!-- sales info -->
                     <button
-                        class="inline w-10 h-10 text-sm text-white bg-yellow-500 rounded-full hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
-                        @click.prevent="editMode = !editMode"
+                        class="inline px-2 py-1 m-1 text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-900 dark:hover:bg-blue-700"
+                        @click.prevent="salesInfo"
                     >
-                        <i
-                            class="mx-1 fas"
-                            :class="{
-                                'fa-power-off': editMode,
-                                'fa-cogs': !editMode,
-                            }"
-                        ></i>
-                        <span class="hidden md:inline-block"> 25 </span>
+                        <i class="mx-1 fas fa-dollar-sign"></i>
+                        <span class="hidden md:inline-block"> إحصائيات </span>
+                    </button>
+
+                    <!-- low products amount -->
+                    <button
+                        class="inline px-2 py-1 m-1 text-white bg-indigo-500 rounded hover:bg-indigo-700 dark:bg-indigo-900 dark:hover:bg-indigo-700"
+                        @click.prevent="categoryForm"
+                    >
+                        <i class="mx-1 fas fa-plus"></i>
+                        <span class="hidden md:inline-block"> معلومات </span>
                     </button>
                 </div>
                 <Multiselect
@@ -134,6 +139,7 @@
         </div>
 
     <!-- create new category form -->
+    <!-- sales info modal -->
         <modal />
     </app-layout>
 </template>
@@ -145,6 +151,7 @@ import { openModal, container } from "jenesius-vue-modal";
 import CategoryForm from "../components/CategoryForm.vue";
 import axios from "axios";
 import Product from '../components/Product.vue';
+import SaleInfo from '../components/SaleInfo.vue';
 
 @Options({ components: { Link, modal: container, Product } })
 export default class Home extends Vue {
@@ -229,6 +236,10 @@ export default class Home extends Vue {
 
         // @ts-ignore
         this.alert();
+    }
+
+    async salesInfo() {
+        openModal(SaleInfo);
     }
 
     mounted() {

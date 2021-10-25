@@ -132,4 +132,14 @@ class SaleController extends Controller
             "done" => $sale->delete(),
         ]);
     }
+
+    public function stats() {
+        $buy = Sale::whereType('buy')->sum('total');
+        
+        $sell = Sale::whereType('sell')->sum('total');
+
+        $diff = $sell - $buy;
+
+        return response()->json(compact('buy', 'sell', 'diff'));
+    }
 }

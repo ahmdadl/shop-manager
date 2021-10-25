@@ -37,6 +37,7 @@ Route::get('/reports/bought', [SaleController::class, 'bought']);
 Route::post('/products/{product}/sales', [SaleController::class, 'sell']);
 Route::delete('/sales/{sale}', [SaleController::class, 'destroy']);
 
+Route::get('/sales/stats', [SaleController::class, 'stats']);
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->name('dashboard');
