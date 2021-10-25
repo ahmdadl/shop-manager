@@ -1,6 +1,6 @@
 <template>
     <div
-        class="my-3 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-50 md:w-1/3 sm:w-full h-3/4"
+        class="my-3 bg-white rounded-lg shadow-lg  dark:bg-gray-900 dark:text-gray-50 md:w-1/3 sm:w-full h-3/4"
     >
         <div class="flex justify-between px-5 py-4 border-b border-gray-100">
             <div>
@@ -12,7 +12,7 @@
             <div>
                 <button>
                     <i
-                        class="text-red-500 transition duration-150 fa fa-times-circle hover:text-red-600"
+                        class="text-red-500 transition duration-150  fa fa-times-circle hover:text-red-600"
                         @click="close"
                     ></i>
                 </button>
@@ -31,18 +31,21 @@
                     range
                 ></Datepicker>
             </div>
+
+            <!-- category select -->
+            {{categories}}
         </div>
 
         <div class="flex justify-end px-5 py-4">
             <button
-                class="px-3 py-2 mx-2 mr-1 text-sm text-white transition duration-150 bg-red-500 rounded hover:bg-red-600 dark:bg-red-900 dark:hover:bg-red-700"
+                class="px-3 py-2 mx-2 mr-1 text-sm text-white transition duration-150 bg-red-500 rounded  hover:bg-red-600 dark:bg-red-900 dark:hover:bg-red-700"
                 @click.prevent="close"
             >
                 <i class="mx-1 fas fa-times"></i>
                 إلغاء
             </button>
             <button
-                class="px-3 py-2 mx-2 text-sm text-green-900 transition duration-150 border border-green-700 rounded hover:bg-green-700 hover:text-white disabled:hover:bg-gray-500 disabled:cursor-not-allowed"
+                class="px-3 py-2 mx-2 text-sm text-green-900 transition duration-150 border border-green-700 rounded  hover:bg-green-700 hover:text-white disabled:hover:bg-gray-500 disabled:cursor-not-allowed"
             >
                 <i class="mx-1 fas fa-save" v-if="!saving"></i>
                 <i class="mx-1 fas fa-spinner fa-spin" v-else></i>
@@ -56,9 +59,14 @@ import { closeModal } from "jenesius-vue-modal";
 import { DateTime } from "luxon";
 import { Options, Vue } from "vue-class-component";
 import Datepicker from "vue3-date-time-picker";
+import { Category } from "../interfaces";
+
+class Props {
+    categories: Category[] = [];
+}
 
 @Options({ components: { Datepicker } })
-export default class Filter extends Vue {
+export default class Filter extends Vue.with(Props) {
     date = "";
     saving = false;
 

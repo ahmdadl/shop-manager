@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ class SaleController extends Controller
     public function index() {
         return Inertia::render('Report', [
             'salesData' => Sale::with('product')->paginate(),
+            'categories' => fn() => Category::all(),
         ]);
     }
 

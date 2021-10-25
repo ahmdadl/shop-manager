@@ -10,6 +10,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
+// @ts-ignore
+import Multiselect from "@vueform/multiselect";
+import "@vueform/multiselect/themes/default.css";
+
 import { toast, alert, confirm } from "./helpers/swal";
 
 import mitt from "mitt";
@@ -29,7 +33,7 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => {
         const page = require(`./Pages/${name}`).default;
-        page.layout = page.layout || AppLayout;
+        // page.layout = page.layout || AppLayout;
         return page;
     },
     // @ts-ignore
@@ -38,7 +42,9 @@ createInertiaApp({
             .use(plugin)
             .use(VueSweetalert2)
             // @ts-ignore
-            .mixin({ methods: { route, toast, alert, confirm, money } });
+            .mixin({ methods: { route, toast, alert, confirm, money } })
+            .component('AppLayout', AppLayout)
+            .component("Multiselect", Multiselect);
 
         mount.config.globalProperties.emitter = emitter;
 

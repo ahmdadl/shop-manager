@@ -228,11 +228,9 @@ import {
     emptyCategory,
     emptyProduct,
 } from "../interfaces";
-// @ts-ignore
-import Multiselect from "@vueform/multiselect";
-import "@vueform/multiselect/themes/default.css";
 
-@Options({ components: { Multiselect } })
+
+@Options({ components: { } })
 export default class Product extends Vue {
     category = emptyCategory;
     products: ProductInterface[] = [];

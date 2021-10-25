@@ -102,7 +102,6 @@ export default defineComponent({
     data() {
         return {
             darkMode: false,
-            reportsPage: false,
         };
     },
 
@@ -121,14 +120,17 @@ export default defineComponent({
             this.emitter.emit("openFilters");
         },
     },
+    computed: {
+        reportsPage() {
+            return location.pathname.indexOf("/reports") > -1;
+        },
+    },
     mounted() {
         const darkMode = localStorage.getItem("theme");
         if (darkMode === "dark") {
             document.body.classList.add("dark");
             this.darkMode = true;
         }
-
-        this.reportsPage = location.pathname.indexOf("/reports") > -1;
     },
 });
 </script>
