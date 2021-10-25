@@ -1,6 +1,6 @@
 <template>
     <div
-        class="my-3 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-50 md:w-1/3 sm:w-full"
+        class="my-3 bg-white rounded-lg shadow-lg  dark:bg-gray-900 dark:text-gray-50 md:w-1/3 sm:w-full"
     >
         <div class="flex justify-between px-5 py-4 border-b border-gray-100">
             <div>
@@ -12,7 +12,7 @@
             <div>
                 <button>
                     <i
-                        class="text-red-500 transition duration-150 fa fa-times-circle hover:text-red-600"
+                        class="text-red-500 transition duration-150  fa fa-times-circle hover:text-red-600"
                         @click="close"
                     ></i>
                 </button>
@@ -27,7 +27,7 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
+                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r  dark:bg-blue-900"
                         >
                             <i :class="`mx-auto fas fa-heading`"></i>
                         </div>
@@ -35,7 +35,7 @@
                             <input
                                 id="title"
                                 type="text"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l  focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                                 placeholder="الإسم"
                                 v-model="form.title"
                             />
@@ -52,7 +52,7 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
+                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r  dark:bg-blue-900"
                         >
                             <i :class="`mx-auto fas fa-image`"></i>
                         </div>
@@ -60,7 +60,7 @@
                             <input
                                 id="file"
                                 type="file"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l  focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
                                 @input="form.img = $event.target.files[0]"
                             />
                             <div v-if="form.errors.img" class="text-red-700">
@@ -74,14 +74,14 @@
 
         <div class="flex justify-end px-5 py-4">
             <button
-                class="px-3 py-2 mx-2 mr-1 text-sm text-white transition duration-150 bg-red-500 rounded hover:bg-red-600 dark:bg-red-900 dark:hover:bg-red-700"
+                class="px-3 py-2 mx-2 mr-1 text-sm text-white transition duration-150 bg-red-500 rounded  hover:bg-red-600 dark:bg-red-900 dark:hover:bg-red-700"
                 @click.prevent="close"
             >
                 <i class="mx-1 fas fa-times"></i>
                 إلغاء
             </button>
             <button
-                class="px-3 py-2 mx-2 text-sm text-green-900 transition duration-150 border border-green-700 rounded hover:bg-green-700 hover:text-white disabled:hover:bg-gray-500 disabled:cursor-not-allowed"
+                class="px-3 py-2 mx-2 text-sm text-green-900 transition duration-150 border border-green-700 rounded  hover:bg-green-700 hover:text-white disabled:hover:bg-gray-500 disabled:cursor-not-allowed"
                 :disabled="!form.title || !form.title.length"
                 @click.prevent="save"
             >
@@ -130,25 +130,27 @@ export default class CategoryForm extends Vue.with(Props) {
         form.append("title", this.form?.title);
         if (typeof this.form.img === "object") {
             form.append("avatar", this.form?.img);
-        }        
+        }
 
         // axios not updating with patch request
-        const res = await axios.post(
-            `/categories${this.editMode ? `/${this.form.slug}` : ""}`,
-            form,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            }
-        ).catch((err) => {
-            if (err.response.status === 422) {
-                const res = err.response.data.errors;
-                this.form.errors.title = res?.title ? res.title[0] : "";
-                this.form.errors.img = res?.avatar ? res.avatar[0] : "";
-            }
-            return null;
-        });
+        const res = await axios
+            .post(
+                `/categories${this.editMode ? `/${this.form.slug}` : ""}`,
+                form,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            )
+            .catch((err) => {
+                if (err.response.status === 422) {
+                    const res = err.response.data.errors;
+                    this.form.errors.title = res?.title ? res.title[0] : "";
+                    this.form.errors.img = res?.avatar ? res.avatar[0] : "";
+                }
+                return null;
+            });
 
         this.saving = false;
 
@@ -160,7 +162,10 @@ export default class CategoryForm extends Vue.with(Props) {
 
         // emit newly created category to parent
         // @ts-ignore
-        this.emitter.emit(this.editMode ? 'update-category' : "add-category", res.data);
+        this.emitter.emit(
+            this.editMode ? "update-category" : "add-category",
+            res.data
+        );
 
         // @ts-ignore
         this.alert();

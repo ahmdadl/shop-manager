@@ -24,7 +24,7 @@
             </header> -->
 
             <aside
-                class="relative z-20 flex-shrink-0 w-20 overflow-y-auto bg-indigo-600 md:w-28"
+                class="relative z-20 flex-shrink-0 w-20 overflow-y-auto bg-indigo-600 "
             >
                 <div class="top-0 mb-6">
                     <!--Start logo -->
@@ -37,23 +37,33 @@
                     <!--End logo -->
                     <!--Start NavItem -->
                     <div>
-                        <ul class="px-4 mt-6 leading-10">
+                        <ul class="px-2 mt-6 leading-10">
                             <li
                                 class="flex items-center justify-center p-2 mb-3 bg-blue-400 rounded-md cursor-pointer "
+                                @click.prevent="$inertia.visit('/')"
                             >
-                                <i class="fas fa-home"></i>
+                                <i class="text-white fas fa-home"></i>
                             </li>
                             <li
                                 class="flex items-center justify-center p-2 mb-3 bg-pink-400 rounded-md cursor-pointer "
+                                @click.prevent="$inertia.visit('/reports')"
                             >
-                                <i class="text-white fas fa-home fa-sm"></i>
+                                <i class="text-white fas fa-truck-monster"></i>
                             </li>
                             <li
-                                class="flex items-center justify-center p-2 mb-3 bg-yellow-400 rounded-md cursor-pointer "
+                                class="flex items-center justify-center p-2 mb-3 rounded-md cursor-pointer "
+                                :class="{
+                                    'bg-gray-200': darkMode,
+                                    'bg-gray-800': !darkMode,
+                                }"
                                 @click.prevent="toggleDark"
                             >
                                 <i
-                                    class="text-white fas fa-headphones fa-sm"
+                                    class="fas"
+                                    :class="{
+                                        'text-gray-800 fa-sun': darkMode,
+                                        'text-yellow-400 fa-moon': !darkMode,
+                                    }"
                                 ></i>
                             </li>
                         </ul>
@@ -72,38 +82,23 @@
 
 <script>
 import { defineComponent } from "vue";
-import JetApplicationMark from "@/Jetstream/ApplicationMark.vue";
-import JetBanner from "@/Jetstream/Banner.vue";
-import JetDropdown from "@/Jetstream/Dropdown.vue";
-import JetDropdownLink from "@/Jetstream/DropdownLink.vue";
-import JetNavLink from "@/Jetstream/NavLink.vue";
-import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink.vue";
-import { Head, Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
     props: {
         title: String,
     },
 
-    components: {
-        Head,
-        JetApplicationMark,
-        JetBanner,
-        JetDropdown,
-        JetDropdownLink,
-        JetNavLink,
-        JetResponsiveNavLink,
-        Link,
-    },
+    components: {},
 
     data() {
         return {
-            showingNavigationDropdown: false,
+            darkMode: false,
         };
     },
 
     methods: {
         toggleDark() {
+            this.darkMode = !this.darkMode;
             document.body.classList.toggle("dark");
             localStorage.setItem(
                 "theme",
@@ -112,10 +107,11 @@ export default defineComponent({
         },
     },
     mounted() {
-        const darkMode = localStorage.getItem('theme');
-        if (darkMode === 'dark') {
+        const darkMode = localStorage.getItem("theme");
+        if (darkMode === "dark") {
             document.body.classList.add("dark");
+            this.darkMode = true;
         }
-    }
+    },
 });
 </script>
