@@ -26,14 +26,13 @@
             <aside
                 class="relative z-20 flex-shrink-0 w-20 overflow-y-auto bg-indigo-600 md:w-28"
             >
-                <div class="top-0 mb-6 ">
+                <div class="top-0 mb-6">
                     <!--Start logo -->
                     <div class="flex justify-center">
                         <div
                             class="object-cover mt-2 bg-gray-300 bg-center bg-no-repeat bg-cover border-white rounded-full border-1 w-14 h-14"
                             :style="`background-image: url('/logo.jpg')`"
-                        >
-                        </div>
+                        ></div>
                     </div>
                     <!--End logo -->
                     <!--Start NavItem -->
@@ -42,26 +41,19 @@
                             <li
                                 class="flex items-center justify-center p-2 mb-3 bg-blue-400 rounded-md cursor-pointer "
                             >
-                                <a href="/" class="">
-                                    <i
-                                        class="text-white fas fa-align-left fa-sm"
-                                    ></i>
-                                <span class="hidden md:block">    الصفحة الرئيسية
-                                </span>
-                                </a>
+                                <i class="fas fa-home"></i>
                             </li>
                             <li
                                 class="flex items-center justify-center p-2 mb-3 bg-pink-400 rounded-md cursor-pointer "
                             >
-                                <i
-                                    class="text-white fas fa-home fa-sm"
-                                ></i>
+                                <i class="text-white fas fa-home fa-sm"></i>
                             </li>
                             <li
                                 class="flex items-center justify-center p-2 mb-3 bg-yellow-400 rounded-md cursor-pointer "
+                                @click.prevent="toggleDark"
                             >
                                 <i
-                                    class="text-white fas fa-headphones fa-sm" @click="toggleDark"
+                                    class="text-white fas fa-headphones fa-sm"
                                 ></i>
                             </li>
                         </ul>
@@ -112,22 +104,11 @@ export default defineComponent({
 
     methods: {
         toggleDark() {
-            document.body.classList.toggle('dark');
-        },
-        switchToTeam(team) {
-            this.$inertia.put(
-                route("current-team.update"),
-                {
-                    team_id: team.id,
-                },
-                {
-                    preserveState: false,
-                }
+            document.body.classList.toggle("dark");
+            localStorage.setItem(
+                "theme",
+                document.body.classList.contains("dark") ? "dark" : "light"
             );
-        },
-
-        logout() {
-            this.$inertia.post(route("logout"));
         },
     },
 });
