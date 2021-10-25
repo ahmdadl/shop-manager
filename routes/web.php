@@ -31,6 +31,7 @@ Route::patch('/products/{product}', [ProductController::class, 'update']);
 Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
 // sales
+Route::get('/reports', [SaleController::class, 'index']);
 Route::post('/products/{product}/sales', [SaleController::class, 'sell']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

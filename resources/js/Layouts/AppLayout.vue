@@ -38,18 +38,20 @@
                     <!--Start NavItem -->
                     <div>
                         <ul class="px-2 mt-6 leading-10">
-                            <li
+                            <Link
                                 class="flex items-center justify-center p-2 mb-3 bg-blue-400 rounded-md cursor-pointer "
-                                @click.prevent="$inertia.visit('/')"
+                                href="/"
+                                as="li"
                             >
                                 <i class="text-white fas fa-home"></i>
-                            </li>
-                            <li
-                                class="flex items-center justify-center p-2 mb-3 bg-pink-400 rounded-md cursor-pointer "
-                                @click.prevent="$inertia.visit('/reports')"
+                            </Link>
+                            <Link
+                                class="flex items-center justify-center p-2 mb-3 bg-pink-600 rounded-md cursor-pointer "
+                                href="/reports"
+                                as="li"
                             >
                                 <i class="text-white fas fa-truck-monster"></i>
-                            </li>
+                            </Link>
                             <li
                                 class="flex items-center justify-center p-2 mb-3 rounded-md cursor-pointer "
                                 :class="{
@@ -82,13 +84,13 @@
 
 <script>
 import { defineComponent } from "vue";
+import { Link } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
+    components: { Link },
     props: {
         title: String,
     },
-
-    components: {},
 
     data() {
         return {

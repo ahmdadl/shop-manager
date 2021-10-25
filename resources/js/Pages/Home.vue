@@ -101,8 +101,6 @@
                         :src="`/storage/${c.img || 'categories/default.jpg'}`"
                         alt="photo"
                     />
-                    <!-- <div class="object-cover w-full h-full bg-gray-800 bg-center bg-no-repeat bg-contain dark:bg-gray-600" :style="`background-image: url('/storage/${c.img || 'categories/default.jpg'}')`">
-                    </div> -->
                 </div>
                 <div class="w-full p-4 space-y-2 text-right md:w-3/5 md:p-1">
                     <p

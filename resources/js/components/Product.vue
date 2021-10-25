@@ -164,7 +164,7 @@
             <div class="w-full md:w-1/12">
                 <button
                     type="submit"
-                    class="px-2 py-1 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+                    class="px-2 py-1 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600"
                     :disabled="
                         (type === 'add' &&
                             (!product.title || price <= 0 || amount <= 0)) ||
@@ -199,7 +199,7 @@
         </button>
         <button
             type="submit"
-            class="px-2 py-1 text-white transition duration-200 bg-pink-600 rounded hover:bg-pink-800 dark:bg-pink-900 dark:hover:bg-pink-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+            class="px-2 py-1 text-white transition duration-200 bg-pink-600 rounded hover:bg-pink-800 dark:bg-pink-900 dark:hover:bg-pink-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600"
             style="margin-right: 0.75rem"
             @click.prevent="enableEditMode"
             :disabled="!product.slug"
@@ -209,7 +209,7 @@
         </button>
         <button
             type="submit"
-            class="px-2 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600"
+            class="px-2 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600"
             :disabled="!product.slug.length"
             @click.prevent="remove"
         >

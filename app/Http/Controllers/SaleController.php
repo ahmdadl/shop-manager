@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SaleController extends Controller
 {
+
+    public function index() {
+        return Inertia::render('Report', [
+            'sales' => Sale::all(),
+        ]);
+    }
+
     public function sell(Product $product)
     {
         $req = request()->validate([
