@@ -64,4 +64,10 @@ class ProductController extends Controller
             "done" => $product->delete(),
         ]);
     }
+
+    public function stats() {
+        return response()->json(
+            Product::with('category')->where('amount', '<=', '5')->get()
+        );
+    }
 }

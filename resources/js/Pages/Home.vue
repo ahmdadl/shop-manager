@@ -36,10 +36,9 @@
                     <!-- low products amount -->
                     <button
                         class="inline px-2 py-1 m-1 text-white bg-indigo-500 rounded hover:bg-indigo-700 dark:bg-indigo-900 dark:hover:bg-indigo-700"
-                        @click.prevent="categoryForm"
+                        @click.prevent="infoTable"
                     >
-                        <i class="mx-1 fas fa-plus"></i>
-                        <span class="hidden md:inline-block"> معلومات </span>
+                        <i class="mx-1 fas fa-info"></i>
                     </button>
                 </div>
                 <Multiselect
@@ -140,6 +139,7 @@
 
     <!-- create new category form -->
     <!-- sales info modal -->
+    <!-- low products amount (infoTable) modal -->
         <modal />
     </app-layout>
 </template>
@@ -152,6 +152,7 @@ import CategoryForm from "../components/CategoryForm.vue";
 import axios from "axios";
 import Product from '../components/Product.vue';
 import SaleInfo from '../components/SaleInfo.vue';
+import InfoTable from '../components/InfoTable.vue';
 
 @Options({ components: { Link, modal: container, Product } })
 export default class Home extends Vue {
@@ -238,8 +239,12 @@ export default class Home extends Vue {
         this.alert();
     }
 
-    async salesInfo() {
+    salesInfo() {
         openModal(SaleInfo);
+    }
+
+    infoTable() {
+        openModal(InfoTable);
     }
 
     mounted() {
