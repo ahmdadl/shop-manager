@@ -86,7 +86,7 @@
                         <div
                             class="relative px-2 py-1 text-base font-normal leading-relaxed text-gray-100 bg-red-900 bg-opacity-75 rounded-tr-sm "
                         >
-                            {{c.products_count || 0}}
+                            {{money(c.products_count) || 0}}
                         </div>
                         <div v-if="editMode">
                             <button

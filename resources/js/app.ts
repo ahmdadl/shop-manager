@@ -18,6 +18,13 @@ const emitter = mitt();
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
+const money = (num: number) =>
+    new Intl.NumberFormat("en-EG", {
+        // style: "currency",
+        // currency: "EGY",
+        // maximumSignificantDigits: 1
+    }).format(num);
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => {
@@ -31,7 +38,7 @@ createInertiaApp({
             .use(plugin)
             .use(VueSweetalert2)
             // @ts-ignore
-            .mixin({ methods: { route, toast, alert, confirm } });
+            .mixin({ methods: { route, toast, alert, confirm, money } });
 
         mount.config.globalProperties.emitter = emitter;
 

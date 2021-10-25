@@ -68,6 +68,13 @@
                                     }"
                                 ></i>
                             </li>
+                            <li
+                                v-if="reportsPage"
+                                class="flex items-center justify-center p-2 mt-40 mb-3 text-white bg-yellow-400 rounded-md cursor-pointer hover:bg-yellow-700 dark:bg-yellow-800 dark:hover:bg-yellow-600"
+                                @click.prevent="openFilters"
+                            >
+                                <i class="fas fa-filter"></i>
+                            </li>
                         </ul>
                     </div>
                     <!--End NavItem -->
@@ -95,6 +102,7 @@ export default defineComponent({
     data() {
         return {
             darkMode: false,
+            reportsPage: false,
         };
     },
 
@@ -107,6 +115,11 @@ export default defineComponent({
                 document.body.classList.contains("dark") ? "dark" : "light"
             );
         },
+
+        openFilters() {
+            // @ts-ignore
+            this.emitter.emit("openFilters");
+        },
     },
     mounted() {
         const darkMode = localStorage.getItem("theme");
@@ -114,6 +127,8 @@ export default defineComponent({
             document.body.classList.add("dark");
             this.darkMode = true;
         }
+
+        this.reportsPage = location.pathname.indexOf("/reports") > -1;
     },
 });
 </script>

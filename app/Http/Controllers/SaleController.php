@@ -12,7 +12,7 @@ class SaleController extends Controller
 
     public function index() {
         return Inertia::render('Report', [
-            'sales' => Sale::with('product')->paginate(),
+            'salesData' => Sale::with('product')->paginate(),
         ]);
     }
 
