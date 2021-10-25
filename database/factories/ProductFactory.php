@@ -23,11 +23,15 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'category_id'=> fn() => Category::factory(),
-            'title' => $this->faker->sentence(),
-            'slug' => $this->faker->slug(),
-            'amount' => random_int(0, 25),
-            'price' => random_int(50, 1000).random_int(0, 99),
+            "category_id" => fn() => Category::factory(),
+            "title" => $this->faker->sentence(),
+            "slug" => $this->faker->slug(),
+            "amount" => random_int(0, 25),
+            "price" => $this->faker->randomFloat(2, 5, 1000),
+            "updated_at" => $this->faker->dateTimeBetween(
+                "-3 months",
+                "+3 months"
+            ),
         ];
     }
 }

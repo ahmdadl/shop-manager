@@ -32,6 +32,8 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
 // sales
 Route::get('/reports', [SaleController::class, 'index']);
+Route::get('/reports/sold', [SaleController::class, 'sold']);
+Route::get('/reports/bought', [SaleController::class, 'bought']);
 Route::post('/products/{product}/sales', [SaleController::class, 'sell']);
 Route::delete('/sales/{sale}', [SaleController::class, 'destroy']);
 

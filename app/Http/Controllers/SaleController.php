@@ -10,12 +10,81 @@ use Inertia\Inertia;
 
 class SaleController extends Controller
 {
-
-    public function index() {
-        return Inertia::render('Report', [
-            'salesData' => Sale::with('product')->paginate(),
-            'categories' => fn() => Category::all(),
+    public function index(bool $soldOnly = false, bool $buyOnly = false)
+    {
+        $req = (object) request()->validate([
+            "date" => "sometimes|array|min:2|max:2",
+            "categorySlug" => "nullable|string|exists:categories,slug",
+            "productSlug" => "nullable|string|exists:products,slug",
+            "price" => "array",
+            "price.from" => "nullable|numeric",
+            "price.to" => "nullable|numeric",
+            "amount.from" => "nullable|integer",
+            "amount.to" => "nullable|integer",
         ]);
+
+        $sales = Sale::with("product");
+
+        // sold only
+        if ($soldOnly) $sales->whereType('sell');
+        elseif ($buyOnly) $sales->whereType('buy');
+
+        // if any filter was applied
+        if (isset($req->date)) {
+            // date range
+            if (null !== $req->date["from"]) {
+                $sales->whereBetween("updated_at", [
+                    $req->date["from"],
+                    $req->date["to"],
+                ]);
+            }
+
+            //category
+            if ($req->categorySlug && null === $req->productSlug) {
+                $products = Category::whereSlug($req->categorySlug)->with(
+                    "products"
+                );
+                $sales = $sales->whereIn("product_id", $products->pluck("id"));
+            }
+
+            // product
+            if ($req->productSlug) {
+                $sales->whereProductId(
+                    Product::whereSlug($req->productSlug)->first("id")
+                );
+            }
+
+            // price range
+            if ($req->price["from"] || $req->price["to"]) {
+                $sales->whereBetween("total", [
+                    (int) $req->price["from"],
+                    (int) $req->price["to"],
+                ]);
+            }
+
+            // amount range
+            if ($req->amount["from"] || $req->amount["to"]) {
+                $sales->whereBetween("amount", [
+                    (int) $req->amount["from"],
+                    (int) $req->amount["to"],
+                ]);
+            }
+        }
+
+        // dd($sales->toSql());
+
+        return Inertia::render("Report", [
+            "salesData" => $sales->latest()->paginate(),
+            "categories" => fn() => Category::all(),
+        ]);
+    }
+
+    public function sold() {
+        return $this->index(true);
+    }
+
+    public function bought() {
+        return $this->index(false, true);
     }
 
     public function sell(Product $product)
@@ -57,9 +126,10 @@ class SaleController extends Controller
     {
     }
 
-    public function destroy(Sale $sale) {
+    public function destroy(Sale $sale)
+    {
         return response()->json([
-            'done' => $sale->delete(),
+            "done" => $sale->delete(),
         ]);
     }
 }

@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         <img
-                            class="object-fill object-center w-full h-full"
+                            class="object-fill object-center w-full h-1 md:h-full"
                             :src="`/storage/${c.img || 'categories/default.jpg'}`"
                             alt="photo"
                         />

@@ -24,10 +24,14 @@ class SaleFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => fn() => Product::factory(),
-            'type' => Arr::random(['sell', 'buy']),
-            'amount' => random_int(1, 50),
-            'total' => random_int(50, 1000).random_int(0, 99),
+            "product_id" => fn() => Product::factory(),
+            "type" => Arr::random(["sell", "buy"]),
+            "amount" => random_int(1, 50),
+            "total" => $this->faker->randomFloat(2, 5, 1000),
+            "updated_at" => $this->faker->dateTimeBetween(
+                "-3 months",
+                "+3 months"
+            ),
         ];
     }
 }
