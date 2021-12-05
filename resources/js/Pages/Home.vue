@@ -66,7 +66,22 @@
                         noResults:
                             'py-2 px-3 text-gray-600 bg-white dark:text-gray-100 dark:bg-gray-700',
                     }"
-                />
+                >
+                    <template v-slot:singlelabel="{ value }">
+                        <div class="multiselect-single-label">
+                            <span class="character-label-icon">
+                                {{ value.label }}</span
+                            >
+                        </div>
+                    </template>
+
+                    <template v-slot:option="{ option }">
+                        <span class="p-1 ml-2 font-semibold text-white bg-red-600 rounded">
+                            {{ option.pcount }}
+                        </span>
+                        {{ option.label }}
+                    </template>
+                </Multiselect>
                 <div class="w-1/6">
                     <button
                         class="p-2 mx-1 font-bold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
@@ -231,6 +246,7 @@ export default class Home extends Vue {
             return {
                 label: x.title,
                 value: x.slug,
+                pcount: x.products_count,
             };
         });
     }
