@@ -20209,6 +20209,11 @@ function (_super) {
     });
   };
 
+  Product.prototype.setTypeToAdd = function () {
+    this.type = "add";
+    this.resetForm();
+  };
+
   Product.prototype._addnewProduct = function () {
     return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function () {
       var res;
@@ -20230,7 +20235,7 @@ function (_super) {
               ];
             }
 
-            this.amount = this.type === 'add' ? 25 : this.amount;
+            this.amount = this.type === "add" ? 25 : this.amount;
 
             if (this.amount <= 0 || this.price <= 0 || !this.product.title.length) {
               console.log(this.product.title, this.amount, this.price);
@@ -21957,26 +21962,19 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_31 = ["disabled"];
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "ml-1 fas fa-edit"
-}, null, -1
-/* HOISTED */
-);
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" تعديل ");
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" تعديل ");
-
-var _hoisted_34 = [_hoisted_32, _hoisted_33];
-var _hoisted_35 = ["disabled"];
-var _hoisted_36 = {
+var _hoisted_33 = ["disabled"];
+var _hoisted_34 = {
   key: 0,
   "class": "ml-1 fas fa-trash"
 };
-var _hoisted_37 = {
+var _hoisted_35 = {
   key: 1,
   "class": "ml-1 fas fa-spinner fa-spin"
 };
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حذف ");
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حذف ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Multiselect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Multiselect");
@@ -22013,8 +22011,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-2 py-1 text-white transition duration-200 bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-700", {
-      'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600': _ctx.type === 'buy'
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-2 py-1 text-white transition duration-200", {
+      'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600': _ctx.type === 'buy',
+      'bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-700': _ctx.type !== 'buy'
     }]),
     onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.type = 'buy';
@@ -22123,9 +22122,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700", {
       'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600': _ctx.type === 'add'
     }]),
-    onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      _ctx.type = 'add';
-      _ctx.amount = 5;
+    onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
+    function () {
+      var args = [];
+
+      for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+      }
+
+      return _ctx.setTypeToAdd && _ctx.setTypeToAdd.apply(_ctx, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__read)(args), false));
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas", {
@@ -22153,7 +22158,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.enableEditMode && _ctx.enableEditMode.apply(_ctx, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__read)(args), false));
     }, ["prevent"])),
     disabled: !_ctx.product.slug
-  }, _hoisted_34, 8
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fas", {
+      'fa-edit': _ctx.type !== 'edit',
+      'fa-check': _ctx.type === 'edit'
+    }])
+  }, null, 2
+  /* CLASS */
+  ), _hoisted_32], 8
   /* PROPS */
   , _hoisted_31), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
@@ -22169,9 +22181,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       return _ctx.remove && _ctx.remove.apply(_ctx, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__read)(args), false));
     }, ["prevent"]))
-  }, [!_ctx.removing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_36)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_37)), _hoisted_38], 8
+  }, [!_ctx.removing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_34)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_35)), _hoisted_36], 8
   /* PROPS */
-  , _hoisted_35)])], 64
+  , _hoisted_33)])], 64
   /* STABLE_FRAGMENT */
   );
 }

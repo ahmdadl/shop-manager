@@ -28,10 +28,12 @@
                 </button>
                 <button
                     type="button"
-                    class="px-2 py-1 text-white transition duration-200 bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-700"
+                    class="px-2 py-1 text-white transition duration-200"
                     :class="{
                         'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                             type === 'buy',
+                        'bg-purple-600 rounded hover:bg-purple-800 dark:bg-purple-900 dark:hover:bg-purple-700':
+                            type !== 'buy',
                     }"
                     @click.prevent="type = 'buy'"
                 >
@@ -111,7 +113,10 @@
                     'md:w-4/12': type === 'sell' || type === 'buy',
                 }"
             >
-                <div class="flex w-full h-10 border border-blue-200 rounded" v-if="type !== 'add'">
+                <div
+                    class="flex w-full h-10 border border-blue-200 rounded"
+                    v-if="type !== 'add'"
+                >
                     <div
                         class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:text-gray-100 dark:bg-blue-900"
                     >
@@ -186,7 +191,7 @@
                 'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                     type === 'add',
             }"
-            @click.prevent="type = 'add';amount = 5"
+            @click.prevent="setTypeToAdd"
         >
             <i
                 class="fas"
@@ -204,7 +209,13 @@
             @click.prevent="enableEditMode"
             :disabled="!product.slug"
         >
-            <i class="ml-1 fas fa-edit"></i>
+            <i
+                class="fas"
+                :class="{
+                    'fa-edit': type !== 'edit',
+                    'fa-check': type === 'edit',
+                }"
+            ></i>
             تعديل
         </button>
         <button
@@ -229,8 +240,7 @@ import {
     emptyProduct,
 } from "../interfaces";
 
-
-@Options({ components: { } })
+@Options({ components: {} })
 export default class Product extends Vue {
     category = emptyCategory;
     products: ProductInterface[] = [];
@@ -277,6 +287,11 @@ export default class Product extends Vue {
         return await this._sell();
     }
 
+    setTypeToAdd() {
+        this.type = "add";
+        this.resetForm();
+    }
+
     async _addnewProduct() {
         this.saving = true;
         this.dataErr = false;
@@ -289,7 +304,7 @@ export default class Product extends Vue {
             return;
         }
 
-        this.amount = this.type === 'add' ? 25 : this.amount;
+        this.amount = this.type === "add" ? 25 : this.amount;
 
         if (this.amount <= 0 || this.price <= 0 || !this.product.title.length) {
             console.log(this.product.title, this.amount, this.price);
