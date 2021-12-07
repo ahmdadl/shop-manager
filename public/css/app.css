@@ -1355,8 +1355,11 @@ select {
 .h-2\/5 {
 	height: 40%;
 }
-.h-3 {
-	height: 0.75rem;
+.h-1\/2 {
+	height: 50%;
+}
+.h-1\/4 {
+	height: 25%;
 }
 .max-h-full {
 	max-height: 100%;
@@ -1442,15 +1445,6 @@ select {
 .w-3\/6 {
 	width: 50%;
 }
-.w-3\/12 {
-	width: 25%;
-}
-.w-7\/12 {
-	width: 58.333333%;
-}
-.w-3 {
-	width: 0.75rem;
-}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1533,12 +1527,6 @@ select {
 }
 .grid-cols-2 {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.grid-cols-3 {
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.grid-cols-7 {
-	grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 .flex-col {
 	flex-direction: column;

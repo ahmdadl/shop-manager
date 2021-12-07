@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class="pr-2 overflow-x-hidden overflow-y-auto h-3/5">
+        <div class="pr-2 overflow-x-hidden overflow-y-auto h-1/2">
             <div class="flex justify-center w-full px-3 py-1 mx-2" dir="rtl">
                 <div class="w-3/6">
                     <button
@@ -194,7 +194,7 @@
             </div>
         </div>
         <div
-            class="py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-2/5"
+            class="py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-1/2"
         >
             <Product />
         </div>
