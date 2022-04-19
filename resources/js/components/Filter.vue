@@ -1,6 +1,16 @@
 <template>
     <div
-        class="p-3 my-3 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:text-gray-50 md:w-1/3 sm:w-full h-4/5"
+        class="
+            p-3
+            my-3
+            bg-white
+            rounded-lg
+            shadow-lg
+            dark:bg-gray-900 dark:text-gray-50
+            md:w-1/3
+            sm:w-full
+            h-4/5
+        "
     >
         <div class="flex justify-between px-5 py-4 border-b border-gray-100">
             <div>
@@ -12,7 +22,13 @@
             <div>
                 <button>
                     <i
-                        class="text-red-500 transition duration-150 fa fa-times-circle hover:text-red-600"
+                        class="
+                            text-red-500
+                            transition
+                            duration-150
+                            fa fa-times-circle
+                            hover:text-red-600
+                        "
                         @click="close"
                     ></i>
                 </button>
@@ -106,7 +122,15 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
                         >
                             <i class="mx-auto fas fa-greater-than"></i>
                         </div>
@@ -114,7 +138,20 @@
                             <input
                                 id="priceFrom"
                                 type="number"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
                                 placeholder="من"
                                 v-model="price.from"
                                 min="0"
@@ -130,7 +167,15 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
                         >
                             <i class="mx-auto fas fa-less-than"></i>
                         </div>
@@ -138,7 +183,20 @@
                             <input
                                 id="priceTo"
                                 type="number"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
                                 placeholder="إلى"
                                 v-model="price.to"
                                 :min="price.from"
@@ -168,7 +226,15 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
                         >
                             <i class="mx-auto fas fa-greater-than"></i>
                         </div>
@@ -176,7 +242,20 @@
                             <input
                                 id="amountFrom"
                                 type="number"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
                                 placeholder="من"
                                 v-model="amount.from"
                                 min="0"
@@ -191,7 +270,15 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full bg-gray-300 rounded-r dark:bg-blue-900"
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
                         >
                             <i class="mx-auto fas fa-less-than"></i>
                         </div>
@@ -199,7 +286,20 @@
                             <input
                                 id="amountTo"
                                 type="number"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
                                 placeholder="إلى"
                                 v-model="amount.to"
                                 :min="amount.from"
@@ -211,23 +311,53 @@
         </div>
 
         <div
-            class="flex justify-end px-5 py-4 border-t border-gray-600 dark:border-gray-500"
+            class="
+                flex
+                justify-end
+                px-5
+                py-4
+                border-t border-gray-600
+                dark:border-gray-500
+            "
         >
             <button
-                class="px-3 py-2 mx-2 mr-1 text-sm text-white transition duration-150 bg-red-500 rounded hover:bg-red-600 dark:bg-red-900 dark:hover:bg-red-700"
+                class="
+                    px-3
+                    py-2
+                    mx-2
+                    mr-1
+                    text-sm text-white
+                    transition
+                    duration-150
+                    bg-red-500
+                    rounded
+                    hover:bg-red-600
+                    dark:bg-red-900 dark:hover:bg-red-700
+                "
                 @click.prevent="close"
             >
                 <i class="mx-1 fas fa-times"></i>
                 إلغاء
             </button>
             <button
-                class="px-3 py-2 mx-2 text-sm text-green-900 transition duration-150 border border-green-700 rounded hover:bg-green-700 hover:text-white disabled:hover:bg-gray-500 disabled:cursor-not-allowed"
+                class="
+                    px-3
+                    py-2
+                    mx-2
+                    text-sm text-green-900
+                    transition
+                    duration-150
+                    border border-green-700
+                    rounded
+                    hover:bg-green-700 hover:text-white
+                    disabled:hover:bg-gray-500 disabled:cursor-not-allowed
+                "
                 @click.prevent="save"
                 :disabled="
-                    (price.to < price.from ||
-                    price.from > price.to ) ||
-                    (amount.to < amount.from ||
-                    amount.from > amount.to)
+                    price.to < price.from ||
+                    price.from > price.to ||
+                    amount.to < amount.from ||
+                    amount.from > amount.to
                 "
             >
                 <i class="mx-1 fas fa-save" v-if="!saving"></i>
@@ -266,6 +396,13 @@ export default class Filter extends Vue.with(Props) {
     };
 
     async close() {
+        // load unfiltered data
+        this.reset();
+
+        this.save();
+    }
+
+    reset() {
         this.saving = false;
         this.categorySlug = "";
         this.productSlug = "";
@@ -278,7 +415,6 @@ export default class Filter extends Vue.with(Props) {
             from: null,
             to: null,
         };
-        closeModal();
     }
 
     save() {
@@ -297,7 +433,8 @@ export default class Filter extends Vue.with(Props) {
             amount: this.amount,
         });
 
-        this.close();
+        this.reset();
+        closeModal();
     }
 
     async loadProducts() {

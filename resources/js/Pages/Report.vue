@@ -180,7 +180,7 @@ export default class Report extends Vue {
         productSlug: string,
         price: { from: number; to: number },
         amount: { from: number; to: number }
-    ) {
+    ) {        
         // no data supplied
         if (
             !date.from &&
@@ -191,8 +191,8 @@ export default class Report extends Vue {
             !amount.from &&
             !amount.to
         ) {
-            return;
-        }
+            // return unfiltered data
+        }        
 
         const data = { date, categorySlug, productSlug, price, amount };
         this.filterData = data;

@@ -19487,10 +19487,7 @@ function (_super) {
         switch (_a.label) {
           case 0:
             // no data supplied
-            if (!date.from && !categorySlug && !productSlug && !price.from && !price.to && !amount.from && !amount.to) {
-              return [2
-              /*return*/
-              ];
+            if (!date.from && !categorySlug && !productSlug && !price.from && !price.to && !amount.from && !amount.to) {// return unfiltered data
             }
 
             data = {
@@ -19874,24 +19871,29 @@ function (_super) {
   Filter.prototype.close = function () {
     return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function () {
       return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__generator)(this, function (_a) {
-        this.saving = false;
-        this.categorySlug = "";
-        this.productSlug = "";
-        this.products = [];
-        this.price = {
-          from: null,
-          to: null
-        };
-        this.amount = {
-          from: null,
-          to: null
-        };
-        (0,jenesius_vue_modal__WEBPACK_IMPORTED_MODULE_1__.closeModal)();
+        // load unfiltered data
+        this.reset();
+        this.save();
         return [2
         /*return*/
         ];
       });
     });
+  };
+
+  Filter.prototype.reset = function () {
+    this.saving = false;
+    this.categorySlug = "";
+    this.productSlug = "";
+    this.products = [];
+    this.price = {
+      from: null,
+      to: null
+    };
+    this.amount = {
+      from: null,
+      to: null
+    };
   };
 
   Filter.prototype.save = function () {
@@ -19909,7 +19911,8 @@ function (_super) {
       price: this.price,
       amount: this.amount
     });
-    this.close();
+    this.reset();
+    (0,jenesius_vue_modal__WEBPACK_IMPORTED_MODULE_1__.closeModal)();
   };
 
   Filter.prototype.loadProducts = function () {
