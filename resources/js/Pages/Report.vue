@@ -3,6 +3,9 @@
         <!-- show alert if no sales -->
         <div class="flex items-center justify-center w-full">
             <div v-if="!sales.length" class="m-2">
+                <div class="text-center p-5 text-xl">
+                    <i class="fas fa-10x fa-dollar-sign text-gray-400 dark:text-gray-700"></i>
+                </div>
                 <div
                     class="flex max-w-sm mb-4 bg-yellow-200 border rounded  dark:bg-yellow-600"
                 >

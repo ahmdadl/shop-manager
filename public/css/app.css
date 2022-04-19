@@ -1932,6 +1932,9 @@ select {
 .p-4 {
 	padding: 1rem;
 }
+.p-5 {
+	padding: 1.25rem;
+}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -6724,6 +6727,10 @@ body.dark {
 .dark .dark\:text-gray-400 {
 	--tw-text-opacity: 1;
 	color: rgba(156, 163, 175, var(--tw-text-opacity));
+}
+.dark .dark\:text-gray-700 {
+	--tw-text-opacity: 1;
+	color: rgba(55, 65, 81, var(--tw-text-opacity));
 }
 .dark .dark\:placeholder-gray-200::-moz-placeholder {
 	--tw-placeholder-opacity: 1;
