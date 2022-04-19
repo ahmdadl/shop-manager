@@ -19852,7 +19852,7 @@ function (_super) {
   function Filter() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
 
-    _this.date = "";
+    _this.date = [];
     _this.saving = false;
     _this.categorySlug = "";
     _this.productSlug = "";
@@ -19865,6 +19865,7 @@ function (_super) {
       from: null,
       to: null
     };
+    _this.query = new URLSearchParams(window.location.search);
     return _this;
   }
 
@@ -19952,6 +19953,52 @@ function (_super) {
 
   Filter.prototype.formatDate = function (date) {
     return luxon__WEBPACK_IMPORTED_MODULE_3__.DateTime.fromJSDate(date[0]).setLocale("ar").toLocaleString(luxon__WEBPACK_IMPORTED_MODULE_3__.DateTime.DATE_MED) + " - " + luxon__WEBPACK_IMPORTED_MODULE_3__.DateTime.fromJSDate(date[1]).setLocale("ar").toLocaleString(luxon__WEBPACK_IMPORTED_MODULE_3__.DateTime.DATE_MED);
+  };
+
+  Filter.prototype.mounted = function () {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function () {
+      return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__generator)(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            this.query = new URLSearchParams(window.location.search);
+            if (!this.query.has("productSlug")) return [3
+            /*break*/
+            , 3];
+            this.price = {
+              from: parseFloat(this.query.get("price[from]") || '0'),
+              to: parseFloat(this.query.get("price[to]") || '0')
+            };
+            this.amount = {
+              from: parseFloat(this.query.get("amount[from]") || '0'),
+              to: parseFloat(this.query.get("amount[to]") || '0')
+            };
+            this.categorySlug = this.query.get('categorySlug');
+            if (!this.categorySlug.length) return [3
+            /*break*/
+            , 2]; // load this category products
+
+            return [4
+            /*yield*/
+            , this.loadProducts()];
+
+          case 1:
+            // load this category products
+            _a.sent();
+
+            _a.label = 2;
+
+          case 2:
+            this.productSlug = this.query.get('productSlug');
+            this.date = [this.query.get('date[from]'), this.query.get('date[to]')];
+            _a.label = 3;
+
+          case 3:
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
   };
 
   Filter = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_4__.Options)({

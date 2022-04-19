@@ -381,19 +381,26 @@ class Props {
 
 @Options({ components: { Datepicker } })
 export default class Filter extends Vue.with(Props) {
-    date = "";
+    date: string[] = [];
     saving = false;
     categorySlug = "";
     productSlug = "";
     products: ProductInterface[] = [];
-    price = {
+    price: {
+        from: number | null;
+        to: number | null;
+    } = {
         from: null,
         to: null,
     };
-    amount = {
+    amount: {
+        from: number | null;
+        to: number | null;
+    } = {
         from: null,
         to: null,
     };
+    query = new URLSearchParams(window.location.search);
 
     async close() {
         // load unfiltered data
@@ -417,7 +424,7 @@ export default class Filter extends Vue.with(Props) {
         };
     }
 
-    save() {
+    save() {        
         const date = {
             // @ts-ignore
             from: DateTime.fromJSDate(this.date[0]).toISO(),
@@ -465,6 +472,33 @@ export default class Filter extends Vue.with(Props) {
                 .setLocale("ar")
                 .toLocaleString(DateTime.DATE_MED)
         );
+    }
+
+    async mounted() {
+        this.query = new URLSearchParams(window.location.search);
+
+        if (this.query.has("productSlug")) {
+            this.price = {
+                from: parseFloat(this.query.get("price[from]") as string || '0'),
+                to: parseFloat(this.query.get("price[to]") as string || '0'),
+            };
+
+            this.amount = {
+                from: parseFloat(this.query.get("amount[from]") as string || '0'),
+                to: parseFloat(this.query.get("amount[to]") as string || '0'),
+            };            
+
+            this.categorySlug = this.query.get('categorySlug') as string;
+
+            if (this.categorySlug.length) {
+                // load this category products
+                await this.loadProducts();
+            }
+
+            this.productSlug = this.query.get('productSlug') as string;
+            
+            this.date = [this.query.get('date[from]') as string, this.query.get('date[to]') as string];            
+        }
     }
 }
 </script>
