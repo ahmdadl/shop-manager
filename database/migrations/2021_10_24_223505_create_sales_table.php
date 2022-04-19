@@ -17,8 +17,10 @@ class CreateSalesTable extends Migration
             $table->id();
             $table
                 ->foreignId("product_id")
+                ->nullable()
                 ->constrained()
-                ->onDelete("cascade");
+                ->nullOnDelete();
+
             $table
                 ->enum("type", ["sell", "buy"])
                 ->default("sell")

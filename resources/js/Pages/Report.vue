@@ -3,11 +3,26 @@
         <!-- show alert if no sales -->
         <div class="flex items-center justify-center w-full">
             <div v-if="!sales.length" class="m-2">
-                <div class="text-center p-5 text-xl">
-                    <i class="fas fa-10x fa-dollar-sign text-gray-400 dark:text-gray-700"></i>
+                <div class="text-center p-5">
+                    <i
+                        class="
+                            fas
+                            fa-7x fa-dollar-sign
+                            text-gray-400
+                            dark:text-gray-700
+                        "
+                    ></i>
                 </div>
                 <div
-                    class="flex max-w-sm mb-4 bg-yellow-200 border rounded  dark:bg-yellow-600"
+                    class="
+                        flex
+                        max-w-sm
+                        mb-4
+                        bg-yellow-200
+                        border
+                        rounded
+                        dark:bg-yellow-600
+                    "
                 >
                     <div class="w-16 bg-yellow-500 dark:bg-yellow-400">
                         <div class="p-4">
@@ -37,7 +52,19 @@
         <!-- data table -->
         <div>
             <div
-                class="flex items-center justify-center text-sm font-extrabold leading-normal text-gray-600 uppercase bg-gray-200 shadow-lg  dark:bg-gray-800 dark:text-gray-100"
+                class="
+                    flex
+                    items-center
+                    justify-center
+                    text-sm
+                    font-extrabold
+                    leading-normal
+                    text-gray-600
+                    uppercase
+                    bg-gray-200
+                    shadow-lg
+                    dark:bg-gray-800 dark:text-gray-100
+                "
             >
                 <div class="w-1/12 px-6 py-3 text-right">نوع العملية</div>
                 <div class="w-2/12 px-6 py-3 text-right">التاريخ</div>
@@ -47,28 +74,67 @@
                 <div class="w-1/12 px-6 py-3 text-center">#</div>
             </div>
             <div
-                class="flex transition duration-150 ease-in-out border-b border-gray-400  dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
+                class="
+                    flex
+                    transition
+                    duration-150
+                    ease-in-out
+                    border-b border-gray-400
+                    dark:border-gray-600
+                    hover:bg-gray-50
+                    dark:hover:bg-gray-700
+                "
                 v-for="sale in sales"
                 :key="sale.id"
             >
                 <div
-                    class="flex items-center justify-center w-1/12 py-3 text-sm font-medium text-center  whitespace-nowrap"
+                    class="
+                        flex
+                        items-center
+                        justify-center
+                        w-1/12
+                        py-3
+                        text-sm
+                        font-medium
+                        text-center
+                        whitespace-nowrap
+                    "
                 >
                     <span
-                        class="px-3 py-1 text-white bg-green-500 rounded  dark:bg-green-700"
+                        class="
+                            px-3
+                            py-1
+                            text-white
+                            bg-green-500
+                            rounded
+                            dark:bg-green-700
+                        "
                         v-if="sale.type === 'sell'"
                     >
                         بيع
                     </span>
                     <span
-                        class="px-3 py-1 text-white bg-red-500 rounded  dark:bg-red-700"
+                        class="
+                            px-3
+                            py-1
+                            text-white
+                            bg-red-500
+                            rounded
+                            dark:bg-red-700
+                        "
                         v-if="sale.type === 'buy'"
                     >
                         شراء
                     </span>
                 </div>
                 <div
-                    class="w-2/12 px-6 py-3 text-right text-yellow-700  dark:text-yellow-500"
+                    class="
+                        w-2/12
+                        px-6
+                        py-3
+                        text-right text-yellow-700
+                        dark:text-yellow-500
+                    "
                 >
                     <div class="flex flex-col items-center">
                         <p class="block">
@@ -80,15 +146,25 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-center w-5/12">
-                    <span class="">
-                        {{ sale.product.title }}
+                    <span
+                        :class="{
+                            'text-red-700 dark:text-red-500 line-through':
+                                !sale.product?.title,
+                        }"
+                    >
+                        {{ sale.product?.title || "تمت إزالته" }}
                     </span>
                 </div>
                 <div
                     class="flex items-center justify-center w-1/12 text-center"
                 >
                     <span
-                        class="text-sm font-semibold text-purple-800  dark:text-purple-500"
+                        class="
+                            text-sm
+                            font-semibold
+                            text-purple-800
+                            dark:text-purple-500
+                        "
                     >
                         {{ sale.amount }}
                     </span>
@@ -97,17 +173,37 @@
                     class="flex items-center justify-center w-2/12 text-center"
                 >
                     <span
-                        class="text-sm font-semibold text-pink-800  dark:text-pink-500"
+                        class="
+                            text-sm
+                            font-semibold
+                            text-pink-800
+                            dark:text-pink-500
+                        "
                         dir="ltr"
                     >
                         {{ money(sale.total) }}
                     </span>
                 </div>
                 <div
-                    class="flex items-center justify-center w-1/12 text-center  item-center"
+                    class="
+                        flex
+                        items-center
+                        justify-center
+                        w-1/12
+                        text-center
+                        item-center
+                    "
                 >
                     <button
-                        class="w-10 h-10 text-white bg-red-400 rounded-full  hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-500"
+                        class="
+                            w-10
+                            h-10
+                            text-white
+                            bg-red-400
+                            rounded-full
+                            hover:bg-red-600
+                            dark:bg-red-800 dark:hover:bg-red-500
+                        "
                         @click.prevent="remove(sale.id)"
                     >
                         <i
@@ -122,7 +218,19 @@
                 </div>
             </div>
             <div
-                class="flex py-3 text-white transition duration-150 ease-in-out bg-green-600 border-b border-gray-400  dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 dark:bg-green-800"
+                class="
+                    flex
+                    py-3
+                    text-white
+                    transition
+                    duration-150
+                    ease-in-out
+                    bg-green-600
+                    border-b border-gray-400
+                    dark:border-gray-600
+                    hover:bg-gray-50
+                    dark:hover:bg-gray-700 dark:bg-green-800
+                "
             >
                 <div class="w-1/12 text-center">المجموع</div>
                 <div class="w-2/12 font-bold text-center">-----</div>
@@ -180,7 +288,7 @@ export default class Report extends Vue {
         productSlug: string,
         price: { from: number; to: number },
         amount: { from: number; to: number }
-    ) {        
+    ) {
         // no data supplied
         if (
             !date.from &&
@@ -192,7 +300,7 @@ export default class Report extends Vue {
             !amount.to
         ) {
             // return unfiltered data
-        }        
+        }
 
         const data = { date, categorySlug, productSlug, price, amount };
         this.filterData = data;
@@ -264,6 +372,7 @@ export default class Report extends Vue {
     mounted() {
         // @ts-ignore
         this.sales = this.$page.props.salesData.data;
+        console.log(this.sales);
 
         const query = location.search.substring(1);
 

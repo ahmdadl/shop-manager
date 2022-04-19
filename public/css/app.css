@@ -2238,6 +2238,9 @@ select {
 .underline {
 	text-decoration: underline;
 }
+.line-through {
+	text-decoration: line-through;
+}
 .antialiased {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -6731,6 +6734,10 @@ body.dark {
 .dark .dark\:text-gray-700 {
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
+.dark .dark\:text-red-500 {
+	--tw-text-opacity: 1;
+	color: rgba(239, 68, 68, var(--tw-text-opacity));
 }
 .dark .dark\:placeholder-gray-200::-moz-placeholder {
 	--tw-placeholder-opacity: 1;

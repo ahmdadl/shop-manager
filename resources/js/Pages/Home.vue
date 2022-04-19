@@ -97,6 +97,9 @@
             <!-- show alert if no categories -->
             <div class="flex items-center justify-center w-full">
                 <div v-if="!selectedCats.length" class="m-2">
+                    <div class='text-center p-5'>
+                        <i class='fas fa-7x fa-exclamation  text-gray-400 dark:text-gray-700'></i>
+                    </div>
                     <div
                         class="flex max-w-sm mb-4 bg-yellow-200 border rounded dark:bg-yellow-600"
                     >

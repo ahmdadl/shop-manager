@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
                 'category_id' => $category->id,
             ]);
             
-            $products->each(function(Product $product) {
-                Sale::factory(random_int(2, 5))->create([
-                    'product_id' => $product->id,
-                ]);
-            });
+            // $products->each(function(Product $product) {
+            //     Sale::factory(random_int(2, 5))->create([
+            //         'product_id' => $product->id,
+            //     ]);
+            // });
         });
 
         DB::commit();
