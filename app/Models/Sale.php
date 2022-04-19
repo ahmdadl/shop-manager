@@ -11,6 +11,11 @@ class Sale extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'total' => 'double',
+        'amount' => 'int',
+    ];
+
     public function product() {
         return $this->belongsTo(Product::class);
     }

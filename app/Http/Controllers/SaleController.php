@@ -26,8 +26,11 @@ class SaleController extends Controller
         $sales = Sale::with("product");
 
         // sold only
-        if ($soldOnly) $sales->whereType('sell');
-        elseif ($buyOnly) $sales->whereType('buy');
+        if ($soldOnly) {
+            $sales->whereType("sell");
+        } elseif ($buyOnly) {
+            $sales->whereType("buy");
+        }
 
         // if any filter was applied
         if (isset($req->date)) {
@@ -79,17 +82,20 @@ class SaleController extends Controller
         ]);
     }
 
-    public function sold() {
+    public function sold()
+    {
         return $this->index(true);
     }
 
-    public function bought() {
+    public function bought()
+    {
         return $this->index(false, true);
     }
 
     public function sell(Product $product)
     {
         $req = request()->validate([
+            "type" => "required|alpha|max:4",
             "amount" => [
                 "required",
                 "integer",
@@ -98,14 +104,18 @@ class SaleController extends Controller
                     ? "max:{$product->amount}"
                     : "",
             ],
-            "type" => "required|alpha|max:4",
         ]);
+
+        $price =
+            $req["type"] === "sell"
+                ? $product->sell_price
+                : $product->buy_price;
 
         $done = Sale::create([
             "product_id" => $product->id,
             "amount" => $req["amount"],
             "type" => $req["type"],
-            "total" => ((int) $req["amount"]) * $product->price,
+            "total" => ((int) $req["amount"]) * $price,
         ])->id;
 
         if ($done) {
@@ -133,13 +143,14 @@ class SaleController extends Controller
         ]);
     }
 
-    public function stats() {
-        $buy = Sale::whereType('buy')->sum('total');
-        
-        $sell = Sale::whereType('sell')->sum('total');
+    public function stats()
+    {
+        $buy = Sale::whereType("buy")->sum("total");
+
+        $sell = Sale::whereType("sell")->sum("total");
 
         $diff = $sell - $buy;
 
-        return response()->json(compact('buy', 'sell', 'diff'));
+        return response()->json(compact("buy", "sell", "diff"));
     }
 }

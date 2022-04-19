@@ -22,7 +22,8 @@ class CreateProductsTable extends Migration
             $table->string("title");
             $table->string("slug")->index();
             $table->integer("amount")->default(0);
-            $table->double("price")->default(0);
+            $table->double("sell_price")->default(0);
+            $table->double("buy_price")->default(0);
             $table->timestamps();
         });
     }

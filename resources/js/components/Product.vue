@@ -5,12 +5,29 @@
     <p class="text-xs text-red-400" v-if="dataErr">يرجى مراجعة البيانات</p>
     <form @submit.prevent="save">
         <div
-            class="flex justify-center p-1 mt-3 space-y-5 md:space-x-4 md:space-y-0"
+            class="
+                flex
+                justify-center
+                p-1
+                mt-3
+                space-y-5
+                md:space-x-4 md:space-y-0
+            "
         >
             <div class="flex flex-col w-full space-y-3 md:w-1/12">
                 <button
                     type="button"
-                    class="px-2 py-1 text-white transition duration-200 bg-blue-600 rounded hover:bg-blue-800 dark:bg-blue-700 dark:hover:bg-blue-600"
+                    class="
+                        px-2
+                        py-1
+                        text-white
+                        transition
+                        duration-200
+                        bg-blue-600
+                        rounded
+                        hover:bg-blue-800
+                        dark:bg-blue-700 dark:hover:bg-blue-600
+                    "
                     :class="{
                         'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                             type === 'sell',
@@ -88,7 +105,16 @@
                         class="flex w-full h-10 border border-blue-200 rounded"
                     >
                         <div
-                            class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:text-gray-100 dark:bg-blue-900"
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                text-gray-900
+                                bg-gray-300
+                                rounded-r
+                                dark:text-gray-100 dark:bg-blue-900
+                            "
                         >
                             <i :class="`mx-auto fas fa-heading`"></i>
                         </div>
@@ -96,7 +122,20 @@
                             <input
                                 id="title"
                                 type="text"
-                                class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
                                 placeholder="الإسم"
                                 v-model="product.title"
                             />
@@ -118,7 +157,16 @@
                     v-if="type !== 'add'"
                 >
                     <div
-                        class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:text-gray-100 dark:bg-blue-900"
+                        class="
+                            flex
+                            items-center
+                            w-2/12
+                            h-full
+                            text-gray-900
+                            bg-gray-300
+                            rounded-r
+                            dark:text-gray-100 dark:bg-blue-900
+                        "
                     >
                         <i :class="`mx-auto fas fa-shopping-bag`"></i>
                     </div>
@@ -126,7 +174,20 @@
                         <input
                             id="amount"
                             type="number"
-                            class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
+                            class="
+                                flex
+                                items-center
+                                w-full
+                                h-full
+                                px-1
+                                bg-gray-200
+                                rounded-l
+                                focus:outline-none focus:bg-white
+                                dark:bg-gray-800
+                                dark:focus:bg-gray-700
+                                dark:text-white
+                                dark:placeholder-gray-200
+                            "
                             placeholder="الكمية"
                             v-model="amount"
                             min="0"
@@ -134,7 +195,18 @@
                         />
                     </div>
                     <div
-                        class="flex items-center justify-center w-2/12 h-full text-center text-gray-900 bg-gray-300 rounded-l dark:text-gray-100 dark:bg-blue-900 text-md"
+                        class="
+                            flex
+                            items-center
+                            justify-center
+                            w-2/12
+                            h-full
+                            text-center text-gray-900
+                            bg-gray-300
+                            rounded-l
+                            dark:text-gray-100 dark:bg-blue-900
+                            text-md
+                        "
                     >
                         <span class="font-semibold">
                             {{ product.amount }}
@@ -151,17 +223,84 @@
             >
                 <div class="flex w-full h-10 border border-blue-200 rounded">
                     <div
-                        class="flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:bg-blue-900 dark:text-gray-100"
+                        class="
+                            flex
+                            items-center
+                            w-2/12
+                            h-full
+                            text-gray-900
+                            bg-gray-300
+                            rounded-r
+                            dark:bg-blue-900 dark:text-gray-100
+                        "
                     >
-                        <i :class="`mx-auto fas fa-dollar-sign`"></i>
+                        <i class="mx-auto fas fa-arrow-down"></i>
+                        <i class="mx-auto fas fa-dollar-sign"></i>
                     </div>
                     <div class="w-10/12 rounded-l-xl">
                         <input
-                            id="price"
+                            id="buy_price"
                             type="text"
-                            class="flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200"
-                            placeholder="السعر"
-                            v-model="price"
+                            class="
+                                flex
+                                items-center
+                                w-full
+                                h-full
+                                px-1
+                                bg-gray-200
+                                rounded-l
+                                focus:outline-none focus:bg-white
+                                dark:bg-gray-800
+                                dark:focus:bg-gray-700
+                                dark:text-white
+                                dark:placeholder-gray-200
+                            "
+                            placeholder="سعر الشراء"
+                            v-model="buy_price"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full md:w-3/12"
+                v-show="type === 'add' || type === 'edit'"
+            >
+                <div class="flex w-full h-10 border border-blue-200 rounded">
+                    <div
+                        class="
+                            flex
+                            items-center
+                            w-2/12
+                            h-full
+                            text-gray-900
+                            bg-gray-300
+                            rounded-r
+                            dark:bg-blue-900 dark:text-gray-100
+                        "
+                    >
+                        <i class="mx-auto fas fa-arrow-up"></i>
+                        <i class="mx-auto fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="w-10/12 rounded-l-xl">
+                        <input
+                            id="sell_price"
+                            type="text"
+                            class="
+                                flex
+                                items-center
+                                w-full
+                                h-full
+                                px-1
+                                bg-gray-200
+                                rounded-l
+                                focus:outline-none focus:bg-white
+                                dark:bg-gray-800
+                                dark:focus:bg-gray-700
+                                dark:text-white
+                                dark:placeholder-gray-200
+                            "
+                            placeholder="سعر البيع"
+                            v-model="sell_price"
                         />
                     </div>
                 </div>
@@ -169,10 +308,25 @@
             <div class="w-full md:w-1/12">
                 <button
                     type="submit"
-                    class="px-2 py-1 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600"
+                    class="
+                        px-2
+                        py-1
+                        text-white
+                        transition
+                        duration-200
+                        bg-green-600
+                        rounded
+                        hover:bg-green-800
+                        dark:bg-green-900 dark:hover:bg-green-700
+                        disabled:cursor-not-allowed disabled:bg-gray-600
+                        dark:disabled:bg-gray-600
+                    "
                     :disabled="
                         (type === 'add' &&
-                            (!product.title || price <= 0 || amount <= 0)) ||
+                            (!product.title ||
+                                sell_price <= 0 ||
+                                buy_price <= 0 ||
+                                amount <= 0)) ||
                         (type === 'sell' && amount > product.amount)
                     "
                 >
@@ -186,7 +340,17 @@
     <div class="flex justify-center p-2 mt-1 space-x-3 text-center">
         <button
             type="button"
-            class="px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+            class="
+                px-2
+                py-1
+                text-white
+                transition
+                duration-200
+                bg-yellow-600
+                rounded
+                hover:bg-yellow-800
+                dark:bg-yellow-900 dark:hover:bg-yellow-700
+            "
             :class="{
                 'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600':
                     type === 'add',
@@ -204,7 +368,19 @@
         </button>
         <button
             type="submit"
-            class="px-2 py-1 text-white transition duration-200 bg-pink-600 rounded hover:bg-pink-800 dark:bg-pink-900 dark:hover:bg-pink-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600"
+            class="
+                px-2
+                py-1
+                text-white
+                transition
+                duration-200
+                bg-pink-600
+                rounded
+                hover:bg-pink-800
+                dark:bg-pink-900 dark:hover:bg-pink-700
+                disabled:cursor-not-allowed disabled:bg-gray-600
+                dark:disabled:bg-gray-600
+            "
             style="margin-right: 0.75rem"
             @click.prevent="enableEditMode"
             :disabled="!product.slug"
@@ -220,7 +396,19 @@
         </button>
         <button
             type="submit"
-            class="px-2 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600"
+            class="
+                px-2
+                py-1
+                text-white
+                transition
+                duration-200
+                bg-red-600
+                rounded
+                hover:bg-red-800
+                dark:bg-red-900 dark:hover:bg-red-700
+                disabled:cursor-not-allowed disabled:bg-gray-600
+                dark:disabled:bg-gray-600
+            "
             :disabled="!product.slug.length"
             @click.prevent="remove"
         >
@@ -250,7 +438,8 @@ export default class Product extends Vue {
     val = "";
     type = "sell";
     amount = 0;
-    price = 0;
+    sell_price = 0;
+    buy_price = 0;
 
     amountErr = "";
     nameErr = "";
@@ -265,7 +454,7 @@ export default class Product extends Vue {
 
         const res = await axios.get(`/categories/${this.category.slug}`);
 
-        console.log(res.data);
+        // console.log(res.data);
 
         this.loading = false;
         if (!res || !res.data) {
@@ -306,8 +495,18 @@ export default class Product extends Vue {
 
         this.amount = this.type === "add" ? 25 : this.amount;
 
-        if (this.amount <= 0 || this.price <= 0 || !this.product.title.length) {
-            console.log(this.product.title, this.amount, this.price);
+        if (
+            this.amount <= 0 ||
+            this.sell_price <= 0 ||
+            this.buy_price <= 0 ||
+            !this.product.title.length
+        ) {
+            console.log(
+                this.product.title,
+                this.amount,
+                this.sell_price,
+                this.buy_price
+            );
             this.dataErr = true;
             this.saving = false;
             return;
@@ -319,7 +518,8 @@ export default class Product extends Vue {
                 category_id: this.category.id,
                 title: this.product.title,
                 amount: this.amount,
-                price: this.price,
+                sell_price: this.sell_price,
+                buy_price: this.buy_price,
             }
         ).catch((err) => {
             if (err.response.status === 422) {
@@ -365,7 +565,8 @@ export default class Product extends Vue {
         this.products.map((x) => {
             if (x.slug === this.product.slug) {
                 x.title = this.product.title;
-                x.price = this.price;
+                x.sell_price = this.sell_price;
+                x.buy_price = this.buy_price;
                 x.amount = this.amount;
             }
             return x;
@@ -476,7 +677,8 @@ export default class Product extends Vue {
         this.product = Object.assign({}, emptyProduct);
         // this.product.title = "";
         this.amount = 1;
-        this.price = 1;
+        this.sell_price = 1;
+        this.buy_price = 1;
 
         // @ts-ignore
         this.$refs?.mst?.clear();
@@ -485,7 +687,8 @@ export default class Product extends Vue {
     enableEditMode() {
         this.type = "edit";
         this.amount = this.product.amount;
-        this.price = this.product.price;
+        this.sell_price = this.product.sell_price;
+        this.buy_price = this.product.buy_price;
     }
 
     mounted() {

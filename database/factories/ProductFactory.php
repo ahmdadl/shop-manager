@@ -24,10 +24,11 @@ class ProductFactory extends Factory
     {
         return [
             "category_id" => fn() => Category::factory(),
-            "title" => $this->faker->sentence(),
+            "title" => $this->faker->words(2, true),
             "slug" => $this->faker->slug(),
             "amount" => random_int(0, 25),
-            "price" => $this->faker->randomFloat(2, 5, 1000),
+            "sell_price" => $this->faker->randomFloat(2, 5, 1000),
+            "buy_price" => $this->faker->randomFloat(2, 5, 1000),
             "updated_at" => $this->faker->dateTimeBetween(
                 "-3 months",
                 "+3 months"

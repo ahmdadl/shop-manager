@@ -29,8 +29,8 @@ class SaleFactory extends Factory
             "amount" => random_int(1, 50),
             "total" => $this->faker->randomFloat(2, 5, 1000),
             "updated_at" => $this->faker->dateTimeBetween(
-                "-3 months",
-                "+3 months"
+                "-6 months",
+                "now"
             ),
         ];
     }

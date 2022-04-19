@@ -21,7 +21,8 @@ export interface ProductInterface {
     slug: string;
     img?: string;
     amount: number;
-    price: number;
+    sell_price: number;
+    buy_price: number;
 }
 
 export const emptyProduct: ProductInterface = {
@@ -31,7 +32,8 @@ export const emptyProduct: ProductInterface = {
     slug: '',
     img: undefined,
     amount: 1,
-    price: 1,
+    sell_price: 1,
+    buy_price: 1,
 }
 
 export interface Sale {

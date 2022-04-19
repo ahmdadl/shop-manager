@@ -20132,7 +20132,8 @@ function (_super) {
     _this.val = "";
     _this.type = "sell";
     _this.amount = 0;
-    _this.price = 0;
+    _this.sell_price = 0;
+    _this.buy_price = 0;
     _this.amountErr = "";
     _this.nameErr = "";
     _this.dataErr = false;
@@ -20154,8 +20155,8 @@ function (_super) {
             , axios__WEBPACK_IMPORTED_MODULE_0___default().get("/categories/" + this.category.slug)];
 
           case 1:
-            res = _a.sent();
-            console.log(res.data);
+            res = _a.sent(); // console.log(res.data);
+
             this.loading = false;
 
             if (!res || !res.data) {
@@ -20237,8 +20238,8 @@ function (_super) {
 
             this.amount = this.type === "add" ? 25 : this.amount;
 
-            if (this.amount <= 0 || this.price <= 0 || !this.product.title.length) {
-              console.log(this.product.title, this.amount, this.price);
+            if (this.amount <= 0 || this.sell_price <= 0 || this.buy_price <= 0 || !this.product.title.length) {
+              console.log(this.product.title, this.amount, this.sell_price, this.buy_price);
               this.dataErr = true;
               this.saving = false;
               return [2
@@ -20252,7 +20253,8 @@ function (_super) {
               category_id: this.category.id,
               title: this.product.title,
               amount: this.amount,
-              price: this.price
+              sell_price: this.sell_price,
+              buy_price: this.buy_price
             })["catch"](function (err) {
               if (err.response.status === 422) {
                 var res_1 = err.response.data.errors;
@@ -20303,7 +20305,8 @@ function (_super) {
             this.products.map(function (x) {
               if (x.slug === _this.product.slug) {
                 x.title = _this.product.title;
-                x.price = _this.price;
+                x.sell_price = _this.sell_price;
+                x.buy_price = _this.buy_price;
                 x.amount = _this.amount;
               }
 
@@ -20449,7 +20452,8 @@ function (_super) {
     this.product = Object.assign({}, _interfaces__WEBPACK_IMPORTED_MODULE_1__.emptyProduct); // this.product.title = "";
 
     this.amount = 1;
-    this.price = 1; // @ts-ignore
+    this.sell_price = 1;
+    this.buy_price = 1; // @ts-ignore
 
     (_b = (_a = this.$refs) === null || _a === void 0 ? void 0 : _a.mst) === null || _b === void 0 ? void 0 : _b.clear();
   };
@@ -20457,7 +20461,8 @@ function (_super) {
   Product.prototype.enableEditMode = function () {
     this.type = "edit";
     this.amount = this.product.amount;
-    this.price = this.product.price;
+    this.sell_price = this.product.sell_price;
+    this.buy_price = this.product.buy_price;
   };
 
   Product.prototype.mounted = function () {
@@ -21931,7 +21936,9 @@ var _hoisted_21 = {
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:bg-blue-900 dark:text-gray-100"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("mx-auto fas fa-dollar-sign")
+  "class": "mx-auto fas fa-arrow-down"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "mx-auto fas fa-dollar-sign"
 })], -1
 /* HOISTED */
 );
@@ -21940,41 +21947,61 @@ var _hoisted_23 = {
   "class": "w-10/12 rounded-l-xl"
 };
 var _hoisted_24 = {
+  "class": "w-full md:w-3/12"
+};
+var _hoisted_25 = {
+  "class": "flex w-full h-10 border border-blue-200 rounded"
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex items-center w-2/12 h-full text-gray-900 bg-gray-300 rounded-r dark:bg-blue-900 dark:text-gray-100"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "mx-auto fas fa-arrow-up"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "mx-auto fas fa-dollar-sign"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_27 = {
+  "class": "w-10/12 rounded-l-xl"
+};
+var _hoisted_28 = {
   "class": "w-full md:w-1/12"
 };
-var _hoisted_25 = ["disabled"];
-var _hoisted_26 = {
+var _hoisted_29 = ["disabled"];
+var _hoisted_30 = {
   key: 0,
   "class": "ml-1 fas fa-save"
 };
-var _hoisted_27 = {
+var _hoisted_31 = {
   key: 1,
   "class": "ml-1 fas fa-spinner fa-spin"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حفظ ");
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حفظ ");
 
-var _hoisted_29 = {
+var _hoisted_33 = {
   "class": "flex justify-center p-2 mt-1 space-x-3 text-center"
 };
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" جديد ");
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" جديد ");
 
-var _hoisted_31 = ["disabled"];
+var _hoisted_35 = ["disabled"];
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" تعديل ");
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" تعديل ");
 
-var _hoisted_33 = ["disabled"];
-var _hoisted_34 = {
+var _hoisted_37 = ["disabled"];
+var _hoisted_38 = {
   key: 0,
   "class": "ml-1 fas fa-trash"
 };
-var _hoisted_35 = {
+var _hoisted_39 = {
   key: 1,
   "class": "ml-1 fas fa-spinner fa-spin"
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حذف ");
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" حذف ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Multiselect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Multiselect");
@@ -21982,7 +22009,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(!_ctx.category.title.length ? _ctx.catErr : _ctx.category.title), 1
   /* TEXT */
   ), _ctx.dataErr ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_2, "يرجى مراجعة البيانات")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
+    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
     function () {
       var args = [];
 
@@ -22098,31 +22125,43 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    id: "price",
+    id: "buy_price",
     type: "text",
     "class": "flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200",
-    placeholder: "السعر",
+    placeholder: "سعر الشراء",
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return _ctx.price = $event;
+      return _ctx.buy_price = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.price]])])])], 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.buy_price]])])])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.type === 'add' || _ctx.type === 'edit']]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.type === 'add' || _ctx.type === 'edit']]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    id: "sell_price",
+    type: "text",
+    "class": "flex items-center w-full h-full px-1 bg-gray-200 rounded-l focus:outline-none focus:bg-white dark:bg-gray-800 dark:focus:bg-gray-700 dark:text-white dark:placeholder-gray-200",
+    placeholder: "سعر البيع",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return _ctx.sell_price = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.sell_price]])])])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.type === 'add' || _ctx.type === 'edit']]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     "class": "px-2 py-1 text-white transition duration-200 bg-green-600 rounded hover:bg-green-800 dark:bg-green-900 dark:hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600",
-    disabled: _ctx.type === 'add' && (!_ctx.product.title || _ctx.price <= 0 || _ctx.amount <= 0) || _ctx.type === 'sell' && _ctx.amount > _ctx.product.amount
-  }, [!_ctx.saving ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_26)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_27)), _hoisted_28], 8
+    disabled: _ctx.type === 'add' && (!_ctx.product.title || _ctx.sell_price <= 0 || _ctx.buy_price <= 0 || _ctx.amount <= 0) || _ctx.type === 'sell' && _ctx.amount > _ctx.product.amount
+  }, [!_ctx.saving ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_30)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_31)), _hoisted_32], 8
   /* PROPS */
-  , _hoisted_25)])])], 32
+  , _hoisted_29)])])], 32
   /* HYDRATE_EVENTS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-2 py-1 text-white transition duration-200 bg-yellow-600 rounded hover:bg-yellow-800 dark:bg-yellow-900 dark:hover:bg-yellow-700", {
       'bg-green-600 hover:bg-green-800 dark:bg-green-800 dark:hover:bg-green-600': _ctx.type === 'add'
     }]),
-    onClick: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
+    onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
     function () {
       var args = [];
 
@@ -22139,7 +22178,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }])
   }, null, 2
   /* CLASS */
-  ), _hoisted_30], 2
+  ), _hoisted_34], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
@@ -22147,7 +22186,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     style: {
       "margin-right": "0.75rem"
     },
-    onClick: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
+    onClick: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
     function () {
       var args = [];
 
@@ -22165,13 +22204,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }])
   }, null, 2
   /* CLASS */
-  ), _hoisted_32], 8
+  ), _hoisted_36], 8
   /* PROPS */
-  , _hoisted_31), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_35), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit",
     "class": "px-2 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-800 dark:bg-red-900 dark:hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-600 dark:disabled:bg-gray-600",
     disabled: !_ctx.product.slug.length,
-    onClick: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
+    onClick: _cache[10] || (_cache[10] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)( //@ts-ignore
     function () {
       var args = [];
 
@@ -22181,9 +22220,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       return _ctx.remove && _ctx.remove.apply(_ctx, (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__read)(args), false));
     }, ["prevent"]))
-  }, [!_ctx.removing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_34)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_35)), _hoisted_36], 8
+  }, [!_ctx.removing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_38)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_39)), _hoisted_40], 8
   /* PROPS */
-  , _hoisted_33)])], 64
+  , _hoisted_37)])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -22603,7 +22642,8 @@ var emptyProduct = {
   slug: '',
   img: undefined,
   amount: 1,
-  price: 1
+  sell_price: 1,
+  buy_price: 1
 };
 var emptySale = {
   id: 0,

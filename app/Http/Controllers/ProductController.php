@@ -12,7 +12,8 @@ class ProductController extends Controller
         "category_id" => "required|integer|exists:categories,id",
         "title" => "required|string|max:255",
         "amount" => "required|integer|min:1",
-        "price" => "required|min:1",
+        "sell_price" => "required|min:1",
+        "buy_price" => "required|min:1",
     ];
 
     public function index(Category $category)
@@ -41,7 +42,8 @@ class ProductController extends Controller
                 "category_id" => $req->category_id,
                 "title" => $req->title,
                 "amount" => 0,
-                "price" => $req->price,
+                "sell_price" => $req->sell_price,
+                "buy_price" => $req->buy_price,
             ])
         );
     }
@@ -50,7 +52,8 @@ class ProductController extends Controller
         $req = (object) request()->validate($this->reqValidation);
 
         $product->title = $req->title;
-        $product->price = $req->price;
+        $product->sell_price = $req->sell_price;
+        $product->buy_price = $req->buy_price;
         $product->amount = $req->amount;
 
         return response()->json([

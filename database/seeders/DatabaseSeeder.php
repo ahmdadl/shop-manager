@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
     {
         DB::beginTransaction();
         // \App\Models\User::factory(10)->create();
-        $cats = Category::factory()->count(20)->create();
+        $cats = Category::factory()->count(3)->create();
         $cats->each(function (Category $category) {
-            $products = Product::factory(random_int(5, 15))->create([
+            $products = Product::factory(random_int(1, 3))->create([
                 'category_id' => $category->id,
             ]);
             

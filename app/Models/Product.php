@@ -14,6 +14,12 @@ class Product extends Model
 
     protected $guarded  = [];
 
+    protected $casts = [
+        'sell_price' => 'double',
+        'buy_price' => 'double',
+        'amount' => 'int',
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *
