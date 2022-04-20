@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+
 return [
 
     /*
@@ -56,6 +58,11 @@ return [
         'backups' => [
             'driver' => 'local',
             'root' => base_path(),
+        ],
+
+        'backupsDir' => [
+            'driver' => 'local',
+            'root' => base_path('Shop-Manager-Backups')
         ]
 
     ],

@@ -14,7 +14,16 @@
         </nav> -->
 
         <div
-            class="flex min-h-screen gap-0 transition duration-75 ease-linear bg-gray-100 dark:text-white dark:bg-gray-900"
+            class="
+                flex
+                min-h-screen
+                gap-0
+                transition
+                duration-75
+                ease-linear
+                bg-gray-100
+                dark:text-white dark:bg-gray-900
+            "
         >
             <!-- Page Heading -->
             <!-- <header class="bg-white shadow" v-if="$slots.header">
@@ -24,13 +33,29 @@
             </header> -->
 
             <aside
-                class="relative z-20 flex-shrink-0 w-20 overflow-y-auto bg-indigo-600 "
+                class="
+                    relative
+                    z-20
+                    flex-shrink-0
+                    w-20
+                    overflow-y-auto
+                    bg-indigo-600
+                "
             >
                 <div class="top-0 mb-6">
                     <!--Start logo -->
                     <div class="flex justify-center">
                         <div
-                            class="object-cover mt-2 bg-gray-300 bg-center bg-no-repeat bg-cover border-white rounded-full border-1 w-14 h-14"
+                            class="
+                                object-cover
+                                mt-2
+                                bg-gray-300 bg-center bg-no-repeat bg-cover
+                                border-white
+                                rounded-full
+                                border-1
+                                w-14
+                                h-14
+                            "
                             :style="`background-image: url('/logo.jpg')`"
                         ></div>
                     </div>
@@ -39,37 +64,85 @@
                     <div>
                         <ul class="px-2 mt-6 leading-10">
                             <Link
-                                class="flex items-center justify-center p-2 mb-3 bg-blue-400 rounded-md cursor-pointer "
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    bg-blue-400
+                                    rounded-md
+                                    cursor-pointer
+                                "
                                 href="/"
                                 as="li"
                             >
                                 <i class="text-white fas fa-home"></i>
                             </Link>
                             <Link
-                                class="flex items-center justify-center p-2 mb-3 bg-pink-600 rounded-md cursor-pointer "
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    bg-pink-600
+                                    rounded-md
+                                    cursor-pointer
+                                "
                                 href="/reports"
                                 as="li"
                             >
                                 <i class="text-white fas fa-newspaper"></i>
                             </Link>
                             <Link
-                                class="flex items-center justify-center p-2 mb-3 bg-pink-600 rounded-md cursor-pointer "
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    bg-pink-600
+                                    rounded-md
+                                    cursor-pointer
+                                "
                                 href="/reports/sold"
                                 as="li"
                             >
                                 <i class="text-white fas fa-plus"></i>
-                                <i class="mr-1 text-white fas fa-dollar-sign"></i>
+                                <i
+                                    class="mr-1 text-white fas fa-dollar-sign"
+                                ></i>
                             </Link>
                             <Link
-                                class="flex items-center justify-center p-2 mb-3 bg-pink-600 rounded-md cursor-pointer "
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    bg-pink-600
+                                    rounded-md
+                                    cursor-pointer
+                                "
                                 href="/reports/bought"
                                 as="li"
                             >
                                 <i class="text-white fas fa-minus"></i>
-                                <i class="mr-1 text-white fas fa-dollar-sign"></i>
+                                <i
+                                    class="mr-1 text-white fas fa-dollar-sign"
+                                ></i>
                             </Link>
                             <li
-                                class="flex items-center justify-center p-2 mb-3 rounded-md cursor-pointer "
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    rounded-md
+                                    cursor-pointer
+                                "
                                 :class="{
                                     'bg-gray-200': darkMode,
                                     'bg-gray-800': !darkMode,
@@ -84,9 +157,41 @@
                                     }"
                                 ></i>
                             </li>
+
+                            <!-- settings page -->
+
+                            <Link
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    bg-pink-600
+                                    rounded-md
+                                    cursor-pointer
+                                "
+                                href="/settings"
+                                as="li"
+                            >
+                                <i class="text-white fas fa-cogs"></i>
+                            </Link>
                             <li
                                 v-if="reportsPage"
-                                class="flex items-center justify-center p-2 mt-40 mb-3 text-white bg-yellow-400 rounded-md cursor-pointer hover:bg-yellow-700 dark:bg-yellow-800 dark:hover:bg-yellow-600"
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mt-40
+                                    mb-3
+                                    text-white
+                                    bg-yellow-400
+                                    rounded-md
+                                    cursor-pointer
+                                    hover:bg-yellow-700
+                                    dark:bg-yellow-800 dark:hover:bg-yellow-600
+                                "
                                 @click.prevent="openFilters"
                             >
                                 <i class="fas fa-filter"></i>
