@@ -18,6 +18,10 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+[data-pointed=true] {
+    @apply bg-green-700 text-white dark:bg-green-400;
+}
+
 input {
     direction: rtl !important;
     color: #000;
