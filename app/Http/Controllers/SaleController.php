@@ -44,16 +44,16 @@ class SaleController extends Controller
 
             //category
             if ($req->categorySlug && null === $req->productSlug) {
-                $products = Category::whereSlug($req->categorySlug)->with(
-                    "products"
-                );
+                $categoryId = Category::whereSlug($req->categorySlug)->first('id')->id;
+                $products = Product::whereCategoryId($categoryId)->get('id');
+
                 $sales = $sales->whereIn("product_id", $products->pluck("id"));
             }
 
             // product
             if ($req->productSlug) {
                 $sales->whereProductId(
-                    Product::whereSlug($req->productSlug)->first("id")
+                    Product::whereSlug($req->productSlug)->first("id")->id
                 );
             }
 
@@ -74,7 +74,7 @@ class SaleController extends Controller
             }
         }
 
-        // dd($sales->toSql());
+        // dd($sales->toSql(), $sales->getBindings());
 
         return Inertia::render("Report", [
             "salesData" => $sales->latest()->paginate(),
