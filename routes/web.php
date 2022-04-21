@@ -50,4 +50,6 @@ Route::get("/backup-download/{fileName}", [
     "download",
 ]);
 
+
 Route::post('/settings/backup-db', [SettingController::class, 'backup']);
+Route::post('/settings/restore-db', [SettingController::class, 'restore']);

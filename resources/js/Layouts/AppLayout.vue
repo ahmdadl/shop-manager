@@ -25,13 +25,6 @@
                 dark:text-white dark:bg-gray-900
             "
         >
-            <!-- Page Heading -->
-            <!-- <header class="bg-white shadow" v-if="$slots.header">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <slot name="header"></slot>
-                </div>
-            </header> -->
-
             <aside
                 class="
                     relative
@@ -40,6 +33,7 @@
                     w-20
                     overflow-y-auto
                     bg-indigo-600
+                    dark:bg-indigo-700
                 "
             >
                 <div class="top-0 mb-6">
@@ -71,8 +65,10 @@
                                     p-2
                                     mb-3
                                     bg-blue-400
+                                    hover:bg-blue-600
                                     rounded-md
                                     cursor-pointer
+                                    transition
                                 "
                                 href="/"
                                 as="li"
@@ -86,9 +82,11 @@
                                     justify-center
                                     p-2
                                     mb-3
-                                    bg-pink-600
+                                    bg-pink-500
+                                    hover:bg-pink-600
                                     rounded-md
                                     cursor-pointer
+                                    transition
                                 "
                                 href="/reports"
                                 as="li"
@@ -102,9 +100,11 @@
                                     justify-center
                                     p-2
                                     mb-3
-                                    bg-pink-600
+                                    bg-pink-500
+                                    hover:bg-pink-600
                                     rounded-md
                                     cursor-pointer
+                                    transition
                                 "
                                 href="/reports/sold"
                                 as="li"
@@ -121,9 +121,11 @@
                                     justify-center
                                     p-2
                                     mb-3
-                                    bg-pink-600
+                                    bg-pink-500
+                                    hover:bg-pink-600
                                     rounded-md
                                     cursor-pointer
+                                    transition
                                 "
                                 href="/reports/bought"
                                 as="li"
@@ -133,6 +135,29 @@
                                     class="mr-1 text-white fas fa-dollar-sign"
                                 ></i>
                             </Link>
+
+                            <!-- settings page -->
+                            <Link
+                                class="
+                                    flex
+                                    items-center
+                                    justify-center
+                                    p-2
+                                    mb-3
+                                    bg-red-600
+                                    hover:bg-red-700
+                                    rounded-md
+                                    cursor-pointer
+                                    transition
+                                "
+                                href="/settings"
+                                as="li"
+                            >
+                                <i
+                                    class="text-white fas fa-cloud-upload-alt"
+                                ></i>
+                            </Link>
+
                             <li
                                 class="
                                     flex
@@ -142,6 +167,7 @@
                                     mb-3
                                     rounded-md
                                     cursor-pointer
+                                    transition
                                 "
                                 :class="{
                                     'bg-gray-200': darkMode,
@@ -158,24 +184,7 @@
                                 ></i>
                             </li>
 
-                            <!-- settings page -->
-
-                            <Link
-                                class="
-                                    flex
-                                    items-center
-                                    justify-center
-                                    p-2
-                                    mb-3
-                                    bg-pink-600
-                                    rounded-md
-                                    cursor-pointer
-                                "
-                                href="/settings"
-                                as="li"
-                            >
-                                <i class="text-white fas fa-cogs"></i>
-                            </Link>
+                            <!-- reports filter button -->
                             <li
                                 v-if="reportsPage"
                                 class="
@@ -189,6 +198,7 @@
                                     bg-yellow-400
                                     rounded-md
                                     cursor-pointer
+                                    transition
                                     hover:bg-yellow-700
                                     dark:bg-yellow-800 dark:hover:bg-yellow-600
                                 "

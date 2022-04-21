@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Arr;
+use App\RestoreDatabase;
 use Artisan;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Storage;
 use Str;
-
 class SettingController extends Controller
 {
     const DATE_FORMAT = "Y-m-d-G-i-s";
@@ -61,6 +59,11 @@ class SettingController extends Controller
         ]);
     }
 
+    /**
+     * backup database
+     *
+     * @return Response
+     */
     public function backup()
     {
         Artisan::call("backup:clean");
@@ -87,6 +90,31 @@ class SettingController extends Controller
         ]);
     }
 
+    public function restore()
+    {
+        ["sql" => $sql] = request()->validate([
+            "sql" => "required|file",
+        ]);
+
+        // delete all old files
+        Storage::disk('backups')->files();
+
+        // upload file
+        $fileName = "backup" . time() . $sql->getClientOriginalName();
+        $path = "storage/" . $sql->storeAs("backups", $fileName, "public");
+
+        $process = new RestoreDatabase($path);
+
+        $done = $process->handle();
+
+        return response()->json(compact("done"));
+    }
+
+    /**
+     * get backup files and sort to get the latest file
+     *
+     * @return array|false
+     */
     private function getSortedBackupFiles(): array|false
     {
         $files = Storage::disk("backupsDir")->files();

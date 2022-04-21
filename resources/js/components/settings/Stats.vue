@@ -1,8 +1,10 @@
 <template>
     <div class="container mx-auto py-5">
-        <div class="bg-white max-w-sm mx-auto rounded-2xl shadow-lg">
+        <div
+            class="bg-white max-w-sm mx-auto rounded-2xl shadow-lg rounded-2xl"
+        >
             <div
-                class="h-20 flex items-center justify-between"
+                class="h-20 flex items-center justify-between rounded-t-2xl"
                 :class="
                     hasBackup
                         ? 'bg-green-500 dark:bg-green-700'
@@ -29,7 +31,7 @@
                         text-white
                         px-2
                         py-1
-                        mx-1
+                        ml-2
                         hover:bg-green-900 hover:border-green-500
                         rounded
                         transition
@@ -48,7 +50,7 @@
                         text-white
                         px-2
                         py-1
-                        mx-1
+                        ml-2
                         hover:bg-green-900 hover:border-green-500
                         rounded
                         transition
@@ -59,7 +61,9 @@
                 >
                     <i
                         class="fas text-xl mx-1"
-                        :class="creating ? 'fa-spin fa-redo' : 'fa-plus'"
+                        :class="
+                            creating ? 'fa-spin fa-spinner faster' : 'fa-plus'
+                        "
                     ></i>
                     <span class="hidden md:inline-block"> إنشاء </span>
                 </button>
@@ -83,7 +87,7 @@
             </div>
 
             <!-- footer -->
-            <div class="flex items-center flex-wrap text-white">
+            <div class="flex items-center flex-wrap text-white rounded-2xl">
                 <button
                     class="
                         px-3
@@ -94,13 +98,16 @@
                         transition
                         hover:bg-indigo-600
                         dark:hover:bg-indigo-700
+                        rounded-br-2xl
                     "
                     type="button"
                     @click.prevent="createBackup"
                 >
                     <i
                         class="fas text-xl mx-1"
-                        :class="creating ? 'fa-spin fa-redo' : 'fa-plus'"
+                        :class="
+                            creating ? 'fa-spin fa-spinner faster' : 'fa-plus'
+                        "
                     ></i>
                     إنشاء نسخة
                 </button>
@@ -114,22 +121,42 @@
                         transition
                         hover:bg-yellow-600
                         dark:hover:bg-yellow-700
+                        rounded-bl-2xl
+                    "
+                    @click.prevent="
+                        $refs.fileInput.value = null;
+                        $refs.fileInput.click();
                     "
                 >
                     <i
                         class="fas text-xl mx-1"
-                        :class="uploading ? 'fa-spin fa-redo' : 'fa-upload'"
+                        :class="
+                            uploading
+                                ? 'faster fa-spin fa-spinner'
+                                : 'fa-upload'
+                        "
                     ></i>
                     إسترجاع
                 </button>
             </div>
         </div>
     </div>
+
+    <form @submit.prevent="">
+        <input
+            ref="fileInput"
+            type="file"
+            name="sql"
+            class="invisible"
+            @change="uploadFile"
+        />
+    </form>
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { Options, Vue } from "vue-class-component";
+import axios from "axios";
+import { DateTime } from "luxon";
 
 class Props {
     props: {} = {};
@@ -160,10 +187,59 @@ export default class Stats extends Vue.with(Props) {
         this.alert();
 
         this.hasBackup = true;
-        this.fileName = res.data.file_name.replace('.zip', '');
+        this.fileName = res.data.file_name.replace(".zip", "");
         this.creating = false;
-        this.diff = 'الآن';
-        this.latestDate = 'الآن';
+        this.diff = "الآن";
+        this.latestDate = "الآن";
+    }
+
+    async uploadFile(ev: any) {
+        // console.log(ev.target.files);
+        if (!ev.target.files.length) {
+            return;
+        }
+
+        const file: File = ev.target.files[0];
+
+        let lastModified = DateTime.fromMillis(file.lastModified).setLocale(
+            "ar-EG"
+        );
+
+        // @ts-ignore
+        const conf = await this.confirm(
+            "هل أنت متأكد ؟ \n هذا الملف منذ \n" +
+                `<span class='bg-blue-500 font-semibold rounded mt-3 text-white px-2'>${lastModified.toFormat(
+                    "dd-LLL-yyyy h:ma"
+                )}</span>`
+        );
+
+        if (!conf.isConfirmed) return;
+
+        // begin uploading
+        this.uploading = true;
+
+        const formData = new FormData();
+        formData.append("sql", file);
+
+        const res = await axios.post("/settings/restore-db", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        if (!res || !res.data || !res.data.done) {
+            this.uploading = false;
+            // @ts-ignore
+            this.error();
+
+            return;
+        }
+
+        this.uploading = false;
+        // @ts-ignore
+        this.alert();
+
+        window.location.reload();
     }
 
     mounted() {
