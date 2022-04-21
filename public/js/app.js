@@ -20791,6 +20791,29 @@ function (_super) {
     (0,jenesius_vue_modal__WEBPACK_IMPORTED_MODULE_0__.closeModal)();
   };
 
+  ProductFilter.prototype.mounted = function () {
+    this.query = new URLSearchParams(window.location.search);
+
+    if (this.query.has("sellPrice[to]")) {
+      this.sellPrice = {
+        from: parseFloat(this.query.get("sellPrice[from]") || '0'),
+        to: parseFloat(this.query.get("sellPrice[to]") || '0')
+      };
+      this.buyPrice = {
+        from: parseFloat(this.query.get("buyPrice[from]") || '0'),
+        to: parseFloat(this.query.get("buyPrice[to]") || '0')
+      };
+      this.amount = {
+        from: parseFloat(this.query.get("amount[from]") || '0'),
+        to: parseFloat(this.query.get("amount[to]") || '0')
+      };
+      this.soldAmount = {
+        from: parseFloat(this.query.get("soldAmount[from]") || '0'),
+        to: parseFloat(this.query.get("soldAmount[to]") || '0')
+      };
+    }
+  };
+
   ProductFilter = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_2__.Options)({
     components: {}
   })], ProductFilter);

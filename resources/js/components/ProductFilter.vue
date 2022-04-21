@@ -576,5 +576,31 @@ export default class ProductFilter extends Vue {
         this.reset();
         closeModal();
     }
+
+    mounted() {
+        this.query = new URLSearchParams(window.location.search);        
+
+        if (this.query.has("sellPrice[to]")) {
+            this.sellPrice = {
+                from: parseFloat(this.query.get("sellPrice[from]") as string || '0'),
+                to: parseFloat(this.query.get("sellPrice[to]") as string || '0'),
+            };
+
+            this.buyPrice = {
+                from: parseFloat(this.query.get("buyPrice[from]") as string || '0'),
+                to: parseFloat(this.query.get("buyPrice[to]") as string || '0'),
+            };
+
+            this.amount = {
+                from: parseFloat(this.query.get("amount[from]") as string || '0'),
+                to: parseFloat(this.query.get("amount[to]") as string || '0'),
+            };
+            
+            this.soldAmount = {
+                from: parseFloat(this.query.get("soldAmount[from]") as string || '0'),
+                to: parseFloat(this.query.get("soldAmount[to]") as string || '0'),
+            };
+        }
+    }
 }
 </script>
