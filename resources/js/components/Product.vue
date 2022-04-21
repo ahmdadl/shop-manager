@@ -98,7 +98,31 @@
                             noResults:
                                 'py-2 px-3 text-gray-600 bg-white dark:text-gray-100 dark:bg-gray-700',
                         }"
-                    />
+                    >
+                        <template v-slot:singlelabel="{ value }">
+                            <div class="multiselect-single-label">
+                                <span class="character-label-icon">
+                                    {{ value.title }}</span
+                                >
+                            </div>
+                        </template>
+
+                        <template v-slot:option="{ option }">
+                            <span
+                                class="
+                                    p-1
+                                    ml-2
+                                    font-semibold
+                                    text-white
+                                    bg-red-600
+                                    rounded
+                                "
+                            >
+                                {{ option.amount }}
+                            </span>
+                            {{ option.title }}
+                        </template>
+                    </Multiselect>
                 </div>
                 <div v-else>
                     <div
