@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
@@ -49,7 +50,7 @@ Route::get("/backup-download/{fileName}", [
     SettingController::class,
     "download",
 ]);
+Route::post("/settings/backup-db", [SettingController::class, "backup"]);
+Route::post("/settings/restore-db", [SettingController::class, "restore"]);
 
-
-Route::post('/settings/backup-db', [SettingController::class, 'backup']);
-Route::post('/settings/restore-db', [SettingController::class, 'restore']);
+Route::get("/{category}", [CategoryController::class, "productIndex"]);

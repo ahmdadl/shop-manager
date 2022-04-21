@@ -234,7 +234,8 @@
                 >
                     <div class="relative w-full h-full max-h-full md:w-2/5">
                         <div class="absolute top-0 right-0 z-10">
-                            <div
+                            <Link
+                                :href="`/${c.slug}`"
                                 class="
                                     relative
                                     px-2
@@ -243,12 +244,14 @@
                                     font-normal
                                     leading-relaxed
                                     text-gray-100
-                                    bg-red-900 bg-opacity-75
+                                    bg-red-900
+                                    hover:bg-opacity-100
+                                    bg-opacity-75
                                     rounded-tr-sm
                                 "
                             >
                                 {{ money(c.products_count) || 0 }}
-                            </div>
+                            </Link>
                             <div v-if="editMode">
                                 <button
                                     class="
