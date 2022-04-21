@@ -248,9 +248,12 @@
                                     hover:bg-opacity-100
                                     bg-opacity-75
                                     rounded-tr-sm
+                                    has-anime
                                 "
                             >
-                                {{ money(c.products_count) || 0 }}
+                                <span>
+                                    {{ money(c.products_count) || 0 }}
+                                </span>
                             </Link>
                             <div v-if="editMode">
                                 <button

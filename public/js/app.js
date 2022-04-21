@@ -21206,10 +21206,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, ["prevent"])
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
           href: "/" + c.slug,
-          "class": "relative px-2 py-1 text-base font-normal leading-relaxed text-gray-100 bg-red-900 hover:bg-opacity-100 bg-opacity-75 rounded-tr-sm"
+          "class": "relative px-2 py-1 text-base font-normal leading-relaxed text-gray-100 bg-red-900 hover:bg-opacity-100 bg-opacity-75 rounded-tr-sm has-anime"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.money(c.products_count) || 0), 1
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.money(c.products_count) || 0), 1
             /* TEXT */
             )];
           }),
