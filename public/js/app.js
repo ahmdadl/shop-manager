@@ -19376,6 +19376,8 @@ function (_super) {
     // @ts-ignore
 
     this.emitter.on("add-category", function (category) {
+      category.products_count = 0;
+
       _this.allCategories.unshift(category);
 
       _this.selectedCats.unshift(category);
@@ -19582,6 +19584,7 @@ function (_super) {
   Object.defineProperty(Report.prototype, "amountSum", {
     get: function get() {
       return this.sales.reduce(function (p, c) {
+        if (c.type === "sell") return p -= c.amount;
         return p += c.amount;
       }, 0);
     },
@@ -21311,7 +21314,7 @@ var _hoisted_21 = {
 
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "w-1/12 text-center"
-}, "المجموع", -1
+}, "الإجمالى", -1
 /* HOISTED */
 );
 

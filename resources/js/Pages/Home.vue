@@ -4,14 +4,33 @@
             <div class="flex justify-center w-full px-3 py-1 mx-2" dir="rtl">
                 <div class="w-3/6">
                     <button
-                        class="inline px-2 py-1 m-1 text-white bg-green-500 rounded hover:bg-green-700 dark:bg-green-900 dark:hover:bg-green-700"
+                        class="
+                            inline
+                            px-2
+                            py-1
+                            m-1
+                            text-white
+                            bg-green-500
+                            rounded
+                            hover:bg-green-700
+                            dark:bg-green-900 dark:hover:bg-green-700
+                        "
                         @click.prevent="categoryForm"
                     >
                         <i class="mx-1 fas fa-plus"></i>
                         <span class="hidden md:inline-block"> إضافة </span>
                     </button>
                     <button
-                        class="inline px-2 py-1 text-white bg-yellow-500 rounded hover:bg-yellow-700 dark:bg-yellow-900 dark:hover:bg-yellow-700"
+                        class="
+                            inline
+                            px-2
+                            py-1
+                            text-white
+                            bg-yellow-500
+                            rounded
+                            hover:bg-yellow-700
+                            dark:bg-yellow-900 dark:hover:bg-yellow-700
+                        "
                         @click.prevent="editMode = !editMode"
                     >
                         <i
@@ -26,7 +45,17 @@
 
                     <!-- sales info -->
                     <button
-                        class="inline px-2 py-1 m-1 text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-900 dark:hover:bg-blue-700"
+                        class="
+                            inline
+                            px-2
+                            py-1
+                            m-1
+                            text-white
+                            bg-blue-500
+                            rounded
+                            hover:bg-blue-700
+                            dark:bg-blue-900 dark:hover:bg-blue-700
+                        "
                         @click.prevent="salesInfo"
                     >
                         <i class="mx-1 fas fa-dollar-sign"></i>
@@ -35,7 +64,17 @@
 
                     <!-- low products amount -->
                     <button
-                        class="inline px-2 py-1 m-1 text-white bg-indigo-500 rounded hover:bg-indigo-700 dark:bg-indigo-900 dark:hover:bg-indigo-700"
+                        class="
+                            inline
+                            px-2
+                            py-1
+                            m-1
+                            text-white
+                            bg-indigo-500
+                            rounded
+                            hover:bg-indigo-700
+                            dark:bg-indigo-900 dark:hover:bg-indigo-700
+                        "
                         @click.prevent="infoTable"
                     >
                         <i class="mx-1 fas fa-info"></i>
@@ -76,7 +115,16 @@
                     </template>
 
                     <template v-slot:option="{ option }">
-                        <span class="p-1 ml-2 font-semibold text-white bg-red-600 rounded">
+                        <span
+                            class="
+                                p-1
+                                ml-2
+                                font-semibold
+                                text-white
+                                bg-red-600
+                                rounded
+                            "
+                        >
                             {{ option.pcount }}
                         </span>
                         {{ option.label }}
@@ -84,7 +132,19 @@
                 </Multiselect>
                 <div class="w-1/6">
                     <button
-                        class="p-2 mx-1 font-bold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed"
+                        class="
+                            p-2
+                            mx-1
+                            font-bold
+                            text-white
+                            bg-red-500
+                            rounded
+                            hover:bg-red-700
+                            dark:bg-red-800 dark:hover:bg-red-600
+                            disabled:bg-red-300 disabled:text-red-700
+                            dark:disabled:bg-red-500
+                            disabled:hover:cursor-not-allowed
+                        "
                         @click="resetSearch"
                         :disabled="selectedCats.length === allCategories.length"
                     >
@@ -97,11 +157,26 @@
             <!-- show alert if no categories -->
             <div class="flex items-center justify-center w-full">
                 <div v-if="!selectedCats.length" class="m-2">
-                    <div class='text-center p-5'>
-                        <i class='fas fa-7x fa-exclamation  text-gray-400 dark:text-gray-700'></i>
+                    <div class="text-center p-5">
+                        <i
+                            class="
+                                fas
+                                fa-7x fa-exclamation
+                                text-gray-400
+                                dark:text-gray-700
+                            "
+                        ></i>
                     </div>
                     <div
-                        class="flex max-w-sm mb-4 bg-yellow-200 border rounded dark:bg-yellow-600"
+                        class="
+                            flex
+                            max-w-sm
+                            mb-4
+                            bg-yellow-200
+                            border
+                            rounded
+                            dark:bg-yellow-600
+                        "
                     >
                         <div class="w-16 bg-yellow-500 dark:bg-yellow-400">
                             <div class="p-4">
@@ -131,7 +206,24 @@
 
             <div class="grid grid-cols-2 md:grid-cols-5 gap-x-3 gap-y-5">
                 <div
-                    class="flex flex-col w-full overflow-hidden transition duration-200 ease-linear bg-white rounded-lg cursor-pointer dark:text-white dark:bg-gray-800 h-28 sahdow-lg md:flex-row hover:bg-green-700 hover:text-white group dark:hover:bg-green-700"
+                    class="
+                        flex flex-col
+                        w-full
+                        overflow-hidden
+                        transition
+                        duration-200
+                        ease-linear
+                        bg-white
+                        rounded-lg
+                        cursor-pointer
+                        dark:text-white dark:bg-gray-800
+                        h-28
+                        sahdow-lg
+                        md:flex-row
+                        hover:bg-green-700 hover:text-white
+                        group
+                        dark:hover:bg-green-700
+                    "
                     :class="{
                         'border border-green-900 bg-green-900 dark:bg-green-900':
                             selectedCat.slug === c.slug,
@@ -143,13 +235,33 @@
                     <div class="relative w-full h-full max-h-full md:w-2/5">
                         <div class="absolute top-0 right-0 z-10">
                             <div
-                                class="relative px-2 py-1 text-base font-normal leading-relaxed text-gray-100 bg-red-900 bg-opacity-75 rounded-tr-sm "
+                                class="
+                                    relative
+                                    px-2
+                                    py-1
+                                    text-base
+                                    font-normal
+                                    leading-relaxed
+                                    text-gray-100
+                                    bg-red-900 bg-opacity-75
+                                    rounded-tr-sm
+                                "
                             >
                                 {{ money(c.products_count) || 0 }}
                             </div>
                             <div v-if="editMode">
                                 <button
-                                    class="block px-2 py-1 my-1 text-white bg-blue-400 hover:bg-blue-600 dark:bg-blue-800 dark:hover:bg-blue-600 bg-opacity-80"
+                                    class="
+                                        block
+                                        px-2
+                                        py-1
+                                        my-1
+                                        text-white
+                                        bg-blue-400
+                                        hover:bg-blue-600
+                                        dark:bg-blue-800 dark:hover:bg-blue-600
+                                        bg-opacity-80
+                                    "
                                     @click.prevent="
                                         categoryForm(c.slug, c.title, c.img)
                                     "
@@ -157,7 +269,17 @@
                                     <i class="mx-1 fas fa-edit"></i>
                                 </button>
                                 <button
-                                    class="block px-2 py-1 pl-3 text-white bg-red-400 hover:bg-red-600 dark:bg-red-800 dark:hover:bg-red-600 bg-opacity-80"
+                                    class="
+                                        block
+                                        px-2
+                                        py-1
+                                        pl-3
+                                        text-white
+                                        bg-red-400
+                                        hover:bg-red-600
+                                        dark:bg-red-800 dark:hover:bg-red-600
+                                        bg-opacity-80
+                                    "
                                     @click.prevent="remove(c.slug)"
                                 >
                                     <i
@@ -169,7 +291,12 @@
                             </div>
                         </div>
                         <img
-                            class="object-fill object-center w-full h-1 md:h-full"
+                            class="
+                                object-fill object-center
+                                w-full
+                                h-1
+                                md:h-full
+                            "
                             :src="`/storage/${
                                 c.img || 'categories/default.jpg'
                             }`"
@@ -180,7 +307,12 @@
                         class="w-full p-4 space-y-2 text-right md:w-3/5 md:p-1"
                     >
                         <div
-                            class="text-sm font-bold text-gray-700 dark:text-gray-200"
+                            class="
+                                text-sm
+                                font-bold
+                                text-gray-700
+                                dark:text-gray-200
+                            "
                             dir="rtl"
                         >
                             <h1
@@ -197,7 +329,15 @@
             </div>
         </div>
         <div
-            class="py-2 pr-1 text-white bg-blue-900 border-t border-gray-800 dark:border-gray-500 h-1/2"
+            class="
+                py-2
+                pr-1
+                text-white
+                bg-blue-900
+                border-t border-gray-800
+                dark:border-gray-500
+                h-1/2
+            "
         >
             <Product />
         </div>
@@ -320,6 +460,7 @@ export default class Home extends Vue {
         // add newly created category to categories list
         // @ts-ignore
         this.emitter.on("add-category", (category: Category) => {
+            category.products_count = 0;
             this.allCategories.unshift(category);
             this.selectedCats.unshift(category);
         });

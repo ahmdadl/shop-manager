@@ -232,7 +232,7 @@
                     dark:hover:bg-gray-700 dark:bg-green-800
                 "
             >
-                <div class="w-1/12 text-center">المجموع</div>
+                <div class="w-1/12 text-center">الإجمالى</div>
                 <div class="w-2/12 font-bold text-center">-----</div>
                 <div class="w-5/12 font-bold text-center">-----</div>
                 <div class="w-1/12 font-bold text-center" dir="ltr">
@@ -351,7 +351,11 @@ export default class Report extends Vue {
     }
 
     get amountSum(): number {
-        return this.sales.reduce((p, c) => (p += c.amount), 0);
+        return this.sales.reduce((p, c) => {
+            if (c.type === "sell") return (p -= c.amount);
+
+            return (p += c.amount);
+        }, 0);
     }
 
     get priceSum(): number {
