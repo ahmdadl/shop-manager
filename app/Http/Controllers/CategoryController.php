@@ -32,16 +32,16 @@ class CategoryController extends Controller
             // sellPrice range
             if ($req->sellPrice["from"] || $req->sellPrice["to"]) {
                 $products->whereBetween("sell_price", [
-                    (int) $req->sellPrice["from"],
-                    (int) $req->sellPrice["to"],
+                    (double) $req->sellPrice["from"],
+                    (double) $req->sellPrice["to"],
                 ]);
             }
 
             // buyPrice range
             if ($req->buyPrice["from"] || $req->buyPrice["to"]) {
                 $products->whereBetween("buy_price", [
-                    (int) $req->buyPrice["from"],
-                    (int) $req->buyPrice["to"],
+                    (double) $req->buyPrice["from"],
+                    (double) $req->buyPrice["to"],
                 ]);
             }
 

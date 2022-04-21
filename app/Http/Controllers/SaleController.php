@@ -60,8 +60,8 @@ class SaleController extends Controller
             // price range
             if ($req->price["from"] || $req->price["to"]) {
                 $sales->whereBetween("total", [
-                    (int) $req->price["from"],
-                    (int) $req->price["to"],
+                    (double) $req->price["from"],
+                    (double) $req->price["to"],
                 ]);
             }
 
