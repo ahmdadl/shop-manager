@@ -130,17 +130,49 @@
                 :filter-data="filterData"
             />
         </div>
+
+        <!-- filters -->
+        <div class="flex my-2">
+            <Modal />
+        </div>
     </app-layout>
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { ProductInterface } from "../interfaces";
 import Pagination from "../components/Pagination.vue";
+import { openModal, container, closeModal } from "jenesius-vue-modal";
+import ProductFilter from "../components/ProductFilter.vue";
+import { Inertia } from "@inertiajs/inertia";
 
-@Options({ components: { Pagination } })
+@Options({ components: { Pagination, Modal: container } })
 export default class ProductIndex extends Vue {
     products: ProductInterface[] = [];
     filterData = {};
+
+    showFilters() {
+        // @ts-ignore
+        if (!this.products.data.length) return;
+
+        closeModal();
+
+        openModal(ProductFilter);
+    }
+
+    async filter(
+        sellPrice: Range,
+        buyPrice: Range,
+        amount: Range,
+        soldAmount: Range
+    ) {
+        const data = { sellPrice, buyPrice, amount, soldAmount };
+        this.filterData = data;
+
+        await Inertia.visit(`/c/${this.$page.props.category_slug}`, {
+            // @ts-ignore
+            data,
+        });
+    }
 
     mounted() {
         this.products = this.$page.props["products"] as ProductInterface[];
@@ -158,6 +190,17 @@ export default class ProductIndex extends Vue {
             // @ts-ignore
             delete this.filterData.page;
         }
+
+        // @ts-ignore
+        this.emitter.on("openFiltersCategory", () => this.showFilters());
+
+        // @ts-ignore
+        this.emitter.on(
+            "filter-products",
+            ({ sellPrice, buyPrice, amount, soldAmount }) => {
+                this.filter(sellPrice, buyPrice, amount, soldAmount);
+            }
+        );
     }
 }
 </script>

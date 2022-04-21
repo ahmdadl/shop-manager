@@ -186,7 +186,7 @@
 
                             <!-- reports filter button -->
                             <li
-                                v-if="reportsPage"
+                                v-if="hasFilter('/c/') || hasFilter('/reports')"
                                 class="
                                     flex
                                     items-center
@@ -202,7 +202,11 @@
                                     hover:bg-yellow-700
                                     dark:bg-yellow-800 dark:hover:bg-yellow-600
                                 "
-                                @click.prevent="openFilters"
+                                @click.prevent="
+                                    openFilters(
+                                        hasFilter('/c/') ? 'Category' : 'Report'
+                                    )
+                                "
                             >
                                 <i class="fas fa-filter"></i>
                             </li>
@@ -246,14 +250,13 @@ export default defineComponent({
             );
         },
 
-        openFilters() {
+        openFilters(page) {
             // @ts-ignore
-            this.emitter.emit("openFilters");
+            this.emitter.emit(`openFilters${page}`);
         },
-    },
-    computed: {
-        reportsPage() {
-            return location.pathname.indexOf("/reports") > -1;
+
+        hasFilter(page) {
+            return location.pathname.indexOf(page) > -1;
         },
     },
     mounted() {

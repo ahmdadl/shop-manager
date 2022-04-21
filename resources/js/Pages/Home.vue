@@ -235,7 +235,7 @@
                     <div class="relative w-full h-full max-h-full md:w-2/5">
                         <div class="absolute top-0 right-0 z-10">
                             <Link
-                                :href="`/${c.slug}`"
+                                :href="`/c/${c.slug}`"
                                 class="
                                     relative
                                     px-2

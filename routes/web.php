@@ -53,4 +53,4 @@ Route::get("/backup-download/{fileName}", [
 Route::post("/settings/backup-db", [SettingController::class, "backup"]);
 Route::post("/settings/restore-db", [SettingController::class, "restore"]);
 
-Route::get("/{category}", [CategoryController::class, "productIndex"]);
+Route::get("/c/{category}", [CategoryController::class, "productIndex"]);

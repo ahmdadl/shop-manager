@@ -35,85 +35,19 @@
             </div>
         </div>
 
-        <div class="flex flex-col px-3 py-5 space-y-5">
-            <div dir="ltr">
-                <Datepicker
-                    v-model="date"
-                    cancelText="إلغاء"
-                    selectText="تأكيد"
-                    placeholder="إختر التاريخ"
-                    :enableTimePicker="false"
-                    :format="formatDate"
-                    range
-                ></Datepicker>
-            </div>
-
-            <!-- category select -->
-            <Multiselect
-                ref="mst"
-                v-model="categorySlug"
-                :options="categories"
-                :searchable="true"
-                placeholder="أختر صنف"
-                noResultsText="لا يوجد"
-                noOptionsText="القائمة فارعة"
-                :filterResults="true"
-                :delay="-1"
-                @select="loadProducts"
-                valueProp="slug"
-                label="title"
-                trackBy="title"
-                :classes="{
-                    search: 'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3.5 dark:bg-gray-600 text-gray-900 dark:text-white',
-                    option: 'flex items-center justify-start box-border text-right cursor-pointer text-base leading-snug py-2 px-3 dark:bg-gray-600 dark:hover:bg-blue-900 text-gray-900 dark:text-gray-100',
-                    optionPointed:
-                        'text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-blue-900',
-                    optionSelected: 'text-white bg-blue-500 dark:bg-blue-900',
-                    noOptions:
-                        'py-2 px-3 text-gray-600 bg-white dark:text-gray-100 dark:bg-gray-700',
-                    noResults:
-                        'py-2 px-3 text-gray-600 bg-white dark:text-gray-100 dark:bg-gray-700',
-                }"
-            />
-
-            <!-- product select -->
-            <Multiselect
-                ref="prst"
-                v-model="productSlug"
-                :options="products"
-                :searchable="true"
-                placeholder="أختر صنف"
-                noResultsText="لا يوجد"
-                noOptionsText="القائمة فارعة"
-                :filterResults="true"
-                :delay="-1"
-                valueProp="slug"
-                label="title"
-                trackBy="title"
-                :classes="{
-                    search: 'w-full absolute inset-0 outline-none appearance-none box-border border-0 text-base font-sans bg-white rounded pl-3.5 dark:bg-gray-600 text-gray-900 dark:text-white',
-                    option: 'flex items-center justify-start box-border text-right cursor-pointer text-base leading-snug py-2 px-3 dark:bg-gray-600 dark:hover:bg-blue-900 text-gray-900 dark:text-gray-100',
-                    optionPointed:
-                        'text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-blue-900',
-                    optionSelected: 'text-white bg-blue-500 dark:bg-blue-900',
-                    noOptions:
-                        'py-2 px-3 text-gray-600 bg-white dark:text-gray-100 dark:bg-gray-700',
-                    noResults:
-                        'py-2 px-3 text-gray-600 bg-white dark:text-gray-100 dark:bg-gray-700',
-                }"
-            />
-
-            <!-- price range -->
-            <div class="flex space-x-2">
+        <div class="py-3 px-2">
+            <!-- amount range -->
+            <div class="flex space-x-2 py-3">
                 <div class="w-1/6">
                     <h3
                         class="text-lg font-semibold"
                         :class="{
                             'text-red-700 dark:text-red-400':
-                                price.to < price.from || price.from > price.to,
+                                amount.to < amount.from ||
+                                amount.from > amount.to,
                         }"
                     >
-                        السعر
+                        الكمية
                     </h3>
                 </div>
                 <!-- from -->
@@ -153,9 +87,9 @@
                                     dark:placeholder-gray-200
                                 "
                                 placeholder="من"
-                                v-model="price.from"
+                                v-model="amount.from"
                                 min="0"
-                                :max="price.to - 1"
+                                :max="amount.to - 1"
                             />
                         </div>
                     </div>
@@ -198,26 +132,26 @@
                                     dark:placeholder-gray-200
                                 "
                                 placeholder="إلى"
-                                v-model="price.to"
-                                :min="price.from"
+                                v-model="amount.to"
+                                :min="amount.from"
                             />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- amount range -->
-            <div class="flex space-x-2">
+            <!-- soldAmount range -->
+            <div class="flex space-x-2 py-3">
                 <div class="w-1/6">
                     <h3
                         class="text-lg font-semibold"
                         :class="{
                             'text-red-700 dark:text-red-400':
-                                amount.to < amount.from ||
-                                amount.from > amount.to,
+                                soldAmount.to < soldAmount.from ||
+                                soldAmount.from > soldAmount.to,
                         }"
                     >
-                        الكمية
+                        الكمية المباعة
                     </h3>
                 </div>
                 <!-- from -->
@@ -240,7 +174,7 @@
                         </div>
                         <div class="w-10/12 rounded-l-xl">
                             <input
-                                id="amountFrom"
+                                id="priceFrom"
                                 type="number"
                                 class="
                                     flex
@@ -257,13 +191,14 @@
                                     dark:placeholder-gray-200
                                 "
                                 placeholder="من"
-                                v-model="amount.from"
+                                v-model="soldAmount.from"
                                 min="0"
-                                :max="amount.to - 1"
+                                :max="soldAmount.to - 1"
                             />
                         </div>
                     </div>
                 </div>
+
                 <!-- to -->
                 <div class="w-2/6">
                     <div
@@ -284,7 +219,7 @@
                         </div>
                         <div class="w-10/12 rounded-l-xl">
                             <input
-                                id="amountTo"
+                                id="priceTo"
                                 type="number"
                                 class="
                                     flex
@@ -301,8 +236,218 @@
                                     dark:placeholder-gray-200
                                 "
                                 placeholder="إلى"
-                                v-model="amount.to"
-                                :min="amount.from"
+                                v-model="soldAmount.to"
+                                :min="soldAmount.from"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="mx-auto w-3/4 my-3 pt-1 border-gray-500 rounded-2xl" />
+
+            <!-- sellPrice range -->
+            <div class="flex space-x-2 py-3">
+                <div class="w-1/6">
+                    <h3
+                        class="text-lg font-semibold"
+                        :class="{
+                            'text-red-700 dark:text-red-400':
+                                sellPrice.to < sellPrice.from ||
+                                sellPrice.from > sellPrice.to,
+                        }"
+                    >
+                        سعر البيع
+                    </h3>
+                </div>
+                <!-- from -->
+                <div class="w-2/6">
+                    <div
+                        class="flex w-full h-10 border border-blue-200 rounded"
+                    >
+                        <div
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
+                        >
+                            <i class="mx-auto fas fa-greater-than"></i>
+                        </div>
+                        <div class="w-10/12 rounded-l-xl">
+                            <input
+                                id="priceFrom"
+                                type="number"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
+                                placeholder="من"
+                                v-model="sellPrice.from"
+                                min="0"
+                                :max="sellPrice.to - 1"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- to -->
+                <div class="w-2/6">
+                    <div
+                        class="flex w-full h-10 border border-blue-200 rounded"
+                    >
+                        <div
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
+                        >
+                            <i class="mx-auto fas fa-less-than"></i>
+                        </div>
+                        <div class="w-10/12 rounded-l-xl">
+                            <input
+                                id="priceTo"
+                                type="number"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
+                                placeholder="إلى"
+                                v-model="sellPrice.to"
+                                :min="sellPrice.from"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- buy Price range -->
+            <div class="flex space-x-2 py-3">
+                <div class="w-1/6">
+                    <h3
+                        class="text-lg font-semibold"
+                        :class="{
+                            'text-red-700 dark:text-red-400':
+                                buyPrice.to < buyPrice.from ||
+                                buyPrice.from > buyPrice.to,
+                        }"
+                    >
+                        سعر الشراء
+                    </h3>
+                </div>
+                <!-- from -->
+                <div class="w-2/6">
+                    <div
+                        class="flex w-full h-10 border border-blue-200 rounded"
+                    >
+                        <div
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
+                        >
+                            <i class="mx-auto fas fa-greater-than"></i>
+                        </div>
+                        <div class="w-10/12 rounded-l-xl">
+                            <input
+                                id="buyPriceFrom"
+                                type="number"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
+                                placeholder="من"
+                                v-model="buyPrice.from"
+                                min="0"
+                                :max="buyPrice.to - 1"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- to -->
+                <div class="w-2/6">
+                    <div
+                        class="flex w-full h-10 border border-blue-200 rounded"
+                    >
+                        <div
+                            class="
+                                flex
+                                items-center
+                                w-2/12
+                                h-full
+                                bg-gray-300
+                                rounded-r
+                                dark:bg-blue-900
+                            "
+                        >
+                            <i class="mx-auto fas fa-less-than"></i>
+                        </div>
+                        <div class="w-10/12 rounded-l-xl">
+                            <input
+                                id="buyPriceTo"
+                                type="number"
+                                class="
+                                    flex
+                                    items-center
+                                    w-full
+                                    h-full
+                                    px-1
+                                    bg-gray-200
+                                    rounded-l
+                                    focus:outline-none focus:bg-white
+                                    dark:bg-gray-800
+                                    dark:focus:bg-gray-700
+                                    dark:text-white
+                                    dark:placeholder-gray-200
+                                "
+                                placeholder="إلى"
+                                v-model="buyPrice.to"
+                                :min="buyPrice.from"
                             />
                         </div>
                     </div>
@@ -310,6 +455,7 @@
             </div>
         </div>
 
+        <!-- footer -->
         <div
             class="
                 flex
@@ -354,10 +500,7 @@
                 "
                 @click.prevent="save"
                 :disabled="
-                    price.to < price.from ||
-                    price.from > price.to ||
-                    amount.to < amount.from ||
-                    amount.from > amount.to
+                    false
                 "
             >
                 <i class="mx-1 fas fa-save" v-if="!saving"></i>
@@ -368,29 +511,27 @@
     </div>
 </template>
 <script lang="ts">
+import { Options, Vue } from "vue-class-component";
 import axios from "axios";
 import { closeModal } from "jenesius-vue-modal";
-import { DateTime } from "luxon";
-import { Options, Vue } from "vue-class-component";
-import Datepicker from "vue3-date-time-picker";
-import { Category, ProductInterface, Range } from "../interfaces";
+import { Range } from "../interfaces";
 
-class Props {
-    categories: Category[] = [];
-}
-
-@Options({ components: { Datepicker } })
-export default class Filter extends Vue.with(Props) {
-    date: string[] = [];
-    saving = false;
-    categorySlug = "";
-    productSlug = "";
-    products: ProductInterface[] = [];
-    price: Range = {
+@Options({ components: {} })
+export default class ProductFilter extends Vue {
+    saving: boolean = false;
+    sellPrice: Range = {
+        from: null,
+        to: null,
+    };
+    buyPrice: Range = {
         from: null,
         to: null,
     };
     amount: Range = {
+        from: null,
+        to: null,
+    };
+    soldAmount: Range = {
         from: null,
         to: null,
     };
@@ -405,10 +546,11 @@ export default class Filter extends Vue.with(Props) {
 
     reset() {
         this.saving = false;
-        this.categorySlug = "";
-        this.productSlug = "";
-        this.products = [];
-        this.price = {
+        this.sellPrice = {
+            from: null,
+            to: null,
+        };
+        this.buyPrice = {
             from: null,
             to: null,
         };
@@ -416,88 +558,23 @@ export default class Filter extends Vue.with(Props) {
             from: null,
             to: null,
         };
+        this.soldAmount = {
+            from: null,
+            to: null,
+        };
     }
 
-    save() {        
-        const date = {
-            // @ts-ignore
-            from: DateTime.fromJSDate(this.date[0]).toISO(),
-            // @ts-ignore
-            to: DateTime.fromJSDate(this.date[1]).toISO(),
-        };
+    save() {
         // @ts-ignore
-        this.emitter.emit("filter-data", {
-            date,
-            categorySlug: this.categorySlug,
-            productSlug: this.productSlug,
-            price: this.price,
+        this.emitter.emit("filter-products", {
+            sellPrice: this.sellPrice,
+            buyPrice: this.buyPrice,
             amount: this.amount,
+            soldAmount: this.soldAmount,
         });
 
         this.reset();
         closeModal();
     }
-
-    async loadProducts() {
-        if (this.saving || !this.categorySlug.length) return;
-
-        this.saving = true;
-
-        const res = await axios.get(`/categories/${this.categorySlug}`);
-
-        this.saving = false;
-
-        if (!res || !res.data) {
-            // @ts-ignore
-            this.toast();
-            return;
-        }
-
-        this.products = [...res.data];
-    }
-
-    formatDate(date: Date[]) {
-        return (
-            DateTime.fromJSDate(date[0])
-                .setLocale("ar")
-                .toLocaleString(DateTime.DATE_MED) +
-            " - " +
-            DateTime.fromJSDate(date[1])
-                .setLocale("ar")
-                .toLocaleString(DateTime.DATE_MED)
-        );
-    }
-
-    async mounted() {
-        this.query = new URLSearchParams(window.location.search);
-
-        if (this.query.has("productSlug")) {
-            this.price = {
-                from: parseFloat(this.query.get("price[from]") as string || '0'),
-                to: parseFloat(this.query.get("price[to]") as string || '0'),
-            };
-
-            this.amount = {
-                from: parseFloat(this.query.get("amount[from]") as string || '0'),
-                to: parseFloat(this.query.get("amount[to]") as string || '0'),
-            };            
-
-            this.categorySlug = this.query.get('categorySlug') as string;
-
-            if (this.categorySlug.length) {
-                // load this category products
-                await this.loadProducts();
-            }
-
-            this.productSlug = this.query.get('productSlug') as string;
-            
-            this.date = [this.query.get('date[from]') as string, this.query.get('date[to]') as string];            
-        }
-    }
 }
 </script>
-<style>
-.modal-container {
-    align-items: unset !important;
-}
-</style>

@@ -289,19 +289,6 @@ export default class Report extends Vue {
         price: { from: number; to: number },
         amount: { from: number; to: number }
     ) {
-        // no data supplied
-        if (
-            !date.from &&
-            !categorySlug &&
-            !productSlug &&
-            !price.from &&
-            !price.to &&
-            !amount.from &&
-            !amount.to
-        ) {
-            // return unfiltered data
-        }
-
         const data = { date, categorySlug, productSlug, price, amount };
         this.filterData = data;
 
@@ -393,7 +380,7 @@ export default class Report extends Vue {
         }
 
         // @ts-ignore
-        this.emitter.on("openFilters", () => this.showFilters());
+        this.emitter.on("openFiltersReport", () => this.showFilters());
 
         // @ts-ignore
         this.emitter.on(

@@ -28,17 +28,17 @@ export interface ProductInterface {
 export const emptyProduct: ProductInterface = {
     id: 0,
     category: emptyCategory,
-    title: '',
-    slug: '',
+    title: "",
+    slug: "",
     img: undefined,
     amount: 1,
     sell_price: 1,
     buy_price: 1,
-}
+};
 
 export interface Sale {
     id: number;
-    type: 'sell' | 'buy';
+    type: "sell" | "buy";
     amount: number;
     total: number;
     updated_at: string;
@@ -47,9 +47,14 @@ export interface Sale {
 
 export const emptySale: Sale = {
     id: 0,
-    type: 'sell',
+    type: "sell",
     amount: 0,
     total: 0,
-    updated_at: '',
+    updated_at: "",
     product: emptyProduct,
+};
+
+export interface Range {
+    from: number | null;
+    to: number | null;
 }
