@@ -47,6 +47,16 @@
                     "
                 >
                     <p>
+                        <i
+                            v-if="product.amount <= 5"
+                            class="
+                                fas
+                                fa-exclamation-triangle
+                                mx-1
+                                text-red-600
+                                dark:text-red-500
+                            "
+                        ></i>
                         {{ product.title }}
                     </p>
                 </div>
