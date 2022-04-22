@@ -55,7 +55,7 @@ class CategoryController extends Controller
 
             // sold amount range
             if ($req->soldAmount["from"] || $req->soldAmount["to"]) {
-                $products->whereBetween("sales_count", [
+                $products->havingBetween("sales_count", [
                     (int) $req->soldAmount["from"],
                     (int) $req->soldAmount["to"],
                 ]);
