@@ -82,8 +82,8 @@
                                     justify-center
                                     p-2
                                     mb-3
-                                    bg-pink-500
-                                    hover:bg-pink-600
+                                    bg-green-600
+                                    hover:bg-green-700
                                     rounded-md
                                     cursor-pointer
                                     transition

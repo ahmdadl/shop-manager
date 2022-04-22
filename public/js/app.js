@@ -26775,7 +26775,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    "class": "flex items-center justify-center p-2 mb-3 bg-pink-500 hover:bg-pink-600 rounded-md cursor-pointer transition",
+    "class": "flex items-center justify-center p-2 mb-3 bg-green-600 hover:bg-green-700 rounded-md cursor-pointer transition",
     href: "/reports",
     as: "li"
   }, {
