@@ -19450,12 +19450,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm-bundler.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.esm-bundler.js");
 /* harmony import */ var _components_Pagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Pagination.vue */ "./resources/js/components/Pagination.vue");
 /* harmony import */ var jenesius_vue_modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jenesius-vue-modal */ "./node_modules/jenesius-vue-modal/dist/jenesius-vue-modal.cjs.js");
 /* harmony import */ var _components_ProductFilter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/ProductFilter.vue */ "./resources/js/components/ProductFilter.vue");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -19466,7 +19469,7 @@ __webpack_require__.r(__webpack_exports__);
 var ProductIndex =
 /** @class */
 function (_super) {
-  (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__extends)(ProductIndex, _super);
+  (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__extends)(ProductIndex, _super);
 
   function ProductIndex() {
     var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -19492,9 +19495,9 @@ function (_super) {
   };
 
   ProductIndex.prototype.filter = function (sellPrice, buyPrice, amount, soldAmount) {
-    return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function () {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function () {
       var data;
-      return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__generator)(this, function (_a) {
+      return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__generator)(this, function (_a) {
         switch (_a.label) {
           case 0:
             data = {
@@ -19523,22 +19526,45 @@ function (_super) {
   };
 
   ProductIndex.prototype.fintProduct = function (query) {
-    return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function () {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function () {
       var products;
-      return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__generator)(this, function (_a) {
-        products = this.pagination.data.filter(function (x) {
-          return x.title.toLowerCase().indexOf(query) > -1;
-        });
-        this.products = products;
+      return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__generator)(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            if (query.length < 3) return [2
+            /*return*/
+            ];
+            return [4
+            /*yield*/
+            , axios__WEBPACK_IMPORTED_MODULE_4___default().post("/c/" + this.$page.props.category_slug, {
+              slug: query
+            })];
+
+          case 1:
+            products = _a.sent();
+            return [2
+            /*return*/
+            , products.data.map(function (x) {
+              return {
+                label: x.title,
+                value: x.slug,
+                pcount: x.amount
+              };
+            })];
+        }
+      });
+    });
+  };
+
+  ProductIndex.prototype.showSelectedProduct = function (slug) {
+    return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function () {
+      return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__generator)(this, function (_a) {
+        this.products = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__spreadArray)([], (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__read)(this.products.filter(function (x) {
+          return x.slug === slug;
+        })), false);
         return [2
         /*return*/
-        , products.map(function (x) {
-          return {
-            label: x.title,
-            value: x.slug,
-            pcount: x.amount
-          };
-        })];
+        ];
       });
     });
   };
@@ -19580,14 +19606,14 @@ function (_super) {
     });
   };
 
-  ProductIndex = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_5__.Options)({
+  ProductIndex = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0,vue_class_component__WEBPACK_IMPORTED_MODULE_6__.Options)({
     components: {
       Pagination: _components_Pagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
       Modal: jenesius_vue_modal__WEBPACK_IMPORTED_MODULE_1__.container
     }
   })], ProductIndex);
   return ProductIndex;
-}(vue_class_component__WEBPACK_IMPORTED_MODULE_5__.Vue);
+}(vue_class_component__WEBPACK_IMPORTED_MODULE_6__.Vue);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductIndex);
 
@@ -21700,6 +21726,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         delay: 0,
         minChars: 1,
         resolveOnLoad: false,
+        onSelect: _ctx.showSelectedProduct,
         onClear: _cache[5] || (_cache[5] = function ($event) {
           return _ctx.products = _ctx.pagination.data;
         }),
@@ -21733,7 +21760,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["modelValue", "options", "classes"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      , ["modelValue", "options", "onSelect", "classes"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": "p-2 mx-1 font-bold text-white bg-red-500 rounded hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-600 disabled:bg-red-300 disabled:text-red-700 dark:disabled:bg-red-500 disabled:hover:cursor-not-allowed",
         onClick: _cache[6] || (_cache[6] = //@ts-ignore
         function () {

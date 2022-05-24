@@ -54,3 +54,4 @@ Route::post("/settings/backup-db", [SettingController::class, "backup"]);
 Route::post("/settings/restore-db", [SettingController::class, "restore"]);
 
 Route::get("/c/{category}", [CategoryController::class, "productIndex"]);
+Route::post("/c/{category}", [ProductController::class, "find"]);

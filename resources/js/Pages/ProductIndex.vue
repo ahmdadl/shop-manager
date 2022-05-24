@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class='w-full form'>
+        <div class="w-full form">
             <!-- search for products -->
             <div class="flex justify-center w-full px-3 py-1 mx-2" dir="rtl">
                 <div class="w-3/6">
@@ -51,6 +51,7 @@
                     :delay="0"
                     :minChars="1"
                     :resolveOnLoad="false"
+                    @select="showSelectedProduct"
                     @clear="products = pagination.data"
                     class="w-2/6"
                     ref="multiSelect"
@@ -197,6 +198,7 @@ import Pagination from "../components/Pagination.vue";
 import { openModal, container, closeModal } from "jenesius-vue-modal";
 import ProductFilter from "../components/ProductFilter.vue";
 import { Inertia } from "@inertiajs/inertia";
+import axios from "axios";
 
 interface PaginationResource {
     data: ProductInterface[];
@@ -244,19 +246,24 @@ export default class ProductIndex extends Vue {
     }
 
     async fintProduct(query: string) {
-        const products = this.pagination.data.filter(
-            (x) => x.title.toLowerCase().indexOf(query) > -1
+        if (query.length < 3) return;
+
+        const products = await axios.post(
+            `/c/${this.$page.props.category_slug}`,
+            { slug: query }
         );
 
-        this.products = products;
-
-        return products.map((x) => {
+        return products.data.map((x) => {
             return {
                 label: x.title,
                 value: x.slug,
                 pcount: x.amount,
             };
         });
+    }
+
+    async showSelectedProduct(slug: string) {        
+        this.products = [...this.products.filter(x => x.slug === slug)];
     }
 
     resetSearch() {

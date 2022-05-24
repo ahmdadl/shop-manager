@@ -48,7 +48,8 @@ class ProductController extends Controller
         );
     }
 
-    public function update(Product $product) {
+    public function update(Product $product)
+    {
         $req = (object) request()->validate($this->reqValidation);
 
         $product->title = $req->title;
@@ -57,7 +58,7 @@ class ProductController extends Controller
         $product->amount = $req->amount;
 
         return response()->json([
-            'done' => $product->update(),
+            "done" => $product->update(),
         ]);
     }
 
@@ -68,9 +69,25 @@ class ProductController extends Controller
         ]);
     }
 
-    public function stats() {
+    public function stats()
+    {
         return response()->json(
-            Product::with('category')->where('amount', '<=', '5')->get()
+            Product::with("category")
+                ->where("amount", "<=", "5")
+                ->get()
+        );
+    }
+
+    public function find(Category $category)
+    {
+        ["slug" => $slug] = request()->validate([
+            "slug" => "required|string|min:3",
+        ]);
+
+        return response()->json(
+            Product::whereCategoryId($category->id)
+                ->where("title", "LIKE", "%$slug%")
+                ->get()
         );
     }
 }
