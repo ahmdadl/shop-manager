@@ -32,16 +32,16 @@ class CategoryController extends Controller
             // sellPrice range
             if ($req->sellPrice["from"] || $req->sellPrice["to"]) {
                 $products->whereBetween("sell_price", [
-                    (double) $req->sellPrice["from"],
-                    (double) $req->sellPrice["to"],
+                    (float) $req->sellPrice["from"],
+                    (float) $req->sellPrice["to"],
                 ]);
             }
 
             // buyPrice range
             if ($req->buyPrice["from"] || $req->buyPrice["to"]) {
                 $products->whereBetween("buy_price", [
-                    (double) $req->buyPrice["from"],
-                    (double) $req->buyPrice["to"],
+                    (float) $req->buyPrice["from"],
+                    (float) $req->buyPrice["to"],
                 ]);
             }
 
@@ -55,12 +55,14 @@ class CategoryController extends Controller
 
             // sold amount range
             if ($req->soldAmount["from"] || $req->soldAmount["to"]) {
-                $products->havingBetween("sales_count", [
+                $products->whereRaw('(select count(*) from "sales" where "products"."id" = "sales"."product_id") between ? and ?', [
                     (int) $req->soldAmount["from"],
                     (int) $req->soldAmount["to"],
                 ]);
             }
         }
+
+        // dd($products->toSql(), $products->getBindings());
 
         return Inertia::render("ProductIndex", [
             "products" => $products->orderByDesc("sales_count")->paginate(),
