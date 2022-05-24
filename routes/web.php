@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
@@ -55,3 +56,6 @@ Route::post("/settings/restore-db", [SettingController::class, "restore"]);
 
 Route::get("/c/{category}", [CategoryController::class, "productIndex"]);
 Route::post("/c/{category}", [ProductController::class, "find"]);
+
+// TODO add dashboard contains charts, statics
+// Route::get('/dashboard', [DashboardController::class, 'index']);
