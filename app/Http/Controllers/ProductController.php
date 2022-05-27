@@ -81,12 +81,12 @@ class ProductController extends Controller
     public function find(Category $category)
     {
         ["slug" => $slug] = request()->validate([
-            "slug" => "required|string|min:3",
+            "slug" => "required|string",
         ]);
 
         return response()->json(
             Product::whereCategoryId($category->id)
-                ->where("title", "LIKE", "%$slug%")
+                ->whereRaw("LOWER(title) LIKE LOWER(?)", ["%$slug%"])
                 ->get()
         );
     }
