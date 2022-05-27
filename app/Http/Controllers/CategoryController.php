@@ -26,7 +26,16 @@ class CategoryController extends Controller
             "soldAmount.to" => "nullable|integer",
         ]);
 
-        $products = Product::withCount("sales")->whereCategoryId($category->id);
+        $products = Product::withSum(
+            [
+                "sales as sales_sum_amount" => fn($q) => $q->where(
+                    "sales.type",
+                    "=",
+                    "sell"
+                ),
+            ],
+            "amount"
+        )->whereCategoryId($category->id);
 
         if (isset($req->sellPrice)) {
             // sellPrice range
@@ -55,17 +64,23 @@ class CategoryController extends Controller
 
             // sold amount range
             if ($req->soldAmount["from"] || $req->soldAmount["to"]) {
-                $products->whereRaw('(select count(*) from "sales" where "products"."id" = "sales"."product_id") between ? and ?', [
-                    (int) $req->soldAmount["from"],
-                    (int) $req->soldAmount["to"],
-                ]);
+                $products->whereRaw(
+                    '(select SUM(amount) from "sales" where "products"."id" = "sales"."product_id" AND type = ?) between ? and ?',
+                    [
+                        "sell",
+                        (int) $req->soldAmount["from"],
+                        (int) $req->soldAmount["to"],
+                    ]
+                );
             }
         }
 
         // dd($products->toSql(), $products->getBindings());
 
         return Inertia::render("ProductIndex", [
-            "products" => $products->orderByDesc("sales_count")->paginate(),
+            "products" => $products
+                ->orderByDesc("sales_sum_amount")
+                ->paginate(),
             "category_slug" => $category->slug,
         ]);
     }

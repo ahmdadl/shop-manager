@@ -19531,7 +19531,7 @@ function (_super) {
       return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__generator)(this, function (_a) {
         switch (_a.label) {
           case 0:
-            if (query.length < 3) return [2
+            if (query.length < 1) return [2
             /*return*/
             ];
             return [4
@@ -21793,7 +21793,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* TEXT */
         )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" amount "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.money(product.amount)), 1
         /* TEXT */
-        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" sold amount "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.money(product.sales_count)), 1
+        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" sold amount "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.money(product.sales_sum_amount)), 1
         /* TEXT */
         )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" buying price "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.money(product.buy_price)), 1
         /* TEXT */

@@ -143,7 +143,7 @@
                     <span
                         class="text-sm font-semibold text-indigo-800 dark:text-indigo-500"
                     >
-                        {{ money(product.sales_count) }}
+                        {{ money(product.sales_sum_amount) }}
                     </span>
                 </div>
 
@@ -246,7 +246,7 @@ export default class ProductIndex extends Vue {
     }
 
     async fintProduct(query: string) {
-        if (query.length < 3) return;
+        if (query.length < 1) return;
 
         const products = await axios.post(
             `/c/${this.$page.props.category_slug}`,
