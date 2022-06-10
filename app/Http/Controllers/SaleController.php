@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Sale;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -23,14 +24,16 @@ class SaleController extends Controller
             "amount.to" => "nullable|integer",
         ]);
 
-        $sales = Sale::with("product");
+        $sales = Sale::with("product")
+            ->when($soldOnly, fn ($query) => $query->sell())
+            ->when($buyOnly, fn ($query) => $query->buy());
 
         // sold only
-        if ($soldOnly) {
-            $sales->whereType("sell");
-        } elseif ($buyOnly) {
-            $sales->whereType("buy");
-        }
+        // if ($soldOnly) {
+        //     $sales->sale();
+        // } elseif ($buyOnly) {
+        //     $sales->buy();
+        // }
 
         // if any filter was applied
         if (isset($req->date)) {
@@ -44,8 +47,10 @@ class SaleController extends Controller
 
             //category
             if ($req->categorySlug && null === $req->productSlug) {
-                $categoryId = Category::whereSlug($req->categorySlug)->first('id')->id;
-                $products = Product::whereCategoryId($categoryId)->get('id');
+                $categoryId = Category::whereSlug($req->categorySlug)->first(
+                    "id"
+                )->id;
+                $products = Product::whereCategoryId($categoryId)->get("id");
 
                 $sales = $sales->whereIn("product_id", $products->pluck("id"));
             }
@@ -60,8 +65,8 @@ class SaleController extends Controller
             // price range
             if ($req->price["from"] || $req->price["to"]) {
                 $sales->whereBetween("total", [
-                    (double) $req->price["from"],
-                    (double) $req->price["to"],
+                    (float) $req->price["from"],
+                    (float) $req->price["to"],
                 ]);
             }
 
@@ -78,7 +83,7 @@ class SaleController extends Controller
 
         return Inertia::render("Report", [
             "salesData" => $sales->latest()->paginate(),
-            "categories" => fn() => Category::all(),
+            "categories" => fn () => Category::all(),
         ]);
     }
 
@@ -108,8 +113,8 @@ class SaleController extends Controller
 
         $price =
             $req["type"] === "sell"
-                ? $product->sell_price
-                : $product->buy_price;
+            ? $product->sell_price
+            : $product->buy_price;
 
         $done = Sale::create([
             "product_id" => $product->id,
@@ -122,8 +127,8 @@ class SaleController extends Controller
             // update product amount
             $product->amount =
                 $req["type"] === "sell"
-                    ? $product->amount - $req["amount"]
-                    : $product->amount + $req["amount"];
+                ? $product->amount - $req["amount"]
+                : $product->amount + $req["amount"];
             $product->update();
         }
 
